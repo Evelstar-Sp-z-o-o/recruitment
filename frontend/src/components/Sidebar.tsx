@@ -1,19 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Home as HomeIcon, Note as NoteIcon, Menu as MenuIcon } from '@mui/icons-material';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
+import { openModal } from '../redux/modalSlice';
+
 const Sidebar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const [selectedPage, setSelectedPage] = useState(pathname);
+  const [selectedPage, setSelectedPage] = useState<string>();
   const [anchorEl, setAnchorEl] = useState(null);
+
+  useEffect(() => {
+    setSelectedPage(pathname);
+  }, [pathname]);
 
   const handleClick = (path) => {
     setSelectedPage(path);
     navigate(path);
+    if (path === '/create-post') {
+      dispatch(openModal());
+    }
   };
 
   const handleMenuClick = (event) => {
