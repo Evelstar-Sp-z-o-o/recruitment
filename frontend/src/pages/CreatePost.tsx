@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { CancelPresentation, PhotoSizeSelectActual } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button, IconButton, Input, Modal, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, IconButton, Input, Modal, TextField, Typography } from '@mui/material';
 
 import { closeModal } from '../redux/modalSlice';
 import { RootState } from '../redux/store';
@@ -24,6 +24,9 @@ const CreatePost = () => {
   const [text, setText] = useState<string>();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [tempImage, setTempImage] = useState<string | null>(null);
+  const [modalType, setModalType] = useState('form');
+  const [textToFeedback, setTextToFeedback] = useState<string>();
+  const [newPostId, setNewPostId] = useState<string>();
 
   const openModal = useSelector((state: RootState) => state.modal.isOpen);
   const dispatch = useDispatch();
@@ -34,7 +37,13 @@ const CreatePost = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const post = tempImage ? { content: text, imageUrl: tempImage } : { content: text };
+    const post = {
+      content: text,
+      imageUrl: tempImage || null,
+      createdAt: new Date().getTime(),
+      updatedAt: new Date().getTime(),
+      username: 'haniakim',
+    };
     try {
       const response = await fetch('/api/posts', {
         method: 'POST',
@@ -45,11 +54,14 @@ const CreatePost = () => {
       });
 
       if (!response.ok) {
-        console.log('Failed to create a post');
+        setTextToFeedback('Failed to create a post');
+        setModalType('error');
         return;
       }
       const data = await response.json();
-      console.log('Successfully created a post', data);
+      setTextToFeedback('Successfully created a post');
+      setModalType('success');
+      setNewPostId(data.id);
     } catch (error) {
       console.log(error);
     }
@@ -69,18 +81,26 @@ const CreatePost = () => {
   };
 
   const handleClose = () => {
-    setTempImage(null);
-    setImageFile(null);
-    dispatch(closeModal());
-    navigate(-1);
+    if (modalType === 'form') {
+      setTempImage(null);
+      setImageFile(null);
+      dispatch(closeModal());
+      navigate(-1);
+      return;
+    } else if (modalType === 'success') {
+      dispatch(closeModal());
+      navigate(`/post/${newPostId}`);
+    } else {
+      dispatch(closeModal());
+    }
   };
 
-  return (
-    <Modal open={openModal} onClose={handleClose}>
-      <Box component="form" onSubmit={handleSubmit} sx={formStyle}>
-        <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 2, right: 4 }}>
-          <CloseIcon sx={{ color: 'black', fontSize: 18 }} />
-        </IconButton>
+  const feedback =
+    modalType === 'error' || modalType === 'success' ? <Alert severity={modalType}>{textToFeedback}</Alert> : null;
+
+  const modalBody =
+    modalType === 'form' ? (
+      <>
         <Typography variant="h6" component="h2" sx={{ flex: '1', mb: 1 }}>
           Create Your Post
         </Typography>
@@ -118,8 +138,22 @@ const CreatePost = () => {
         <Button type="submit" variant="contained" sx={{ mt: 2 }}>
           Post
         </Button>
-      </Box>
-    </Modal>
+      </>
+    ) : (
+      feedback
+    );
+
+  return (
+    <>
+      <Modal open={openModal} onClose={handleClose}>
+        <Box component="form" onSubmit={handleSubmit} sx={formStyle}>
+          <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 2, right: 4 }}>
+            <CloseIcon sx={{ color: 'black', fontSize: 18 }} />
+          </IconButton>
+          {modalBody}
+        </Box>
+      </Modal>
+    </>
   );
 };
 
