@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 
-import Sidebar from './components/SideBar';
+import Sidebar from './components/Sidebar';
 import CreatePost from './pages/CreatePost';
 import Home from './pages/Home';
 import Posts from './pages/Posts';
@@ -11,7 +11,7 @@ import './styles/main.scss';
 const App: FC = () => {
   return (
     <BrowserRouter>
-      <div className='main'>
+      <div className="main">
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
