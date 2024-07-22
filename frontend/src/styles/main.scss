@@ -1,3 +1,9 @@
+// Zmienne
+@import './variables';
+
+// Elementy
+@import './sidebar.scss';
+
 .center {
   display: flex;
   align-items: center;
@@ -11,5 +17,18 @@
 
 body {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: $main-font;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: $md-size) {
+  .main {
+    flex-direction: row;
+  }
 }

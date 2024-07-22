@@ -1,0 +1,23 @@
+.sidebar-list {
+  display: none;
+  border-right: 1px solid lightgray;
+  min-height: 100vh;
+  padding-right: 30px;
+}
+
+.sidebar-menu {
+  display: block;
+  padding: 10px 0 0 20px;
+}
+
+@media (min-width: $md-size) {
+  .sidebar-list {
+    display: block;
+  }
+}
+
+@media (min-width: $md-size) {
+  .sidebar-menu {
+    display: none;
+  }
+}
