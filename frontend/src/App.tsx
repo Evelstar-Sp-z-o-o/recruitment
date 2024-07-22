@@ -1,16 +1,22 @@
 import { FC } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Box, Paper, Typography } from '@mui/material';
-
+import CreatePost from './pages/CreatePost';
+import Home from './pages/Home';
+import Posts from './pages/Posts';
+import UpdatePost from './pages/UpdatePost';
 import './styles/main.scss';
 
 const App: FC = () => {
   return (
-    <Box className="center">
-      <Paper sx={{ padding: 4 }}>
-        <Typography variant="h6">Hello, please start here. 🙂</Typography>
-      </Paper>
-    </Box>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/update-post" element={<UpdatePost />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
