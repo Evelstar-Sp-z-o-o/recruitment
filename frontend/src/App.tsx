@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import { AppBar, Toolbar, Typography, Container } from '@mui/material';
 
+import EditPost from './components/EditPost';
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
-import EditPost from './components/EditPost';
 
 const App: React.FC = () => {
   return (
@@ -26,9 +26,9 @@ const App: React.FC = () => {
       </AppBar>
       <Container>
         <Routes>
-          <Route path="/" Component={PostList} />
-          <Route path="/create" Component={PostForm} />
-          <Route path="/edit/:id" Component={EditPost} />
+          <Route path="/" element={<PostList />} />
+          <Route path="/create" element={<PostForm />} />
+          <Route path="/edit/:id" element={<EditPost />} />
         </Routes>
       </Container>
     </Router>
