@@ -1,67 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TextField, Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 
-import { createPost, updatePost, fetchPost } from '../store/actions/posts';
-import { RootState } from '../store/reducers';
+import { createPost, updatePost } from '../redux/actions/posts';
+import { RootState } from '../redux/reducers';
+import { PostData, Post as PostType } from '../types';
 
-interface PostFormProps {
-  postId: number | null;
-  onCancelEdit: () => void;
-}
-
-const PostForm: React.FC<PostFormProps> = ({ postId, onCancelEdit }) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const PostForm: React.FC = () => {
   const dispatch = useDispatch();
-  const post = useSelector((state: RootState) => (postId !== null ? state.posts.find((p) => p.id === postId) : null));
+  const editingPost = useSelector((state: RootState) => state.posts.editingPost);
+
+  const [post, setPost] = useState<PostData>({
+    body: '',
+    author: '',
+    created: Date.now() / 1000,
+    edited: Date.now() / 1000,
+    postId: '',
+  });
 
   useEffect(() => {
-    if (postId !== null) {
-      dispatch(fetchPost(postId));
+    if (editingPost) {
+      setPost(editingPost.data);
     }
-  }, [dispatch, postId]);
-
-  useEffect(() => {
-    if (post) {
-      setTitle(post.title);
-      setContent(post.content);
-    }
-  }, [post]);
+  }, [editingPost]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (postId !== null) {
-      dispatch(updatePost({ id: postId, title, content }));
-      onCancelEdit();
+    if (editingPost) {
+      dispatch(updatePost({ id: editingPost.id, data: post }));
     } else {
-      dispatch(createPost({ title, content }));
-      setTitle('');
-      setContent('');
+      dispatch(createPost({ id: 0, data: post }));
     }
+    setPost({ body: '', author: '', created: Date.now() / 1000, edited: Date.now() / 1000, postId: '' });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField label="Title" value={title} onChange={(e) => setTitle(e.target.value)} fullWidth margin="normal" />
+      <TextField label="Body" value={post.body} onChange={(e) => setPost({ ...post, body: e.target.value })} required />
       <TextField
-        label="Content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        fullWidth
-        multiline
-        rows={4}
-        margin="normal"
+        label="Author"
+        value={post.author}
+        onChange={(e) => setPost({ ...post, author: e.target.value })}
+        required
       />
       <Button type="submit" variant="contained" color="primary">
-        {postId !== null ? 'Update' : 'Create'}
+        {editingPost ? 'Update Post' : 'Create Post'}
       </Button>
-      {postId !== null && (
-        <Button onClick={onCancelEdit} variant="outlined" color="secondary" style={{ marginLeft: 8 }}>
-          Cancel
-        </Button>
-      )}
     </form>
   );
 };

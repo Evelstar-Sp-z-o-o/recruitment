@@ -1,39 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-import { Container, Typography, Grid, Paper } from '@mui/material';
+import { AppBar, Toolbar, Typography, Container } from '@mui/material';
 
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
 
 const App: React.FC = () => {
-  const [editingPostId, setEditingPostId] = useState<number | null>(null);
-
-  const handleEditPost = (postId: number) => {
-    setEditingPostId(postId);
-  };
-
-  const handleCancelEdit = () => {
-    setEditingPostId(null);
-  };
-
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Twitter-like App
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
-          <Paper>
-            <PostList onEditPost={handleEditPost} />
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper>
-            <PostForm postId={editingPostId} onCancelEdit={handleCancelEdit} />
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
+    <Router>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">
+            <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
+              Home
+            </Link>
+          </Typography>
+          <Typography variant="h6" style={{ marginLeft: 'auto' }}>
+            <Link to="/create" style={{ color: '#fff', textDecoration: 'none' }}>
+              Create Post
+            </Link>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Container>
+        <Routes>
+          <Route path="/" Component={PostList} />
+          <Route path="/create" Component={PostForm} />
+        </Routes>
+      </Container>
+    </Router>
   );
 };
 

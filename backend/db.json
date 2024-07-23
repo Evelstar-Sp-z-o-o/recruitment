@@ -9,6 +9,26 @@
         "postId": "8q7wm5"
       },
       "id": 1
+    },
+    {
+      "id": 3,
+      "data": {
+        "body": "1234",
+        "author": "bleble",
+        "created": 1721772290.754,
+        "edited": 1721772290.754,
+        "postId": ""
+      }
+    },
+    {
+      "id": 4,
+      "data": {
+        "body": "12345",
+        "author": "asd",
+        "created": 1721772297.283,
+        "edited": 1721772297.283,
+        "postId": ""
+      }
     }
   ]
 }

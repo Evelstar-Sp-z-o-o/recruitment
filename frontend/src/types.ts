@@ -1,14 +1,24 @@
-export interface Post {
-  id: number;
-  title: string;
-  content: string;
+export interface PostData {
+  body: string;
+  author: string;
+  created: number;
+  edited: number;
+  postId: string;
 }
 
-export type PostState = Post[];
+export interface Post {
+  id: number;
+  data: PostData;
+}
+
+export type PostState = {
+  posts: Post[];
+  editingPost: Post | null;
+};
 
 interface FetchPostsAction {
   type: 'FETCH_POSTS';
-  payload: PostState;
+  payload: Post[];
 }
 
 interface FetchPostAction {
@@ -31,9 +41,15 @@ interface DeletePostAction {
   payload: number;
 }
 
+interface SetEditingPostAction {
+  type: 'SET_EDITING_POST';
+  payload: Post | null;
+}
+
 export type PostActionTypes =
   | FetchPostsAction
   | FetchPostAction
   | CreatePostAction
   | UpdatePostAction
-  | DeletePostAction;
+  | DeletePostAction
+  | SetEditingPostAction;
