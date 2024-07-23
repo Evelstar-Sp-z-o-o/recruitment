@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@mui/material';
 
@@ -12,18 +13,20 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ post }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = () => {
     dispatch(deletePost(post.id));
   };
 
   const handleEdit = () => {
-    dispatch(setEditingPost(post));
+    navigate(`/edit/${post.id}`);
   };
 
   return (
     <div>
       <h2>{post?.data?.body}</h2>
+      <p>ID: {post?.id}</p>
       <p>Author: {post?.data?.author}</p>
       <p>Created: {new Date(post?.data?.created * 1000).toLocaleString()}</p>
       <p>Edited: {new Date(post?.data?.edited * 1000).toLocaleString()}</p>

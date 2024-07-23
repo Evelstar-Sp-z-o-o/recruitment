@@ -5,6 +5,7 @@ import { AppBar, Toolbar, Typography, Container } from '@mui/material';
 
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
+import EditPost from './components/EditPost';
 
 const App: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" Component={PostList} />
           <Route path="/create" Component={PostForm} />
+          <Route path="/edit/:id" Component={EditPost} />
         </Routes>
       </Container>
     </Router>
