@@ -1,10 +1,15 @@
-import { FC } from 'react';
+import { FC, FunctionComponent } from 'react';
 
 import { Box, Paper, Typography } from '@mui/material';
 
+import { useGetPostsQuery } from './presentation/posts/store/postsApi';
+
 import './styles/main.scss';
 
-const App: FC = () => {
+const App: FunctionComponent = () => {
+  const { data } = useGetPostsQuery();
+  console.log('data');
+  console.log(data);
   return (
     <Box className="center">
       <Paper sx={{ padding: 4 }}>
