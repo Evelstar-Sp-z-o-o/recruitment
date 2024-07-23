@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import Loader from './components/Loader';
 import Sidebar from './components/Sidebar';
 import PostsLayout from './components/layout/PostsLayout';
 import CreatePost from './pages/CreatePost';
@@ -35,14 +36,18 @@ const App: FC = () => {
     <BrowserRouter>
       <div className="main">
         <Sidebar />
-        <Routes>
-          <Route path="/" element={<Home posts={posts} />} />
-          <Route path="/posts" element={<PostsLayout />}>
-            <Route index element={<Posts posts={posts} />} />
-            <Route path="create" element={<CreatePost />} />
-            <Route path="update/:postId" element={<UpdatePost />} />
-          </Route>
-        </Routes>
+        {posts ? (
+          <Routes>
+            <Route path="/" element={<Home posts={posts} />} />
+            <Route path="/posts" element={<PostsLayout />}>
+              <Route index element={<Posts posts={posts} />} />
+              <Route path="create" element={<CreatePost />} />
+              <Route path="update/:postId" element={<UpdatePost />} />
+            </Route>
+          </Routes>
+        ) : (
+          <Loader />
+        )}
       </div>
     </BrowserRouter>
   );
