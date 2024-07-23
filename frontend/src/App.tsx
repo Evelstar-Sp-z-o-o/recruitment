@@ -1,17 +1,12 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper, Typography } from "@mui/material";
 
-import './styles/main.scss';
+import "./styles/main.scss";
+import MainPage from "./MainPage";
 
 const App: FC = () => {
-  return (
-    <Box className="center">
-      <Paper sx={{ padding: 4 }}>
-        <Typography variant="h6">Hello, please start here. 🙂</Typography>
-      </Paper>
-    </Box>
-  );
+  return <MainPage />;
 };
 
 export default App;

@@ -1,14 +1,14 @@
-import path from 'path';
-import { defineConfig } from 'vite';
+import path from "path";
+import { defineConfig } from "vite";
 
-import react from '@vitejs/plugin-react';
+import react from "@vitejs/plugin-react";
 
 export default defineConfig(() => {
   return {
     plugins: [react()],
     test: {
       globals: true,
-      environment: 'jsdom',
+      environment: "jsdom",
     },
     build: {
       commonjsOptions: {
@@ -16,7 +16,7 @@ export default defineConfig(() => {
       },
     },
     resolve: {
-      alias: [{ find: '@', replacement: path.resolve(__dirname, '.') }],
+      alias: [{ find: "@", replacement: path.resolve(__dirname, ".") }],
     },
   };
 });
