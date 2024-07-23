@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Home as HomeIcon, Note as NoteIcon, Menu as MenuIcon } from '@mui/icons-material';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
-import { openModal } from '../redux/modalSlice';
-
 const Sidebar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [selectedPage, setSelectedPage] = useState<string>();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,9 +18,6 @@ const Sidebar = () => {
   const handleClick = (path) => {
     setSelectedPage(path);
     navigate(path);
-    if (path === '/create-post') {
-      dispatch(openModal());
-    }
   };
 
   const handleMenuClick = (event) => {
@@ -32,6 +25,9 @@ const Sidebar = () => {
   };
 
   const handleMenuClose = () => {
+    if (pathname === '/posts/create') {
+      navigate(-1);
+    }
     setAnchorEl(null);
   };
 
@@ -57,7 +53,7 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText primary="Posts" />
           </MenuItem>
-          <MenuItem selected={selectedPage === '/create-post'} onClick={() => handleClick('/create-post')}>
+          <MenuItem selected={selectedPage === '/posts/create'} onClick={() => handleClick('/posts/create')}>
             <ListItemIcon>
               <PostAddIcon />
             </ListItemIcon>
@@ -66,7 +62,7 @@ const Sidebar = () => {
         </Menu>
       </div>
       {/* Sidebar powyzej 768px */}
-      <List className="sidebar-list" sx={{ width: 250 }}>
+      <List className="sidebar-list">
         <ListItemButton
           selected={selectedPage === '/'}
           onClick={() => handleClick('/')}
@@ -75,6 +71,7 @@ const Sidebar = () => {
             '&.Mui-selected': {
               backgroundColor: 'grey.300',
             },
+            width: 250,
           }}
         >
           <ListItemIcon>
@@ -90,6 +87,7 @@ const Sidebar = () => {
             '&.Mui-selected': {
               backgroundColor: 'grey.300',
             },
+            width: 250,
           }}
         >
           <ListItemIcon>
@@ -98,13 +96,14 @@ const Sidebar = () => {
           <ListItemText primary="Posts" />
         </ListItemButton>
         <ListItemButton
-          selected={selectedPage === '/create-post'}
-          onClick={() => handleClick('/create-post')}
+          selected={selectedPage === '/posts/create'}
+          onClick={() => handleClick('/posts/create')}
           sx={{
-            backgroundColor: selectedPage === '/create-post' ? 'grey.300' : 'transparent',
+            backgroundColor: selectedPage === '/posts/create' ? 'grey.300' : 'transparent',
             '&.Mui-selected': {
               backgroundColor: 'grey.300',
             },
+            width: 250,
           }}
         >
           <ListItemIcon>
