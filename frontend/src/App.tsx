@@ -1,16 +1,39 @@
-import { FC } from 'react';
+import React, { useState } from 'react';
 
-import { Box, Paper, Typography } from '@mui/material';
+import { Container, Typography, Grid, Paper } from '@mui/material';
 
-import './styles/main.scss';
+import PostForm from './components/PostForm';
+import PostList from './components/PostList';
 
-const App: FC = () => {
+const App: React.FC = () => {
+  const [editingPostId, setEditingPostId] = useState<number | null>(null);
+
+  const handleEditPost = (postId: number) => {
+    setEditingPostId(postId);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingPostId(null);
+  };
+
   return (
-    <Box className="center">
-      <Paper sx={{ padding: 4 }}>
-        <Typography variant="h6">Hello, please start here. 🙂</Typography>
-      </Paper>
-    </Box>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Twitter-like App
+      </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={8}>
+          <Paper>
+            <PostList onEditPost={handleEditPost} />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Paper>
+            <PostForm postId={editingPostId} onCancelEdit={handleCancelEdit} />
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
