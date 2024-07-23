@@ -1,3 +1,191 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "data": {
+        "content": "Start your day with a positive mindset and see how everything changes. Believe in yourself, work hard, and stay focused. Every challenge is an opportunity in disguise. Embrace the journey, and success will follow. Keep pushing forward and never give up!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130562/samples/food/fish-vegetables.jpg",
+        "createdAt": 1705307025000,
+        "updatedAt": 1705307025000,
+        "username": "haniakim",
+        "numberOfLikes": 3
+      },
+      "id": 1
+    },
+    {
+      "data": {
+        "content": "Exploring new places is a journey of self-discovery. From the tranquil beaches of Bali to the vibrant streets of Tokyo, every destination offers a unique experience. Remember to travel light, capture moments, and leave only footprints. Adventure awaits!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130585/samples/breakfast.jpg",
+        "createdAt": 1718439825000,
+        "updatedAt": 1718439825000,
+        "username": "haniakim",
+        "numberOfLikes": 10
+      },
+      "id": 2
+    },
+    {
+      "data": {
+        "content": "Eating healthy doesn't have to be boring! Try incorporating a variety of colorful vegetables into your meals, and don't forget to stay hydrated. A balanced diet combined with regular exercise is the key to a vibrant and energetic life. Cheers to your health!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130593/cld-sample-4.jpg",
+        "createdAt": 1716193425000,
+        "updatedAt": 1716193425000,
+        "username": "haniakim",
+        "numberOfLikes": 10
+      },
+      "id": 3
+    },
+    {
+      "data": {
+        "content": "The future is here, and it's powered by technology! From AI advancements to groundbreaking gadgets, innovation is shaping our world. Stay curious, keep learning, and embrace new technologies that make life easier and more exciting. The tech revolution continues!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130567/samples/landscapes/architecture-signs.jpg",
+        "createdAt": 1717403025000,
+        "updatedAt": 1717403025000,
+        "username": "haniakim",
+        "numberOfLikes": 0
+      },
+      "id": 4
+    },
+    {
+      "data": {
+        "content": "Personal growth is a lifelong journey. Set goals, face your fears, and step out of your comfort zone. Every challenge you overcome makes you stronger and wiser. Celebrate your progress, no matter how small, and keep striving for greatness. You've got this!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130564/samples/landscapes/girl-urban-view.jpg",
+        "createdAt": 1719908625000,
+        "updatedAt": 1719908625000,
+        "username": "haniakim",
+        "numberOfLikes": 20
+      },
+      "id": 5
+    },
+    {
+      "data": {
+        "content": "Consistency is key to achieving your fitness goals. Mix up your workouts with cardio, strength training, and flexibility exercises. Remember, it's not about being the best; it's about being better than you were yesterday. Stay motivated and keep moving!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130568/samples/landscapes/beach-boat.jpg",
+        "createdAt": 1719044625000,
+        "updatedAt": 1719044625000,
+        "username": "haniakim",
+        "numberOfLikes": 15
+      },
+      "id": 6
+    },
+    {
+      "data": {
+        "content": "Taking care of your mental health is just as important as physical health. Practice mindfulness, take breaks when needed, and don't hesitate to seek support. Remember, it's okay to not be okay, and taking care of yourself is a sign of strength.",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130569/samples/ecommerce/leather-bag-gray.jpg",
+        "createdAt": 1714551825000,
+        "updatedAt": 1714551825000,
+        "username": "haniakim",
+        "numberOfLikes": 7
+      },
+      "id": 7
+    },
+    {
+      "data": {
+        "content": "Cooking is an art that brings joy to the table. Experiment with new recipes, try cooking techniques, and enjoy the process of creating delicious meals. Sharing a home-cooked meal with loved ones makes every dish taste better. Bon appétit!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130570/samples/food/spices.jpg",
+        "createdAt": 1713169425000,
+        "updatedAt": 1713169425000,
+        "username": "haniakim",
+        "numberOfLikes": 15
+      },
+      "id": 8
+    },
+    {
+      "data": {
+        "content": "Fashion is a way to express your personality and creativity. Experiment with different styles, mix and match patterns, and accessorize to make every outfit uniquely yours. Stay confident, embrace trends that resonate with you, and shine with your personal flair!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130569/samples/ecommerce/accessories-bag.jpg",
+        "createdAt": 1721723025000,
+        "updatedAt": 1721723025000,
+        "username": "haniakim",
+        "numberOfLikes": 24
+      },
+      "id": 9
+    },
+    {
+      "data": {
+        "content": "Small changes can make a big difference in protecting our planet. Reduce, reuse, and recycle whenever possible. Support sustainable brands and make eco-friendly choices. Together, we can create a healthier planet for future generations. Every action counts!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130561/samples/food/dessert.jpg",
+        "createdAt": 1712910225000,
+        "updatedAt": 1712910225000,
+        "username": "user1",
+        "numberOfLikes": 5
+      },
+      "id": 10
+    },
+    {
+      "data": {
+        "content": "Music and art have the power to uplift our spirits and connect us with our emotions. Whether you're jamming out to your favorite tunes or admiring beautiful artwork, let creativity inspire you. Share your favorite songs and art with those around you!",
+        "imageUrl": null,
+        "createdAt": 1715502225000,
+        "updatedAt": 1715502225000,
+        "username": "user1",
+        "numberOfLikes": 10
+      },
+      "id": 11
+    },
+    {
+      "data": {
+        "content": "Career growth comes from a mix of passion, perseverance, and continuous learning. Seek mentorship, set clear goals, and never stop improving your skills. Your hard work and dedication will pave the way for success. Stay focused and chase your dreams!",
+        "imageUrl": null,
+        "createdAt": 1718699025000,
+        "updatedAt": 1718699025000,
+        "username": "user1",
+        "numberOfLikes": 15
+      },
+      "id": 12
+    },
+    {
+      "data": {
+        "content": "Strong relationships are built on trust, communication, and mutual respect. Make time for the people who matter most, show appreciation, and work through challenges together. Cherish the moments and create lasting memories with loved ones.",
+        "imageUrl": null,
+        "createdAt": 1721291025000,
+        "updatedAt": 1721291025000,
+        "username": "user2",
+        "numberOfLikes": 20
+      },
+      "id": 13
+    },
+    {
+      "data": {
+        "content": "Self-care is not selfish; it's essential. Take time for yourself, whether it's through a relaxing bath, a good book, or a walk in nature. Prioritize activities that recharge your energy and bring you joy. Remember, you can't pour from an empty cup.",
+        "imageUrl": null,
+        "createdAt": 1712305425000,
+        "updatedAt": 1712305425000,
+        "username": "user2",
+        "numberOfLikes": 17
+      },
+      "id": 14
+    },
+    {
+      "data": {
+        "content": "Science is unlocking the mysteries of our universe. From space exploration to medical breakthroughs, every discovery has the potential to change our lives. Stay curious and keep exploring the wonders of science. The journey of discovery never ends!",
+        "imageUrl": null,
+        "createdAt": 1714897425000,
+        "updatedAt": 1714897425000,
+        "username": "user3",
+        "numberOfLikes": 8
+      },
+      "id": 15
+    },
+    {
+      "data": {
+        "content": "Creating a cozy and stylish home starts with thoughtful decor choices. Personalize your space with colors, textures, and accessories that reflect your taste. A well-decorated home is a place where you can truly relax and feel at ease.",
+        "imageUrl": null,
+        "createdAt": 1721463825000,
+        "updatedAt": 1721463825000,
+        "username": "user3",
+        "numberOfLikes": 16
+      },
+      "id": 16
+    },
+    {
+      "data": {
+        "content": "Pets bring joy, love, and companionship into our lives. Whether you have a playful puppy or a serene cat, cherish the moments spent with your furry friends. Share your favorite pet stories and tips for caring for your beloved animals.",
+        "imageUrl": null,
+        "createdAt": 1719822225000,
+        "updatedAt": 1704097425000,
+        "username": "user3",
+        "numberOfLikes": 12
+      },
+      "id": 17
+    }
+  ]
 }

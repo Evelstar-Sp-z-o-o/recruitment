@@ -4,5 +4,6 @@ export interface Post {
   createdAt: Date;
   updatedAt: Date;
   username: string;
+  numberOfLikes: number;
   id: string;
 }

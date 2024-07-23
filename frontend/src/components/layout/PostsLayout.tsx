@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import Posts from '@/src/pages/Posts';
-
 import { openModal as createModal } from '../../redux/createModalSlice';
 import { openModal as editModal } from '../../redux/editModalSlice';
 
@@ -21,7 +19,6 @@ function PostsLayout() {
 
   return (
     <>
-      <Posts />
       <Outlet />
     </>
   );

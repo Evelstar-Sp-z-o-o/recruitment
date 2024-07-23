@@ -45,6 +45,7 @@ const PostFormModal: React.FC<PostFormModalProps> = ({ initialData, onClose, onS
       createdAt: type === 'edit' ? initialData.createdAt : new Date().getDate(),
       updatedAt: new Date().getTime(),
       username: 'haniakim',
+      numberOfLikes: type === 'edit' ? initialData.numberOfLikes : 0,
     };
     onSubmit(post);
   };
