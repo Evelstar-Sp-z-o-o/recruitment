@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { Box, Button, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 
 import { Post } from '../../types';
 import PostResponseModal from '../modals/PostResponseModal';
@@ -11,7 +12,7 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
-  const { content, imageUrl, username, id } = post;
+  const { content, imageUrl, username, id, createdAt, numberOfLikes } = post;
 
   const [responseModal, setResponseModal] = useState(false);
   const [responseMessage, setResponseMessage] = useState<string>();
@@ -39,6 +40,12 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     navigate('/posts');
   };
 
+  const formatDate = (timeStamp: number) => {
+    const date = new Date(timeStamp);
+    const formattedDate = date.toLocaleDateString('pl-PL');
+    return formattedDate;
+  };
+
   return (
     <>
       <Card
@@ -57,11 +64,29 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           <Typography variant="body1" color="text.secondary">
             {content}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
             {username}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {formatDate(createdAt)}
           </Typography>
         </CardContent>
         <CardActions>
+          <Box
+            sx={{
+              fontSize: '12px',
+              flexGrow: 1,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <IconButton>
+              <ThumbUpIcon />
+            </IconButton>
+            <Typography variant="body2" color="text.secondary">
+              {`${numberOfLikes} ${numberOfLikes <= 1 ? 'Like' : 'Likes'}`}
+            </Typography>
+          </Box>
           <Button
             size="small"
             sx={{ fontSize: '12px', '&:hover': { textDecoration: 'underline' } }}

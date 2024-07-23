@@ -1,8 +1,8 @@
 export interface Post {
   content: string;
   imageUrl: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: number;
+  updatedAt: number;
   username: string;
   numberOfLikes: number;
   id: string;
