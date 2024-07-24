@@ -5,10 +5,10 @@ import { Box, Typography } from '@mui/material';
 import Loader from '../components/Loader';
 import MyPostBox from '../components/posts/MyPostBox';
 import { Post } from '../types';
+import { currentUser } from '../utils';
 
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>();
-  const currentUser = 'haniakim';
 
   useEffect(() => {
     const fetchPosts = async () => {

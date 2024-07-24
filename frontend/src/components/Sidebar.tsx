@@ -32,9 +32,6 @@ const Sidebar = () => {
   };
 
   const handleMenuClose = () => {
-    if (pathname === '/posts/create') {
-      navigate(-1);
-    }
     setAnchorEl(null);
   };
 

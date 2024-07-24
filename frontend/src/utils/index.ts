@@ -12,3 +12,5 @@ export const getFormattedDate = (timeStamp: number) => {
 
   return `${day}/${month}/${year}`;
 };
+
+export const currentUser = 'haniakim';

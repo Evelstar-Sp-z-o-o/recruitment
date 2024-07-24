@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
 import { Post } from '@/src/types';
+import { currentUser } from '@/src/utils';
 import { CancelPresentation, PhotoSizeSelectActual } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, IconButton, Input, Modal, TextField, Typography } from '@mui/material';
@@ -44,8 +45,9 @@ const PostFormModal: React.FC<PostFormModalProps> = ({ initialData, onClose, onS
       imageUrl: tempImage || null,
       createdAt: type === 'edit' ? initialData.createdAt : new Date().getTime(),
       updatedAt: new Date().getTime(),
-      username: 'haniakim',
+      username: currentUser,
       numberOfLikes: type === 'edit' ? initialData.numberOfLikes : 0,
+      likes: type === 'edit' ? initialData.likes : [],
     };
     onSubmit(post);
   };

@@ -6,4 +6,5 @@ export interface Post {
   username: string;
   numberOfLikes: number;
   id: string;
+  likes: string[];
 }
