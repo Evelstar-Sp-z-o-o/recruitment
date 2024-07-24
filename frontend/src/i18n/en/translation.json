@@ -1,4 +1,12 @@
 {
   "noPosts": "Let's create first post!",
-  "addPost": "Add new post"
+  "addPost": "Add new post",
+  "login": {
+    "header": "Do you want to login?",
+    "button": "Login",
+    "incorrect": "Incorrect email",
+    "email": "E-mail",
+    "confirmLogin": "Logged in as {{user}}",
+    "confirmLogout": "Logged out successfully!"
+  }
 }

@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { formatDate } from '@/src/utils/helpers/formatDate';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -15,12 +16,14 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
+import { RootState } from '@reduxjs/toolkit/query';
 
 const PostsList = ({ posts }) => {
+  const user = useSelector<RootState>((state) => state.user);
   const { t } = useTranslation();
   return (
     <>
-      {posts && posts.length === 0 ? (
+      {posts && posts.length > 0 ? (
         posts.map((post, index) => (
           <Fragment key={post.id}>
             <Card sx={{ p: '1.5rem 1rem' }}>
@@ -39,10 +42,10 @@ const PostsList = ({ posts }) => {
                 <Typography color="text.secondary">{post.data.body}</Typography>
               </CardContent>
               <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
-                <IconButton aria-label="add to favorites">
+                <IconButton disabled={!user || user?.toLowerCase() !== post.data.author.toLowerCase()}>
                   <EditIcon />
                 </IconButton>
-                <IconButton aria-label="share">
+                <IconButton disabled={!user || user?.toLowerCase() !== post.data.author.toLowerCase()}>
                   <DeleteForeverIcon />
                 </IconButton>
               </CardActions>
