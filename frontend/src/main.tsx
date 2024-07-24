@@ -13,7 +13,8 @@ const root = createRoot(container);
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#906697',
+      main: '#5b8564',
+      // main: '#73b625',
       // light: will be calculated from palette.primary.main,
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
@@ -22,7 +23,7 @@ const theme = createTheme({
       main: '#fff',
       // light: '#F5EBFF',
       // dark: will be calculated from palette.secondary.main,
-      contrastText: '#47008F',
+      contrastText: '#5b8564',
     },
   },
   breakpoints: {

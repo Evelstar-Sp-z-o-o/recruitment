@@ -15,6 +15,7 @@ import {
   Alert,
   Snackbar,
   Slide,
+  Grid,
 } from '@mui/material';
 
 import EditPost from './components/EditPost';
@@ -26,8 +27,8 @@ function SlideTransition(props) {
 }
 
 const App: React.FC = () => {
-  const [value, setValue] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,30 +58,36 @@ const App: React.FC = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container sx={{ padding: '80px 1rem', minHeight: '100vh', bgcolor: '#0d1117', color: '#e6edf3' }}>
-        <Routes>
-          <Route path="/" element={<PostList />} />
-          <Route path="/create" element={<PostForm />} />
-          <Route path="/edit/:id" element={<EditPost />} />
-        </Routes>
-      </Container>
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-        <BottomNavigation showLabels value={value} onChange={handleChange}>
-          <BottomNavigationAction label="Aktualności" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Ulubione" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Archiwum" icon={<ArchiveIcon />} />
-        </BottomNavigation>
-      </Paper>
-      <Snackbar
-        open={open}
-        autoHideDuration={2500}
-        onClose={handleClose}
-        TransitionComponent={SlideTransition}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        sx={{ marginTop: '4rem' }}
+      <Grid
+        role="main"
+        sx={{ padding: '80px 1rem', minHeight: '100vh', bgcolor: '#0d1117', color: '#e6edf3' }}
+        // lg={{ maxWidth: 'unset' }}
       >
-        <Alert>Nic nie robię. Jestem tutaj dla wyglądu 😊</Alert>
-      </Snackbar>
+        <Container>
+          <Routes>
+            <Route path="/" element={<PostList />} />
+            <Route path="/create" element={<PostForm />} />
+            <Route path="/edit/:id" element={<EditPost />} />
+          </Routes>
+        </Container>
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+          <BottomNavigation showLabels value={value} onChange={handleChange} sx={{ background: '#121212' }}>
+            <BottomNavigationAction sx={{ color: '#e6edf3' }} label="Aktualności" icon={<RestoreIcon />} />
+            <BottomNavigationAction sx={{ color: '#e6edf3' }} label="Ulubione" icon={<FavoriteIcon />} />
+            <BottomNavigationAction sx={{ color: '#e6edf3' }} label="Archiwum" icon={<ArchiveIcon />} />
+          </BottomNavigation>
+        </Paper>
+        <Snackbar
+          open={open}
+          autoHideDuration={2500}
+          onClose={handleClose}
+          TransitionComponent={SlideTransition}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          style={{ marginTop: '4rem' }}
+        >
+          <Alert>Nic nie robię. Jestem tutaj dla wyglądu 😊</Alert>
+        </Snackbar>
+      </Grid>
     </Router>
   );
 };
