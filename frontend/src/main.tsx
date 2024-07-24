@@ -21,8 +21,6 @@ const theme = createTheme({
     },
     secondary: {
       main: '#fff',
-      // light: '#F5EBFF',
-      // dark: will be calculated from palette.secondary.main,
       contrastText: '#5b8564',
     },
   },
