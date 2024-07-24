@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Unknown from '@/src/assets/noUserIcon.svg';
 import Avt from '@/src/assets/userIcon.svg';
@@ -12,7 +13,6 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
-import Link from '@mui/material/Link';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
@@ -41,6 +41,8 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
   const handleLogout = () => {
     toggleMenu(false);
     handleSnackbar(true);
+    localStorage.setItem('wasHomeModalShown', true);
+    sessionStorage.removeItem('user');
     dispatch(setUser(null));
   };
 
@@ -59,13 +61,13 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
         </Container>
 
         <MenuList>
-          <Link href="/" color="inherit" underline="hover">
+          <Link to="/" className="menuLink">
             <MenuItem>
               <ListItemText>Home</ListItemText>
             </MenuItem>
           </Link>
           {user ? (
-            <Link href="/profile" color="inherit" underline="hover">
+            <Link to="/profile" className="menuLink">
               <MenuItem>
                 <ListItemText>My posts</ListItemText>
               </MenuItem>
