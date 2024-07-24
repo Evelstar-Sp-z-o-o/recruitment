@@ -1,6 +1,8 @@
 import { http, HttpResponse } from 'msw';
-import { db } from '../db';
+
 import { faker } from '@faker-js/faker';
+
+import { db } from '../db';
 
 export const handlers = [
   http.get('http://localhost:3000/api/posts', () => {
@@ -23,7 +25,7 @@ export const handlers = [
             edited: Date.now(),
             postId: updatedPost.data.postId,
           },
-          id: updatedPost.id
+          id: updatedPost.id,
         },
       });
       return HttpResponse.json(updatedPost, { status: 201 });
@@ -39,7 +41,7 @@ export const handlers = [
         edited: Date.now(),
         postId: faker.string.uuid(),
       },
-      id: newPost.id
+      id: newPost.id,
     });
     return HttpResponse.json(newPost, { status: 201 });
   }),

@@ -1,15 +1,218 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
-import { Box, Paper, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
+import LogoutIcon from '@mui/icons-material/Logout';
+import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
+import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import SvgIcon from '@mui/material/SvgIcon';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { blue, grey } from '@mui/material/colors';
 
+import Logo from './assets/logo.svg?react';
+import Avt from './assets/userIcon.svg';
 import './styles/main.scss';
 
-const App: FC = () => {
+interface IAddNewPostProps {
+  isFixed?: boolean;
+}
+
+const AddNewPost: FC<IAddNewPostProps> = ({ isFixed }) => {
   return (
-    <Box className="center">
-      <Paper sx={{ padding: 4 }}>
-        <Typography variant="h6">Hello, please start here. 🙂</Typography>
-      </Paper>
+    <Tooltip title={'Add new post'}>
+      <IconButton
+        sx={{
+          position: isFixed ? 'fixed' : 'static',
+          bottom: '3rem',
+          right: '1rem',
+        }}
+      >
+        <AddIcon
+          sx={{
+            color: grey['A100'],
+            fontSize: '3.5rem',
+            bgcolor: blue[700],
+            borderRadius: '50%',
+            p: 0,
+          }}
+        />
+      </IconButton>
+    </Tooltip>
+  );
+};
+
+interface IMenuProps {
+  open: boolean;
+  toggleMenu: () => void;
+}
+
+const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
+  return (
+    <Drawer component="aside" open={open} onClose={toggleMenu}>
+      <Box className="sideMenu">
+        <Container className="menuHeader" maxWidth="xl">
+          <Avatar alt="User" src={Avt as string} />
+          <AddNewPost />
+        </Container>
+        <MenuList>
+          <Link href="/" color="inherit" underline="hover">
+            <MenuItem>
+              <ListItemText>Home</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link href="/profile" color="inherit" underline="hover">
+            <MenuItem>
+              <ListItemText>My posts</ListItemText>
+            </MenuItem>
+          </Link>
+          <Link href="/logout" color="inherit" underline="hover">
+            <MenuItem sx={{ mt: '3rem' }}>
+              <ListItemIcon>
+                <LogoutIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Logout</ListItemText>
+            </MenuItem>
+          </Link>
+        </MenuList>
+      </Box>
+    </Drawer>
+  );
+};
+
+const App: FC = () => {
+  const [open, setOpen] = useState(false);
+
+  const toggleMenu = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
+  return (
+    <Box>
+      <AppBar position="static" color="default" sx={{ padding: '2rem', position: 'relative' }}>
+        <IconButton onClick={toggleMenu(true)} sx={{ width: '4rem', height: '4rem' }}>
+          <Avatar alt="User" src={Avt as string} />
+        </IconButton>
+        <SvgIcon
+          inheritViewBox
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            fontSize: '3rem',
+          }}
+        >
+          <Logo className="logo" />
+        </SvgIcon>
+      </AppBar>
+      <Card sx={{ p: '1.5rem 1rem' }}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: blue[500] }} alt="">
+              <TextsmsOutlinedIcon />
+            </Avatar>
+          }
+          title="john.doe@e.mail"
+          subheader="September 14, 2016"
+        />
+        <CardContent>
+          <Typography color="text.secondary">
+            Lorem ipsum dolor sit amet consectetur. Eu nunc eget venenatis fames vivamus ut tellus tristique phasellus.
+            Ullamcorper tortor facilisis elit cursus quis massa.
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
+          <IconButton aria-label="add to favorites">
+            <EditIcon />
+          </IconButton>
+          <IconButton aria-label="share">
+            <DeleteForeverIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+      <Divider />
+      <Card sx={{ p: '1.5rem 1rem' }}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: blue[500] }} alt="">
+              <TextsmsOutlinedIcon />
+            </Avatar>
+          }
+          title="john.doe@e.mail"
+          subheader="September 14, 2016"
+        />
+        <CardContent>
+          <Typography color="text.secondary">
+            Lorem ipsum dolor sit amet consectetur. Eu nunc eget venenatis fames vivamus ut tellus tristique phasellus.
+            Ullamcorper tortor facilisis elit cursus quis massa.
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
+          <IconButton aria-label="add to favorites">
+            <EditIcon />
+          </IconButton>
+          <IconButton aria-label="share">
+            <DeleteForeverIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+      <Divider />
+      <Card sx={{ p: '1.5rem 1rem' }}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: blue[500] }} alt="">
+              <TextsmsOutlinedIcon />
+            </Avatar>
+          }
+          title="john.doe@e.mail"
+          subheader="September 14, 2016"
+        />
+        <CardContent>
+          <Typography color="text.secondary">
+            Lorem ipsum dolor sit amet consectetur. Eu nunc eget venenatis fames vivamus ut tellus tristique phasellus.
+            Ullamcorper tortor facilisis elit cursus quis massa.
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
+          <IconButton>
+            <EditIcon />
+          </IconButton>
+          <IconButton>
+            <DeleteForeverIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+      <Menu open={open} toggleMenu={toggleMenu(false)} />
+      <AddNewPost isFixed />
+      <Container
+        component="footer"
+        className="footer"
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          p: '2rem',
+        }}
+      >
+        TWIXER
+      </Container>
     </Box>
   );
 };

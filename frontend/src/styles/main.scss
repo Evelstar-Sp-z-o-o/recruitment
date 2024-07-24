@@ -4,7 +4,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: inherit;
 }
 
@@ -17,7 +19,12 @@ body {
   color: theme.$color-black;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: theme.$font-secondary !important;
   font-weight: theme.$weight-bold !important;
 }
@@ -31,4 +38,29 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
   background-color: #eee;
   box-sizing: border-box;
+}
+
+.logo {
+  height: 3rem !important;
+  width: 3rem !important;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  font-family: theme.$font-secondary;
+  font-weight: theme.$weight-bold;
+}
+
+.sideMenu {
+  width: 300px;
+  padding: 2rem 0;
+}
+
+.menuHeader {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
 }
