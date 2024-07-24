@@ -9,16 +9,11 @@ import { fetchPosts, deletePost } from '../redux/actions/posts';
 import { RootState } from '../redux/reducers';
 import Post from './Post';
 
-interface PostListProps {
-  onEditPost: (postId: number) => void;
-}
-
-const PostList: React.FC<PostListProps> = ({ onEditPost }) => {
+const PostList: React.FC = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.posts.posts);
 
   useEffect(() => {
-
     dispatch(fetchPosts());
   }, [dispatch]);
 
@@ -30,9 +25,7 @@ const PostList: React.FC<PostListProps> = ({ onEditPost }) => {
   return (
     <div>
       {posts.map((post) => (
-        <div key={post.id} /* post={post} */>
-          <Post key={post.id} post={post} />
-        </div>
+        <Post key={post.id} post={post} />
       ))}
     </div>
   );

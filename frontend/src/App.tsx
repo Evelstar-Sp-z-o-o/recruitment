@@ -1,16 +1,49 @@
-import React from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-import { AppBar, Toolbar, Typography, Container } from '@mui/material';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import RestoreIcon from '@mui/icons-material/Restore';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Paper,
+  BottomNavigation,
+  BottomNavigationAction,
+  Alert,
+  Snackbar,
+  Slide,
+} from '@mui/material';
 
 import EditPost from './components/EditPost';
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
 
+function SlideTransition(props) {
+  return <Slide {...props} direction="down" />;
+}
+
 const App: React.FC = () => {
+  const [value, setValue] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
   return (
     <Router>
-      <AppBar position="static">
+      <AppBar sx={{ position: 'fixed', top: 0, left: 0, right: 0 }}>
         <Toolbar>
           <Typography variant="h6">
             <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
@@ -24,13 +57,30 @@ const App: React.FC = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container>
+      <Container sx={{ padding: '80px 1rem', minHeight: '100vh', bgcolor: '#0d1117', color: '#e6edf3' }}>
         <Routes>
           <Route path="/" element={<PostList />} />
           <Route path="/create" element={<PostForm />} />
           <Route path="/edit/:id" element={<EditPost />} />
         </Routes>
       </Container>
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <BottomNavigation showLabels value={value} onChange={handleChange}>
+          <BottomNavigationAction label="Aktualności" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="Ulubione" icon={<FavoriteIcon />} />
+          <BottomNavigationAction label="Archiwum" icon={<ArchiveIcon />} />
+        </BottomNavigation>
+      </Paper>
+      <Snackbar
+        open={open}
+        autoHideDuration={2500}
+        onClose={handleClose}
+        TransitionComponent={SlideTransition}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        sx={{ marginTop: '4rem' }}
+      >
+        <Alert>Nic nie robię. Jestem tutaj dla wyglądu 😊</Alert>
+      </Snackbar>
     </Router>
   );
 };
