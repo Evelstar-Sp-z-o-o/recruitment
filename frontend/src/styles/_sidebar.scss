@@ -5,8 +5,31 @@
 }
 
 .sidebar-menu {
-  display: block;
+  display: flex;
   padding: 10px 0 0 20px;
+}
+
+.logo-box {
+  padding-left: 20px;
+}
+.logo-image {
+  width: 80px;
+  height: 80px;
+}
+
+.logo-sm-box {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-sm-image {
+  width: 35px;
+  height: 35px;
+}
+
+.page-name {
+  font-size: 14px;
 }
 
 @media (min-width: $md-size) {

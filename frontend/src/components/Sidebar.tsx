@@ -6,6 +6,8 @@ import { Home as HomeIcon, Note as NoteIcon, Menu as MenuIcon } from '@mui/icons
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
+import logoSmall from '../../public/assets/logo-sm.svg';
+import logo from '../../public/assets/logo.svg';
 import { openModal } from '../redux/createModalSlice';
 
 const Sidebar = () => {
@@ -58,16 +60,23 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText primary="My Posts" />
           </MenuItem>
-          <MenuItem selected={selectedPage === '/posts/create'} onClick={() => handleClick('/posts/create')}>
+          <MenuItem onClick={() => dispatch(openModal())}>
             <ListItemIcon>
               <PostAddIcon />
             </ListItemIcon>
             <ListItemText primary="Create a post" />
           </MenuItem>
         </Menu>
+        <div className="logo-sm-box">
+          <img src={logoSmall} alt="logo" className="logo-sm-image" />
+          <span className="page-name">{pathname === '/' ? 'Home' : 'My Posts'}</span>
+        </div>
       </div>
       {/* Sidebar powyzej 768px */}
-      <List className="sidebar-list" sx={{ pt: 10 }}>
+      <List className="sidebar-list">
+        <div className="logo-box">
+          <img src={logo} alt="logo" className="logo-image" />
+        </div>
         <ListItemButton
           selected={selectedPage === '/'}
           onClick={() => handleClick('/')}
@@ -101,18 +110,21 @@ const Sidebar = () => {
           <ListItemText primary="My Posts" />
         </ListItemButton>
         <ListItemButton
-          selected={selectedPage === '/posts/create'}
           onClick={() => dispatch(openModal())}
           sx={{
-            backgroundColor: selectedPage === '/posts/create' ? 'grey.300' : 'transparent',
-            '&.Mui-selected': {
-              backgroundColor: 'grey.300',
+            backgroundColor: '#028391',
+            borderRadius: '25px',
+            color: 'white',
+            mt: 4,
+            mx: 'auto',
+            width: 230,
+            '&:hover': {
+              backgroundColor: 'rgba(2, 131, 145, 0.7)',
             },
-            width: 250,
           }}
         >
           <ListItemIcon>
-            <PostAddIcon />
+            <PostAddIcon sx={{ color: 'white' }} />
           </ListItemIcon>
           <ListItemText primary="Create a post" />
         </ListItemButton>

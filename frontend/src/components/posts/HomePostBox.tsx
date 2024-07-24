@@ -12,7 +12,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
   return (
     <Box sx={{ display: 'flex', gap: 1, alignItems: 'start', maxWidth: 600, margin: '0 auto' }}>
       <Avatar sx={{ width: 30, height: 30 }} />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <Box sx={{ display: 'flex', gap: 2 }}>
           <Typography variant="body2" color="text.secondary">
             {username}
