@@ -2,6 +2,10 @@
   "noPosts": "Let's create first post!",
   "addPost": "Add new post",
   "noPosts": "Create first post",
+  "menu": {
+    "home": "Home",
+    "profile": "My posts"
+  },
   "login": {
     "header": "Do you want to login?",
     "button": "Login",

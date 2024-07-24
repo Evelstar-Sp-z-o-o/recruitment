@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -27,6 +28,7 @@ interface IMenuProps {
 
 const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const user = useSelector<RootState>((state) => state.user);
   const [openLogin, setOpenLogin] = useState(false);
 
@@ -63,13 +65,13 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
         <MenuList>
           <Link to="/" className="menuLink">
             <MenuItem>
-              <ListItemText>Home</ListItemText>
+              <ListItemText>{t('menu.home')}</ListItemText>
             </MenuItem>
           </Link>
           {user ? (
             <Link to="/profile" className="menuLink">
               <MenuItem>
-                <ListItemText>My posts</ListItemText>
+                <ListItemText>{t('menu.profile')}</ListItemText>
               </MenuItem>
             </Link>
           ) : null}
