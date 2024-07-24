@@ -186,6 +186,17 @@
         "numberOfLikes": 12
       },
       "id": 17
+    },
+    {
+      "data": {
+        "content": "New posts!!",
+        "imageUrl": null,
+        "createdAt": 1721838239240,
+        "updatedAt": 1721838239240,
+        "username": "haniakim",
+        "numberOfLikes": 0
+      },
+      "id": 18
     }
   ]
 }

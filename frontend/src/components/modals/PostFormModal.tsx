@@ -42,7 +42,7 @@ const PostFormModal: React.FC<PostFormModalProps> = ({ initialData, onClose, onS
     const post = {
       content: text,
       imageUrl: tempImage || null,
-      createdAt: type === 'edit' ? initialData.createdAt : new Date().getDate(),
+      createdAt: type === 'edit' ? initialData.createdAt : new Date().getTime(),
       updatedAt: new Date().getTime(),
       username: 'haniakim',
       numberOfLikes: type === 'edit' ? initialData.numberOfLikes : 0,

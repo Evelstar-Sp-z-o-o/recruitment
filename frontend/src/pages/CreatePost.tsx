@@ -45,7 +45,6 @@ const CreatePost = () => {
 
   const handleClose = () => {
     dispatch(closeModal());
-    navigate(-1);
   };
 
   return (
@@ -55,7 +54,7 @@ const CreatePost = () => {
         open={responseModal}
         onClose={() => {
           setResponseModal(false);
-          navigate('/posts');
+          navigate('/');
         }}
         content={responseMessage}
       />
