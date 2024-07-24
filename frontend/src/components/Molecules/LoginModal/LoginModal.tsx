@@ -39,6 +39,7 @@ const LoginModal = ({ isOpen, handleClose, handleSnackbar }) => {
     handleClose(true);
     handleSnackbar(true);
     localStorage.removeItem('wasHomeModalShown');
+    sessionStorage.setItem('user', e.target[0].value);
 
     return dispatch(setUser(e.target[0].value));
   };

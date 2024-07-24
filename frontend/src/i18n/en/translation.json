@@ -1,6 +1,7 @@
 {
   "noPosts": "Let's create first post!",
   "addPost": "Add new post",
+  "noPosts": "Create first post",
   "login": {
     "header": "Do you want to login?",
     "button": "Login",
@@ -8,5 +9,10 @@
     "email": "E-mail",
     "confirmLogin": "Logged in as {{user}}",
     "confirmLogout": "Logged out successfully!"
+  },
+  "404": {
+    "header": "Look like you're lost",
+    "description": "the page you are looking for not available!",
+    "cta": "Go to Home"
   }
 }

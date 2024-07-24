@@ -1,6 +1,7 @@
 {
   "noPosts": "Stwórz pierwszy wpis!",
   "addPost": "Stwórz wpis",
+  "noPosts": "Stwórz pierwszy post",
   "login": {
     "header": "Czy chcesz się zalogować?",
     "button": "Zaloguj",
@@ -8,5 +9,10 @@
     "email": "E-mail",
     "confirmLogin": "Zalogowano jako {{user}}",
     "confirmLogout": "Wylogowano poprawnie!"
+  },
+  "404": {
+    "header": "Chyba się zgubiłeś",
+    "description": "strona, której szukasz jest niedostępna!",
+    "cta": "Wróć"
   }
 }
