@@ -42,10 +42,41 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post }) => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', gap: 2, alignItems: 'start', maxWidth: 600, margin: '0 auto' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          alignItems: 'start',
+          maxWidth: 400,
+          '@media (min-width: 768px)': {
+            maxWidth: 600,
+            flexDirection: 'row',
+          },
+          margin: '0 auto',
+        }}
+      >
         {imageUrl && (
-          <Card sx={{ display: 'flex', width: '100%', height: '100%' }}>
-            <CardMedia component="img" image={imageUrl} sx={{ width: 200, height: 'auto', aspectRatio: '1/1' }} />
+          <Card
+            sx={{
+              display: 'flex',
+              width: '100%',
+              height: '100%',
+              flexShrink: 0,
+              '@media (min-width: 768px)': {
+                width: 200,
+              },
+            }}
+          >
+            <CardMedia
+              component="img"
+              image={imageUrl}
+              sx={{
+                width: '100%',
+                height: 'auto',
+                aspectRatio: '1/1',
+              }}
+            />
           </Card>
         )}
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>

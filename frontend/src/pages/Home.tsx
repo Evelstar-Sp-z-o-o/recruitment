@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 
 import Loader from '../components/Loader';
-import PostBox from '../components/posts/PostBox';
+import HomePostBox from '../components/posts/HomePostBox';
 import { Post } from '../types';
 
 const sortOptionStyle = {
@@ -101,7 +101,7 @@ const Home = () => {
                 },
               }}
             >
-              <PostBox post={post} />
+              <HomePostBox post={post} />
             </Box>
           ))}
         </>
