@@ -6,10 +6,6 @@ import Loader from '../components/Loader';
 import PostBox from '../components/posts/PostBox';
 import { Post } from '../types';
 
-interface HomeProps {
-  posts: Post[];
-}
-
 const sortOptionStyle = {
   width: '50%',
   display: 'flex',
@@ -31,7 +27,7 @@ const basicStyle = {
   fontSize: '14px',
 };
 
-const Home: React.FC<HomeProps> = () => {
+const Home = () => {
   const [posts, setPosts] = useState<Post[]>();
   const [sortOption, setSortOption] = useState('latest');
 

@@ -56,7 +56,7 @@ const Sidebar = () => {
             <ListItemIcon>
               <NoteIcon />
             </ListItemIcon>
-            <ListItemText primary="Posts" />
+            <ListItemText primary="My Posts" />
           </MenuItem>
           <MenuItem selected={selectedPage === '/posts/create'} onClick={() => handleClick('/posts/create')}>
             <ListItemIcon>
@@ -98,7 +98,7 @@ const Sidebar = () => {
           <ListItemIcon>
             <NoteIcon />
           </ListItemIcon>
-          <ListItemText primary="Posts" />
+          <ListItemText primary="My Posts" />
         </ListItemButton>
         <ListItemButton
           selected={selectedPage === '/posts/create'}
