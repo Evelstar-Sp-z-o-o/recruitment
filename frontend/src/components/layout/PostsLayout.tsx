@@ -18,6 +18,7 @@ function PostsLayout() {
 
   return (
     <>
+      <Posts />
       <Outlet />
     </>
   );

@@ -5,7 +5,6 @@ import Sidebar from './components/Sidebar';
 import MainLayout from './components/layout/MainLayout';
 import PostsLayout from './components/layout/PostsLayout';
 import Home from './pages/Home';
-import Posts from './pages/Posts';
 import UpdatePost from './pages/UpdatePost';
 import './styles/main.scss';
 
@@ -18,7 +17,6 @@ const App: FC = () => {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="/posts" element={<PostsLayout />}>
-              <Route index element={<Posts />} />
               <Route path="update/:postId" element={<UpdatePost />} />
             </Route>
           </Route>
