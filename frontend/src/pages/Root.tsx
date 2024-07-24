@@ -1,4 +1,4 @@
-import Home from '@/src/components/Templates/Home/Home';
+import Home from '@/src/pages/Home';
 
 const Root = () => {
   return <Home />;

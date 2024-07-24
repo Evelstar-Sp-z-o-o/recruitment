@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { setUser } from '@/src/store';
@@ -10,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 
-const style = {
+const StyledModal = {
   position: 'absolute' as const,
   top: '50%',
   left: '50%',
@@ -25,6 +26,7 @@ const style = {
 const LoginModal = ({ isOpen, handleClose, handleSnackbar }) => {
   const dispatch = useDispatch();
   const [isEmailCorrect, setIsEmailCorrect] = useState(true);
+  const { t } = useTranslation();
 
   const submitLogin = (e) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,12 +46,12 @@ const LoginModal = ({ isOpen, handleClose, handleSnackbar }) => {
   return (
     <Modal open={isOpen}>
       <>
-        <Box sx={style}>
+        <Box sx={StyledModal}>
           <IconButton onClick={handleClose} sx={{ position: 'absolute', top: '1rem', right: '1rem' }}>
             <CloseIcon />
           </IconButton>
           <Typography variant="h6" component="h2">
-            Do you want to login?
+            {t('login.header')}
           </Typography>
           <Container sx={{ mt: 2 }}>
             <Container
@@ -63,12 +65,12 @@ const LoginModal = ({ isOpen, handleClose, handleSnackbar }) => {
                 inputProps={{
                   type: 'email',
                 }}
-                helperText={isEmailCorrect ? ' ' : 'Incorrect email'}
-                label="e-mail"
+                helperText={isEmailCorrect ? ' ' : t('login.incorrect')}
+                label={t('login.email')}
                 variant="standard"
               />{' '}
               <Button type="submit" variant="outlined">
-                Login
+                {t('login.button')}
               </Button>
             </Container>
           </Container>

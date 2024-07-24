@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AddNewPost from '@/src/components/Atoms/AddNewPost/AddNewPost';
@@ -15,13 +16,14 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { RootState } from '@reduxjs/toolkit/query';
 
 const Home = () => {
-  const user = !!useSelector<RootState>((state) => state.user);
+  const user = useSelector<RootState>((state) => state.user);
   const login = useSelector<RootState>((state) => state.login);
   const wasHomeModalShown = !!localStorage.getItem('wasHomeModalShown') ?? false;
   const { data: posts, isLoading } = useGetPostsQuery();
   const [open, setOpen] = useState(false);
   const [openLogin, setOpenLogin] = useState(!wasHomeModalShown || !!user);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const toggleMenu = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -49,7 +51,7 @@ const Home = () => {
       <Footer />
       <Snackbar open={login} autoHideDuration={6000}>
         <Alert onClose={() => handleSnackbar(false)} severity="success" variant="filled" sx={{ width: '100%' }}>
-          Logged {user ? 'in' : 'out'} successfully!
+          {user ? t('login.confirmLogin', { user: user }) : t('login.confirmLogout')}
         </Alert>
       </Snackbar>
     </Box>

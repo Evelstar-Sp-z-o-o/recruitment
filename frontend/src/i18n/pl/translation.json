@@ -1,4 +1,12 @@
 {
   "noPosts": "Stwórz pierwszy wpis!",
-  "addPost": "Stwórz wpis"
+  "addPost": "Stwórz wpis",
+  "login": {
+    "header": "Czy chcesz się zalogować?",
+    "button": "Zaloguj",
+    "incorrect": "Niepoprawny e-mail",
+    "email": "E-mail",
+    "confirmLogin": "Zalogowano jako {{user}}",
+    "confirmLogout": "Wylogowano poprawnie!"
+  }
 }
