@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { openModal as createModal } from '../../redux/createModalSlice';
 import { openModal as editModal } from '../../redux/editModalSlice';
 
 function PostsLayout() {
@@ -10,9 +9,7 @@ function PostsLayout() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/posts/create') {
-      dispatch(createModal());
-    } else if (location.pathname.startsWith('/posts/update/')) {
+    if (location.pathname.startsWith('/posts/update/')) {
       dispatch(editModal());
     }
   }, [dispatch, location]);

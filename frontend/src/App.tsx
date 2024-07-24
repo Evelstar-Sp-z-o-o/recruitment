@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Loader from './components/Loader';
 import Sidebar from './components/Sidebar';
+import MainLayout from './components/layout/MainLayout';
 import PostsLayout from './components/layout/PostsLayout';
-import CreatePost from './pages/CreatePost';
 import Home from './pages/Home';
 import Posts from './pages/Posts';
 import UpdatePost from './pages/UpdatePost';
@@ -38,11 +38,12 @@ const App: FC = () => {
         <Sidebar />
         {posts ? (
           <Routes>
-            <Route path="/" element={<Home posts={posts} />} />
-            <Route path="/posts" element={<PostsLayout />}>
-              <Route index element={<Posts posts={posts} />} />
-              <Route path="create" element={<CreatePost />} />
-              <Route path="update/:postId" element={<UpdatePost />} />
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Home posts={posts} />} />
+              <Route path="/posts" element={<PostsLayout />}>
+                <Route index element={<Posts posts={posts} />} />
+                <Route path="update/:postId" element={<UpdatePost />} />
+              </Route>
             </Route>
           </Routes>
         ) : (

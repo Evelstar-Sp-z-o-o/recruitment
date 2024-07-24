@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Home as HomeIcon, Note as NoteIcon, Menu as MenuIcon } from '@mui/icons-material';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
+import { openModal } from '../redux/createModalSlice';
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [selectedPage, setSelectedPage] = useState<string>();
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setSelectedPage(pathname);
@@ -62,7 +67,7 @@ const Sidebar = () => {
         </Menu>
       </div>
       {/* Sidebar powyzej 768px */}
-      <List className="sidebar-list">
+      <List className="sidebar-list" sx={{ pt: 10 }}>
         <ListItemButton
           selected={selectedPage === '/'}
           onClick={() => handleClick('/')}
@@ -97,7 +102,7 @@ const Sidebar = () => {
         </ListItemButton>
         <ListItemButton
           selected={selectedPage === '/posts/create'}
-          onClick={() => handleClick('/posts/create')}
+          onClick={() => dispatch(openModal())}
           sx={{
             backgroundColor: selectedPage === '/posts/create' ? 'grey.300' : 'transparent',
             '&.Mui-selected': {
