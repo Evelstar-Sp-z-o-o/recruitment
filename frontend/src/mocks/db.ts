@@ -6,12 +6,12 @@ faker.seed(123);
 export const db = factory({
   post: {
     data: {
-      body: faker.lorem.sentence({ min: 1, max: 20 }),
+      body: faker.lorem.paragraphs({ min: 1, max: 6 }),
       author: faker.internet.email(),
       created: faker.date.past().getTime(),
       edited: faker.date.recent().getTime(),
-      postId: primaryKey(faker.string.uuid)
+      postId: faker.number.int(),
     },
-    id: faker.number.int()
-  }
-})
+    id: primaryKey(faker.string.uuid),
+  },
+});
