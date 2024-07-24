@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -21,10 +21,23 @@ import { RootState } from '@reduxjs/toolkit/query';
 const PostsList = ({ posts }) => {
   const user = useSelector<RootState>((state) => state.user);
   const { t } = useTranslation();
+  const [sortedPosts, setSortedPosts] = useState([]);
+
+  useEffect(() => {
+    if (posts) {
+      const sorted = [...posts];
+      sorted.sort((a, b) => {
+        return b.data.created - a.data.created;
+      });
+
+      setSortedPosts([...sorted]);
+    }
+  }, [posts]);
+
   return (
     <>
-      {posts && posts.length > 0 ? (
-        posts.map((post, index) => (
+      {sortedPosts && sortedPosts.length > 0 ? (
+        sortedPosts.map((post, index) => (
           <Fragment key={post.id}>
             <Card sx={{ p: '1.5rem 1rem' }}>
               <CardHeader
