@@ -27,9 +27,13 @@ createUsers();
 
 const createPosts = () => {
   for (let i = 0; i < faker.number.int({ min: 15, max: 100 }); i += 1) {
-    db.posts.create({
+    db.post.create({
       data: {
-        user: users[faker.number.int({ min: 0, max: users.length - 1 })],
+        author: users[faker.number.int({ min: 0, max: users.length - 1 })],
+        body: faker.lorem.paragraphs({ min: 1, max: 6 }),
+        created: faker.date.past().getTime(),
+        edited: faker.date.recent().getTime(),
+        postId: faker.number.int(),
       },
       id: counter,
     });

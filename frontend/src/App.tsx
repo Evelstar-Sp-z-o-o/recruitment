@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, Fragment } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -28,7 +28,22 @@ import { blue, grey } from '@mui/material/colors';
 
 import Logo from './assets/logo.svg?react';
 import Avt from './assets/userIcon.svg';
+import { useGetPostsQuery } from './store';
 import './styles/main.scss';
+
+const formatDate = (date) => {
+  const dateToConvert = new Date(date);
+
+  return `${dateToConvert.getDate()}.${
+    dateToConvert.getMonth() && dateToConvert.getMonth() + 1 > 9
+      ? dateToConvert.getMonth() + 1
+      : `0${dateToConvert.getMonth() + 1}`
+  }.${dateToConvert.getFullYear()}, ${dateToConvert.getHours()}:${
+    dateToConvert.getMinutes() && dateToConvert.getMinutes() > 9
+      ? dateToConvert.getMinutes()
+      : `0${dateToConvert.getMinutes()}`
+  }`;
+};
 
 interface IAddNewPostProps {
   isFixed?: boolean;
@@ -97,6 +112,7 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
 };
 
 const App: FC = () => {
+  const { data: posts, isLoading } = useGetPostsQuery();
   const [open, setOpen] = useState(false);
 
   const toggleMenu = (newOpen: boolean) => () => {
@@ -105,114 +121,75 @@ const App: FC = () => {
 
   return (
     <Box>
-      <AppBar position="static" color="default" sx={{ padding: '2rem', position: 'relative' }}>
-        <IconButton onClick={toggleMenu(true)} sx={{ width: '4rem', height: '4rem' }}>
-          <Avatar alt="User" src={Avt as string} />
-        </IconButton>
-        <SvgIcon
-          inheritViewBox
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            fontSize: '3rem',
-          }}
-        >
-          <Logo className="logo" />
-        </SvgIcon>
-      </AppBar>
-      <Card sx={{ p: '1.5rem 1rem' }}>
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: blue[500] }} alt="">
-              <TextsmsOutlinedIcon />
-            </Avatar>
-          }
-          title="john.doe@e.mail"
-          subheader="September 14, 2016"
-        />
-        <CardContent>
-          <Typography color="text.secondary">
-            Lorem ipsum dolor sit amet consectetur. Eu nunc eget venenatis fames vivamus ut tellus tristique phasellus.
-            Ullamcorper tortor facilisis elit cursus quis massa.
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
-          <IconButton aria-label="add to favorites">
-            <EditIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <DeleteForeverIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
-      <Divider />
-      <Card sx={{ p: '1.5rem 1rem' }}>
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: blue[500] }} alt="">
-              <TextsmsOutlinedIcon />
-            </Avatar>
-          }
-          title="john.doe@e.mail"
-          subheader="September 14, 2016"
-        />
-        <CardContent>
-          <Typography color="text.secondary">
-            Lorem ipsum dolor sit amet consectetur. Eu nunc eget venenatis fames vivamus ut tellus tristique phasellus.
-            Ullamcorper tortor facilisis elit cursus quis massa.
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
-          <IconButton aria-label="add to favorites">
-            <EditIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <DeleteForeverIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
-      <Divider />
-      <Card sx={{ p: '1.5rem 1rem' }}>
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: blue[500] }} alt="">
-              <TextsmsOutlinedIcon />
-            </Avatar>
-          }
-          title="john.doe@e.mail"
-          subheader="September 14, 2016"
-        />
-        <CardContent>
-          <Typography color="text.secondary">
-            Lorem ipsum dolor sit amet consectetur. Eu nunc eget venenatis fames vivamus ut tellus tristique phasellus.
-            Ullamcorper tortor facilisis elit cursus quis massa.
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
-          <IconButton>
-            <EditIcon />
-          </IconButton>
-          <IconButton>
-            <DeleteForeverIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
-      <Menu open={open} toggleMenu={toggleMenu(false)} />
-      <AddNewPost isFixed />
-      <Container
-        component="footer"
-        className="footer"
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          p: '2rem',
-        }}
-      >
-        TWIXER
-      </Container>
+      {isLoading ? (
+        'Loading'
+      ) : (
+        <>
+          <AppBar position="static" color="default" sx={{ padding: '2rem', position: 'relative' }}>
+            <IconButton onClick={toggleMenu(true)} sx={{ width: '4rem', height: '4rem' }}>
+              <Avatar alt="User" src={Avt as string} />
+            </IconButton>
+            <SvgIcon
+              inheritViewBox
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                fontSize: '3rem',
+              }}
+            >
+              <Logo className="logo" />
+            </SvgIcon>
+          </AppBar>
+          {posts && posts.length > 0
+            ? posts.map((post, index) => (
+                <Fragment key={post.id}>
+                  <Card sx={{ p: '1.5rem 1rem' }}>
+                    <CardHeader
+                      avatar={
+                        <Avatar sx={{ bgcolor: blue[500] }} alt="">
+                          <TextsmsOutlinedIcon />
+                        </Avatar>
+                      }
+                      title={post.data.author}
+                      subheader={`${formatDate(post.data.created)}${
+                        post.data.created !== post.data.edited ? ' (edited)' : null
+                      }`}
+                    />
+                    <CardContent>
+                      <Typography color="text.secondary">{post.data.body}</Typography>
+                    </CardContent>
+                    <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
+                      <IconButton aria-label="add to favorites">
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton aria-label="share">
+                        <DeleteForeverIcon />
+                      </IconButton>
+                    </CardActions>
+                  </Card>
+                  {index !== posts.length - 1 ? <Divider /> : null}
+                </Fragment>
+              ))
+            : 'Nothing to see...'}
+
+          <Menu open={open} toggleMenu={toggleMenu(false)} />
+          <AddNewPost isFixed />
+          <Container
+            component="footer"
+            className="footer"
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              p: '2rem',
+            }}
+          >
+            TWIXER
+          </Container>
+        </>
+      )}
     </Box>
   );
 };
