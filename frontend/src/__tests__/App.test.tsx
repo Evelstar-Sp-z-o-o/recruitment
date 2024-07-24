@@ -1,9 +1,10 @@
 import { Provider } from 'react-redux';
+
 import App from '@/src/App';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { createTestStore } from './utils';
 
+import { createTestStore } from './utils';
 
 describe('App Component', () => {
   it('should match snapshot', () => {
