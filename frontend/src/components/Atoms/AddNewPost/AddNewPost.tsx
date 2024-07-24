@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
@@ -10,6 +11,7 @@ interface IAddNewPostProps {
 }
 
 const AddNewPost: FC<IAddNewPostProps> = ({ isFixed }) => {
+  const { t } = useTranslation();
   const StyledIconButton = {
     position: isFixed ? 'fixed' : 'static',
     bottom: '3rem',
@@ -23,7 +25,7 @@ const AddNewPost: FC<IAddNewPostProps> = ({ isFixed }) => {
     p: 0,
   };
   return (
-    <Tooltip title={'Add new post'}>
+    <Tooltip title={t('addPost')}>
       <IconButton sx={StyledIconButton}>
         <AddIcon sx={StyledIcon} />
       </IconButton>
