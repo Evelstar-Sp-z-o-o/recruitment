@@ -2,6 +2,10 @@
   "noPosts": "Stwórz pierwszy wpis!",
   "addPost": "Stwórz wpis",
   "noPosts": "Stwórz pierwszy post",
+  "menu": {
+    "home": "Strona główna",
+    "profile": "Moje posty"
+  },
   "login": {
     "header": "Czy chcesz się zalogować?",
     "button": "Zaloguj",
@@ -14,5 +18,19 @@
     "header": "Chyba się zgubiłeś",
     "description": "strona, której szukasz jest niedostępna!",
     "cta": "Wróć"
+  },
+  "create": {
+    "header": "Utwórz post",
+    "inputLabel": "Stwórz coś niesamowitego!!!",
+    "noUserAlert": "Aby opublikować post musisz być zalogowany.",
+    "alert": {
+      "success": "Opubliikowano post",
+      "error": "O nie, coś poszło nie tak"
+    },
+    "button": {
+      "cancel": "Anuluj",
+      "send": "Wyślij!",
+      "login": "Zaloguj"
+    }
   }
 }

@@ -31,9 +31,9 @@ export const handlers = [
       return HttpResponse.json(updatedPost, { status: 201 });
     }
   }),
-  http.post('http://localhost:3000/api/posts', async ({ request }) => {
+  http.post('http://localhost:3000/api/posts/', async ({ request }) => {
     const newPost = await request.json();
-    db.article.create({
+    db.post.create({
       data: {
         body: newPost.data.body,
         author: newPost.data.author,
