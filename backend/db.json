@@ -2,13 +2,43 @@
   "posts": [
     {
       "data": {
-        "body": "This is example post",
+        "body": "awdawd",
         "author": "john.doe@gmail.com",
         "created": 1528871013,
         "edited": 1528871013,
         "postId": "8q7wm5"
       },
       "id": 1
+    },
+    {
+      "data": {
+        "body": "ddadsd",
+        "author": "abc@gmail.com",
+        "created": 1721900309699,
+        "edited": 1721900309699,
+        "postId": "rn0o9d"
+      },
+      "id": 2
+    },
+    {
+      "data": {
+        "body": "asd",
+        "author": "abc@gmail.com",
+        "created": 1721906287842,
+        "edited": 1721906287842,
+        "postId": "6m3bry"
+      },
+      "id": 5
+    },
+    {
+      "data": {
+        "body": "dddd",
+        "author": "abc@gmail.com",
+        "created": 1721913006692,
+        "edited": 1721913006692,
+        "postId": "wegjb4"
+      },
+      "id": 6
     }
   ]
 }

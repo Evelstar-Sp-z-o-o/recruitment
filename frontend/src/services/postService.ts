@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { PostData } from '../types/types';
+import { Post, PostData } from '../types/types';
 
 const API_URL = 'http://localhost:3000/api/posts';
 
@@ -19,7 +19,7 @@ export const getPosts = async () => {
   return response.data;
 };
 
-export const getPostById = async (id: number) => {
+export const getPostById = async (id: string) => {
   const response = await axios.get(`${API_URL}/${id}`);
   return response.data;
 };
@@ -37,8 +37,8 @@ export const createPost = async (content: string) => {
   return response.data;
 };
 
-export const updatePost = async (id: number, post: { title: string; content: string }) => {
-  const response = await axios.put(`${API_URL}/${id}`, post);
+export const updatePost = async (post: Post) => {
+  const response = await axios.put(`${API_URL}/${post.id}`, post);
   return response.data;
 };
 

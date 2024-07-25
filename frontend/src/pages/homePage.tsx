@@ -1,12 +1,23 @@
 import { FC } from 'react';
-import { useQuery } from 'react-query';
+
+import styled from 'styled-components';
 
 import { Container, Typography } from '@mui/material';
 
-import { getPosts } from '../services/postService';
+import PostForm from '../components/PostForm';
+import PostItem from '../shared/components/PostItem';
+import { useGetPosts } from '../shared/react-query/use-post-queries';
+
+const ModalContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #364fc7;
+`;
 
 const HomePage: FC = () => {
-  const { data: posts, error, isLoading } = useQuery('posts', getPosts);
+  const { data: posts, error, isLoading } = useGetPosts();
 
   if (isLoading) {
     return <Typography variant="h6">Loading...</Typography>;
@@ -19,8 +30,9 @@ const HomePage: FC = () => {
   return (
     <>
       <Container>
+        <PostForm />
         {posts?.map((post) => (
-          <Typography key={post.id}>{post.data.body}</Typography>
+          <PostItem post={post} reducedView={true} />
         ))}
       </Container>
     </>
