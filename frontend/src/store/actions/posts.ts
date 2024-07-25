@@ -18,12 +18,12 @@ export const fetchPosts = createAsyncThunk<Post[]>(
   }
 );
 
-export const addPost = createAsyncThunk<Post, string>(
+export const addPost = createAsyncThunk<Post, { body: string; author: string }>(
   "posts/addPost",
-  async (body) => {
+  async ({body, author}) => {
     const newPostData = {
       body,
-      author: "john.doe@gmail.com",
+      author,
       created: Date.now(),
       edited: Date.now(),
       postId: Math.random().toString(36).substr(2, 6),

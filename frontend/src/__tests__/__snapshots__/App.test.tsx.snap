@@ -1,0 +1,67 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App > should match snapshot 1`] = `
+[
+  <h2>
+    Unexpected Application Error!
+  </h2>,
+  <h3
+    style={
+      {
+        "fontStyle": "italic",
+      }
+    }
+  >
+    could not find react-redux context value; please ensure the component is wrapped in a &lt;Provider&gt;
+  </h3>,
+  <pre
+    style={
+      {
+        "backgroundColor": "rgba(200,200,200, 0.5)",
+        "padding": "0.5rem",
+      }
+    }
+  >
+    Error: could not find react-redux context value; please ensure the component is wrapped in a &lt;Provider&gt;
+    at useReduxContext (file:///Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-redux/src/hooks/useReduxContext.ts:17:13)
+    at useStore (file:///Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-redux/src/hooks/useStore.ts:97:23)
+    at Module.useDispatch2 (file:///Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-redux/src/hooks/useDispatch.ts:72:19)
+    at PostList (/Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/src/components/PostList.tsx:31:33)
+    at renderWithHooks (/Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:6351:18)
+    at mountIndeterminateComponent (/Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:9855:13)
+    at beginWork (/Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11312:16)
+    at performUnitOfWork (/Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15811:12)
+    at workLoopSync (/Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15745:5)
+    at renderRootSync (/Users/annakowalewskaja/Files/PROJECTS/recruitment/frontend/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15717:7)
+  </pre>,
+  <p>
+    💿 Hey developer 👋
+  </p>,
+  <p>
+    You can provide a way better UX than this when your app throws errors by providing your own 
+    <code
+      style={
+        {
+          "backgroundColor": "rgba(200,200,200, 0.5)",
+          "padding": "2px 4px",
+        }
+      }
+    >
+      ErrorBoundary
+    </code>
+     or
+     
+    <code
+      style={
+        {
+          "backgroundColor": "rgba(200,200,200, 0.5)",
+          "padding": "2px 4px",
+        }
+      }
+    >
+      errorElement
+    </code>
+     prop on your route.
+  </p>,
+]
+`;

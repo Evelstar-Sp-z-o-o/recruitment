@@ -1,9 +1,9 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Tooltip } from "@mui/material";
 
-const NewPostForm = ({ addPost }) => {
+const NewPostForm = ({ addPost, disabled }) => {
   const validationSchema = Yup.object({
     body: Yup.string().required("Required"),
   });
@@ -29,9 +29,22 @@ const NewPostForm = ({ addPost }) => {
             error={touched.body && Boolean(errors.body)}
             helperText={touched.body && errors.body}
           />
-          <Button type="submit" variant="contained" color="primary" style={{ marginTop: 16 }}>
-            Add Post
-          </Button>
+          <Tooltip
+            title={disabled ? "Please, log in to add a post" : ""}
+            placement="top"
+          >
+            <span>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                style={{ marginTop: 16 }}
+                disabled={disabled}
+              >
+                Add Post
+              </Button>
+            </span>
+          </Tooltip>
         </Form>
       )}
     </Formik>

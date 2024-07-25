@@ -1,8 +1,18 @@
-import * as React from "react";
-import PostList from "./components/PostList";
+import React, {type ReactElement}from "react";
+import {
+  RouterProvider,
+} from "react-router-dom";
+import { AppRouter } from "./navigation";
+import { UserProvider } from "./utils/UserProvider";
 
-const MainPage: React.FC = () => {
-  return <PostList />;
+
+const MainPage = (): ReactElement=> {
+
+  return (
+    <UserProvider>
+        <RouterProvider router={AppRouter} />
+    </UserProvider>
+  );
 };
 
 export default MainPage;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { type ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Container,
@@ -10,7 +10,12 @@ import {
   Button,
   Divider,
   Paper,
+  Box,
 } from "@mui/material";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+
+import { useUser } from "../utils/UserProvider";
 import { AppDispatch, RootState } from "../store/store";
 import {
   addPost,
@@ -22,17 +27,19 @@ import {
 import EditPostForm from "./EditPostForm";
 import NewPostForm from "./NewPostForm";
 
-const PostList = () => {
+const PostList = (): ReactElement => {
   const dispatch: AppDispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.posts);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
+  const { email, logout } = useUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
   const handleAddPost = (body: string) => {
-    dispatch(addPost(body));
+    dispatch(addPost({body, author: email}) );
   };
 
   const handleEditPost = (id: number, body: string) => {
@@ -44,13 +51,34 @@ const PostList = () => {
     dispatch(deletePost(id));
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <Container>
-      <Typography variant="h2" gutterBottom align="center">
-        Posts
-      </Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
+        <Typography variant="h2">
+          Posts
+        </Typography>
+        <Box>
+          {email ? (
+            <>
+              <Typography variant="body1" display="inline" mr={2}>{email}</Typography>
+              <Button color="secondary" variant="contained" onClick={handleLogout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <Button color="primary" variant="contained" onClick={() => navigate("/login")}>
+              Login
+            </Button>
+          )}
+        </Box>
+      </Box>
       <Paper style={{ padding: 16, marginBottom: 24 }}>
-        <NewPostForm addPost={handleAddPost} />
+        <NewPostForm addPost={handleAddPost} disabled={!email}/>
       </Paper>
       <Grid container spacing={4}>
         {posts.length > 0 ? (
@@ -68,13 +96,16 @@ const PostList = () => {
                     <>
                       <Typography variant="h6">{String(post.body)}</Typography>
                       <Typography variant="body2" color="textSecondary">
-                        {new Date(post.created).toLocaleString()}
+                        {moment(post.created).fromNow()}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        Author: {post.author}
                       </Typography>
                     </>
                   )}
                 </CardContent>
                 <Divider />
-                <CardActions>
+                {email && (<CardActions>
                   <Button
                     size="small"
                     color="error"
@@ -92,6 +123,7 @@ const PostList = () => {
                     </Button>
                   )}
                 </CardActions>
+                 )}
               </Card>
             </Grid>
           ))
