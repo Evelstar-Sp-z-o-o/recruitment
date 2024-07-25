@@ -7,6 +7,16 @@ import { formatDate } from '@/src/utils/helpers/formatDate';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Snackbar,
+} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -21,8 +31,50 @@ import { RootState } from '@reduxjs/toolkit/query';
 
 const PostsList = ({ posts, handleEdit }) => {
   const user = useSelector<RootState>((state) => state.user);
+  const [removePost, { isError, isSuccess }] = useRemovePostMutation();
   const { t } = useTranslation();
   const [sortedPosts, setSortedPosts] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [postId, setPostId] = useState(null);
+  const [alert, setAlert] = useState(false);
+  const [authorAlert, setAuthorAlert] = useState(false);
+
+  useEffect(() => {
+    if (isError || isSuccess) {
+      setAlert(true);
+    }
+  }, [isError, isSuccess]);
+
+  const handleCloseSnackbar = () => {
+    setAlert(false);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleAlertClose = () => {
+    setAuthorAlert(false);
+    setOpen(false);
+  };
+
+  const handleDelete = (post) => {
+    if (post.data.author !== user) {
+      setPostId(null);
+      setAuthorAlert(true);
+
+      return;
+    }
+
+    setOpen(true);
+    setPostId(post.id);
+  };
+
+  const handleConfirmDelete = () => {
+    setOpen(false);
+    removePost(postId);
+    setPostId(null);
+  };
 
   useEffect(() => {
     if (posts) {
@@ -62,7 +114,10 @@ const PostsList = ({ posts, handleEdit }) => {
                 >
                   <EditIcon />
                 </IconButton>
-                <IconButton disabled={!user || user?.toLowerCase() !== post.data.author.toLowerCase()}>
+                <IconButton
+                  disabled={!user || user?.toLowerCase() !== post.data.author.toLowerCase()}
+                  onClick={() => handleDelete(post)}
+                >
                   <DeleteForeverIcon />
                 </IconButton>
               </CardActions>
@@ -75,6 +130,34 @@ const PostsList = ({ posts, handleEdit }) => {
           {t('noPosts')}
         </Box>
       )}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{t('delete.confirm.confirmHeader')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{t('delete.confirm.confirmMessage')}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>{t('delete.confirm.button.cancel')}</Button>
+          <Button onClick={handleConfirmDelete} autoFocus>
+            {t('delete.confirm.button.confirm')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={authorAlert} onClose={handleClose}>
+        <DialogTitle>{t('delete.authorDelete')}</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleAlertClose}>{t('delete.button.close')}</Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar open={alert} autoHideDuration={6000}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={isSuccess ? 'success' : 'error'}
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {isSuccess ? t('delete.alert.success') : t('delete.alert.error')}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
