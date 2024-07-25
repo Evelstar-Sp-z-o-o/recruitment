@@ -56,7 +56,7 @@ const BaseView = ({ posts }) => {
           variant="filled"
           sx={{ width: '100%' }}
         >
-          {isPostSent ? 'Post published' : 'Oh no, something went wrong'}
+          {isPostSent ? t('create.alert.success') : t('create.alert.error')}
         </Alert>
       </Snackbar>
       <Footer />

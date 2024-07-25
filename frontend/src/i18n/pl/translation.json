@@ -23,6 +23,10 @@
     "header": "Utwórz post",
     "inputLabel": "Stwórz coś niesamowitego!!!",
     "noUserAlert": "Aby opublikować post musisz być zalogowany.",
+    "alert": {
+      "success": "Opubliikowano post",
+      "error": "O nie, coś poszło nie tak"
+    },
     "button": {
       "cancel": "Anuluj",
       "send": "Wyślij!",

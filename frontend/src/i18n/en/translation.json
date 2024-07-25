@@ -23,6 +23,10 @@
     "header": "Create post",
     "inputLabel": "Let's create somethin awesome!!!",
     "noUserAlert": "You must be logged in to publish a post.",
+    "alert": {
+      "success": "Post published",
+      "error": "Oh no, something went wrong"
+    },
     "button": {
       "cancel": "Cancel",
       "send": "Send!",
