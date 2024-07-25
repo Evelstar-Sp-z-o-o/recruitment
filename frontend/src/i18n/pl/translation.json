@@ -19,12 +19,29 @@
     "description": "strona, której szukasz jest niedostępna!",
     "cta": "Wróć"
   },
+  "delete": {
+    "authorDelete": "Możesz usuwać wyłącznie własne posty!",
+    "button": {
+      "close": "Zamknij"
+    },
+    "confirm": {
+      "confirmHeader": "Czy napewno chcesz usunąć ten post?",
+      "confirmMessage": "Nie będziesz mieć możliwości cofnąć tej akcji.",
+      "button": {
+        "cancel": "Anuluj",
+        "confirm": "Potwierdź"
+      }
+    },
+    "alert": {
+      "success": "Post usunięty",
+      "error": "O nie, coś poszło nie tak"
+    }
+  },
   "create": {
     "header": "Utwórz post",
     "inputLabel": "Stwórz coś niesamowitego!!!",
     "noUserAlert": "Aby opublikować post musisz być zalogowany.",
     "authorEdit": "Możesz edytować wyłącznie własne posty!",
-    "authorDelete": "Możesz usuwać wyłącznie własne posty!",
     "alert": {
       "success": "Opubliikowano post",
       "error": "O nie, coś poszło nie tak"
