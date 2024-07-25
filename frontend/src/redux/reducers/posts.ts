@@ -8,7 +8,6 @@ const initialState: PostState = {
 export const postReducer = (state = initialState, action: PostActionTypes): PostState => {
   switch (action.type) {
     case 'FETCH_POSTS':
-      // return { ...state, posts: [] };
       return { ...state, posts: action.payload };
     case 'FETCH_POST':
       return { ...state, editingPost: action.payload };

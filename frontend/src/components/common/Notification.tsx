@@ -9,6 +9,7 @@ interface NotificationProps {
 }
 
 export const Notification: FC<NotificationProps> = ({ handleClose, open, message }) => {
+  // Definicja przejścia animacji
   const SlideTransition = (props) => {
     return <Slide {...props} direction="down" />;
   };

@@ -24,6 +24,7 @@ const EditPost: FC = () => {
 
   const editingPost = useSelector((state: RootState) => state.posts.editingPost);
 
+  // Pobieranie posta przy załadowaniu
   useEffect(() => {
     const fetchPostData = () => {
       try {
@@ -40,6 +41,7 @@ const EditPost: FC = () => {
     fetchPostData();
   }, [id, dispatch]);
 
+  // Ustawianie danych posta po ich załadowaniu
   useEffect(() => {
     if (editingPost) {
       setBody(editingPost.data.body);
@@ -47,6 +49,7 @@ const EditPost: FC = () => {
     }
   }, [editingPost]);
 
+  // Obsługa wysłania formularza
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
@@ -77,9 +80,7 @@ const EditPost: FC = () => {
   };
 
   const handleClose = (event: any, reason: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+    if (reason === 'clickaway') return;
     setOpenNotification(false);
   };
 

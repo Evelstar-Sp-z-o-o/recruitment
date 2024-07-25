@@ -14,6 +14,7 @@ const CreatePost: FC = () => {
   const dispatch = useDispatch();
   const [openNotification, setOpenNotification] = useState<boolean>(false);
 
+  // Stan dla nowego posta
   const [post, setPost] = useState<PostData>({
     body: '',
     author: '',
@@ -22,11 +23,13 @@ const CreatePost: FC = () => {
     postId: '',
   });
 
+  // Stan dla błędów walidacji
   const [errors, setErrors] = useState({
     author: '',
     body: '',
   });
 
+  // Walidacja formularza
   const validate = () => {
     let isValid = true;
     const newErrors = { author: '', body: '' };
@@ -44,6 +47,7 @@ const CreatePost: FC = () => {
     return isValid;
   };
 
+  // Obsługa wysłania formularza
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validate()) {
@@ -60,6 +64,7 @@ const CreatePost: FC = () => {
     }
   };
 
+  // Generowanie losowego ID dla posta
   const generateRandomId = (length: number) => {
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -71,9 +76,7 @@ const CreatePost: FC = () => {
   };
 
   const handleClose = (event: any, reason: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+    if (reason === 'clickaway') return;
     setOpenNotification(false);
   };
 

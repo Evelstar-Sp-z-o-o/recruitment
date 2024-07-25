@@ -10,12 +10,13 @@ const PostList: FC = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.posts.posts);
 
+  // Pobieranie postów przy załadowaniu komponentu
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <CreatePost />
       {posts
         .slice()
@@ -23,7 +24,7 @@ const PostList: FC = () => {
         .map((post) => (
           <Post key={post.id} post={post} />
         ))}
-    </div>
+    </>
   );
 };
 

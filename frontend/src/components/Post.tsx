@@ -21,29 +21,27 @@ const Post: FC<PostProps> = ({ post }) => {
 
   const details = post.data;
 
+  // Funkcja do usuwania posta
   const handleDelete = () => {
     dispatch(deletePost(post.id));
   };
 
+  // Funkcja do edytowania posta
   const handleEdit = () => {
     navigate(`/edit/${post.id}`);
   };
 
-  const handleOpenDialog = () => {
-    setIsDialogOpen(true);
-  };
+  // Otwórz/zamknij dialog potwierdzenia usunięcia
+  const handleOpenDialog = () => setIsDialogOpen(true);
+  const handleCloseDialog = () => setIsDialogOpen(false);
 
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
-  };
-
+  // Zamykanie powiadomienia
   const handleClose = (event: any, reason: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+    if (reason === 'clickaway') return;
     setOpenNotification(false);
   };
 
+  // Potwierdzenie usunięcia posta
   const handleConfirmDelete = () => {
     handleCloseDialog();
     setOpenNotification(true);
@@ -53,6 +51,7 @@ const Post: FC<PostProps> = ({ post }) => {
     }, 1500);
   };
 
+  // Formatowanie znacznika czasu
   const formatUnixTimestamp = (timestamp: number): string => {
     const date: Date = new Date(timestamp * 1000);
     const day: string = String(date.getDate()).padStart(2, '0');
@@ -93,7 +92,7 @@ const Post: FC<PostProps> = ({ post }) => {
             sx={{ display: { xs: 'none', sm: 'block' }, marginRight: 1, textAlign: 'right' }}
           >
             <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
-              {details.created !== details.edited ? 'Edytowano' : ''}
+              {details.created !== details.edited ? 'Edited' : ''}
             </Typography>
 
             <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
