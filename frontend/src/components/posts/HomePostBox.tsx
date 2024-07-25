@@ -8,34 +8,38 @@ import { Avatar, Box, Card, CardMedia, IconButton, Typography } from '@mui/mater
 interface PostBoxProps {
   post: Post;
 }
+
+const styles = {
+  container: { display: 'flex', gap: 1, alignItems: 'start', maxWidth: 600, margin: '0 auto' },
+  contentContainer: { display: 'flex', flexDirection: 'column', width: '100%' },
+  header: { display: 'flex', gap: 2 },
+  likeContainer: { display: 'flex', gap: 1, alignItems: 'center', ml: 'auto', pr: 4 },
+  image: { width: '100%', height: 'auto', aspectRatio: '1/1' },
+  avatar: { width: 30, height: 30 },
+  likeIcon: { width: 20, height: 20 },
+};
+
 const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
-  const { content, imageUrl, username, createdAt, id } = post;
-  const [likeCount, setLikeCount] = useState<number>();
-  const [likeUsers, setLikeUsers] = useState<string[]>();
+  const { content, imageUrl, username, createdAt, id, numberOfLikes, likes } = post;
+  const [likeCount, setLikeCount] = useState<number>(numberOfLikes);
+  const [likeUsers, setLikeUsers] = useState<string[]>(likes);
 
   useEffect(() => {
-    if (post) {
-      setLikeCount(post.numberOfLikes);
-      setLikeUsers(post.likes);
-    }
-  }, [post]);
+    setLikeCount(numberOfLikes);
+    setLikeUsers(likes);
+  }, [numberOfLikes, likes]);
 
+  // Dodac lub usunac like
   const handleLike = async () => {
     try {
-      let updatedPost;
-      if (likeUsers.includes(currentUser)) {
-        updatedPost = {
-          numberOfLikes: likeCount - 1,
-          likes: likeUsers.filter((user) => user !== currentUser),
-        };
-      } else {
-        updatedPost = {
-          numberOfLikes: likeCount + 1,
-          likes: [...likeUsers, currentUser],
-        };
-      }
+      const isLiked = likeUsers.includes(currentUser);
+      const updatedPost = {
+        numberOfLikes: isLiked ? likeCount - 1 : likeCount + 1,
+        likes: isLiked ? likeUsers.filter((user) => user !== currentUser) : [...likeUsers, currentUser],
+      };
+
       const response = await fetch(`/api/posts/${id}`, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -48,27 +52,27 @@ const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
         setLikeUsers(data.data.likes);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   return (
-    <Box sx={{ display: 'flex', gap: 1, alignItems: 'start', maxWidth: 600, margin: '0 auto' }}>
-      <Avatar sx={{ width: 30, height: 30 }} />
-      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <Box sx={{ display: 'flex', gap: 2 }}>
+    <Box sx={styles.container}>
+      <Avatar sx={styles.avatar} />
+      <Box sx={styles.contentContainer}>
+        <Box sx={styles.header}>
           <Typography variant="body2" color="text.secondary">
             {username}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {getFormattedDate(createdAt)}
           </Typography>
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', ml: 'auto', pr: 4 }}>
+          <Box sx={styles.likeContainer}>
             <Typography variant="body2" color="text.secondary">
               {`${likeCount} ${likeCount <= 1 ? 'Like' : 'Likes'}`}
             </Typography>
-            <IconButton sx={{ width: 20, height: 20 }} onClick={handleLike}>
-              <ThumbUpIcon sx={{ color: `${likeUsers && likeUsers.includes(currentUser) ? 'dodgerBlue' : 'gray'}` }} />
+            <IconButton sx={styles.likeIcon} onClick={handleLike}>
+              <ThumbUpIcon sx={{ color: `${likeUsers.includes(currentUser) ? 'dodgerBlue' : 'gray'}` }} />
             </IconButton>
           </Box>
         </Box>
@@ -76,7 +80,7 @@ const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
           <Typography variant="body1">{content}</Typography>
           {imageUrl && (
             <Card sx={{ mt: 2 }}>
-              <CardMedia component="img" image={imageUrl} sx={{ width: '100%', height: 'auto', aspectRatio: '1/1' }} />
+              <CardMedia component="img" image={imageUrl} sx={styles.image} />
             </Card>
           )}
         </Box>
