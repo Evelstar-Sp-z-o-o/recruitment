@@ -6,25 +6,22 @@ import Loader from '../components/Loader';
 import HomePostBox from '../components/posts/HomePostBox';
 import { Post } from '../types';
 
-const sortOptionStyle = {
-  width: '50%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: '#028391;',
-  color: 'white',
-  cursor: 'pointer',
-  fontSize: '14px',
-};
-
-const basicStyle = {
-  width: '50%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'lightgray',
-  cursor: 'pointer',
-  fontSize: '14px',
+const style = {
+  base: {
+    width: '50%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer',
+    fontSize: '14px',
+  },
+  active: {
+    backgroundColor: '#028391',
+    color: 'white',
+  },
+  inactive: {
+    backgroundColor: 'lightgray',
+  },
 };
 
 const Home = () => {
@@ -43,19 +40,21 @@ const Home = () => {
           setPosts(dataWithId);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchPosts();
   }, []);
 
+  // sortowac posty wg wybranej opcji
   useEffect(() => {
     if (posts) {
-      const postsCopy = [...posts];
-      const sortedPosts =
-        sortOption === 'popular'
-          ? postsCopy.sort((a, b) => b.numberOfLikes - a.numberOfLikes)
-          : postsCopy.sort((a, b) => b.createdAt - a.createdAt);
+      const sortedPosts = [...posts].sort((a, b) => {
+        if (sortOption === 'popular') {
+          return b.numberOfLikes - a.numberOfLikes; // wg ilosci like
+        }
+        return b.createdAt - a.createdAt; // wg daty stworzenia
+      });
       setPosts(sortedPosts);
     }
   }, [sortOption]);
@@ -76,10 +75,16 @@ const Home = () => {
       }}
     >
       <Box sx={{ height: 50, width: '100%', display: 'flex' }}>
-        <Box sx={sortOption === 'latest' ? sortOptionStyle : basicStyle} onClick={() => setSortOption('latest')}>
+        <Box
+          sx={{ ...style.base, ...(sortOption === 'latest' ? style.active : style.inactive) }}
+          onClick={() => setSortOption('latest')}
+        >
           Latest
         </Box>
-        <Box sx={sortOption === 'popular' ? sortOptionStyle : basicStyle} onClick={() => setSortOption('popular')}>
+        <Box
+          sx={{ ...style.base, ...(sortOption === 'popular' ? style.active : style.inactive) }}
+          onClick={() => setSortOption('popular')}
+        >
           Most popular
         </Box>
       </Box>
