@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setUser, useCreatePostMutation, useGetPostsQuery } from '@/src/store';
+import { setUser, useCreatePostMutation, useGetPostsQuery, useUpdatePostMutation } from '@/src/store';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -17,24 +17,38 @@ const StyledCreatePost = {
   bgcolor: 'background.paper',
 };
 
-const CreatePostModal = ({ open, close, response }) => {
+const CreatePostModal = ({ open, close, response, initialPost }) => {
   const { data: posts } = useGetPostsQuery();
   const [createPost, { error, isSuccess }] = useCreatePostMutation();
+  const [updatePost, { error: updateError, isSuccess: updateIsSuccess }] = useUpdatePostMutation();
   const user = useSelector<RootState>((state) => state.user);
   const { t } = useTranslation();
   const [openLogin, setOpenLogin] = useState(false);
   const dispatch = useDispatch();
   const [isEmailCorrect, setIsEmailCorrect] = useState(true);
   const [isPostCorrect, setIsPostCorrect] = useState(true);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
+  const [isWrongAuthor, setIsWrongAuthor] = useState(false);
 
   useEffect(() => {
-    if (error || isSuccess) {
-      response(error ?? isSuccess);
+    if (error || isSuccess || updateError || updateIsSuccess) {
+      if (error || isSuccess) {
+        response(error ?? isSuccess);
+      }
+
+      if (updateError || updateIsSuccess) {
+        response(updateError ?? updateIsSuccess);
+      }
     }
-  }, [error, isSuccess]);
+  }, [error, isSuccess, updateError, updateIsSuccess]);
 
   const handleClose = () => {
     setOpenLogin(false);
+  };
+
+  const handleAlertClose = () => {
+    close();
+    setIsWrongAuthor(false);
   };
 
   const handleLogin = (e) => {
@@ -62,6 +76,12 @@ const CreatePostModal = ({ open, close, response }) => {
       return;
     }
 
+    if (initialPost && user !== initialPost.data.author) {
+      setIsWrongAuthor(true);
+
+      return;
+    }
+
     const formData = new FormData(e.target);
     const formJson = Object.fromEntries((formData as any).entries());
     const body = formJson.body;
@@ -76,11 +96,21 @@ const CreatePostModal = ({ open, close, response }) => {
       data: {
         body,
         author: user,
+        created: initialPost ? initialPost.data.created : null,
       },
-      id: posts.length + 1,
+      id: initialPost ? initialPost.id : posts.length + 1,
     };
-    createPost(postBody);
+
+    initialPost ? updatePost(postBody) : createPost(postBody);
     close();
+  };
+
+  const handleChange = (e) => {
+    if (!initialPost) {
+      setIsSubmitEnabled(!!e.target.value);
+    } else {
+      setIsSubmitEnabled(e.target.value !== initialPost.data.body && !!e.target.value);
+    }
   };
 
   return (
@@ -95,18 +125,20 @@ const CreatePostModal = ({ open, close, response }) => {
               multiline
               autoFocus
               required
+              onChange={handleChange}
               error={!isPostCorrect}
               id="body"
               name="body"
               sx={{ width: '100%' }}
               variant="standard"
               label={t('create.inputLabel')}
+              defaultValue={initialPost ? initialPost.data.body : null}
             />
             <Container sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 3 }}>
               <Button variant="contained" color="error" onClick={close}>
                 {t('create.button.cancel')}
               </Button>
-              <Button variant="contained" color="success" type="submit">
+              <Button variant="contained" color="success" type="submit" disabled={!isSubmitEnabled}>
                 {t('create.button.send')}
               </Button>
             </Container>
@@ -140,6 +172,13 @@ const CreatePostModal = ({ open, close, response }) => {
         <DialogActions>
           <Button onClick={handleClose}>{t('create.button.cancel')}</Button>
           <Button type="submit">{t('create.button.login')}</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={isWrongAuthor}>
+        <DialogTitle>{t('create.authorEdit')}</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleAlertClose}>{t('create.button.close')}</Button>
         </DialogActions>
       </Dialog>
     </>

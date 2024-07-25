@@ -23,6 +23,8 @@
     "header": "Create post",
     "inputLabel": "Let's create somethin awesome!!!",
     "noUserAlert": "You must be logged in to publish a post.",
+    "authorEdit": "You can only edit your own posts!",
+    "authorDelete": "You can only remove your own posts!",
     "alert": {
       "success": "Post published",
       "error": "Oh no, something went wrong"
@@ -30,7 +32,8 @@
     "button": {
       "cancel": "Cancel",
       "send": "Send!",
-      "login": "Login"
+      "login": "Login",
+      "close": "Close"
     }
   }
 }

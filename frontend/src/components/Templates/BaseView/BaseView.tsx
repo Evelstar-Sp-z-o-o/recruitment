@@ -15,6 +15,7 @@ const BaseView = ({ posts }) => {
   const [openPostModal, setOpenPostModal] = useState(false);
   const [isPostSent, setIsPostSent] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [singlePost, setSinglePost] = useState(null);
   const { t } = useTranslation();
 
   const toggleMenu = (newOpen: boolean) => () => {
@@ -22,6 +23,7 @@ const BaseView = ({ posts }) => {
   };
 
   const handleTogglePostModal = () => {
+    setSinglePost(null);
     setOpenPostModal((prevState) => !prevState);
   };
 
@@ -36,11 +38,16 @@ const BaseView = ({ posts }) => {
     setOpenSnackbar(false);
   };
 
+  const handleEdit = (post) => {
+    setSinglePost(post);
+    setOpenPostModal((prevState) => !prevState);
+  };
+
   return (
     <>
       <Header toggleMenu={toggleMenu} />
       {posts && posts.length > 0 ? (
-        <PostsList posts={posts} />
+        <PostsList posts={posts} handleEdit={handleEdit} />
       ) : (
         <Typography color="text.secondary" align="center" sx={{ mt: '10rem', fontSize: '2rem' }}>
           {t('noPosts')}
@@ -48,7 +55,12 @@ const BaseView = ({ posts }) => {
       )}
       <Menu open={open} toggleMenu={toggleMenu(false)} handleResponse={handleResponse} />
       <AddNewPost isFixed onClick={handleTogglePostModal} />
-      <CreatePostModal open={openPostModal} close={handleTogglePostModal} response={handleResponse} />
+      <CreatePostModal
+        open={openPostModal}
+        close={handleTogglePostModal}
+        response={handleResponse}
+        initialPost={singlePost}
+      />
       <Snackbar open={openSnackbar} autoHideDuration={6000}>
         <Alert
           onClose={handleSnackbar}

@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
+import { useRemovePostMutation } from '@/src/store';
 import { formatDate } from '@/src/utils/helpers/formatDate';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
@@ -18,7 +19,7 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import { RootState } from '@reduxjs/toolkit/query';
 
-const PostsList = ({ posts }) => {
+const PostsList = ({ posts, handleEdit }) => {
   const user = useSelector<RootState>((state) => state.user);
   const { t } = useTranslation();
   const [sortedPosts, setSortedPosts] = useState([]);
@@ -55,7 +56,10 @@ const PostsList = ({ posts }) => {
                 <Typography color="text.secondary">{post.data.body}</Typography>
               </CardContent>
               <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
-                <IconButton disabled={!user || user?.toLowerCase() !== post.data.author.toLowerCase()}>
+                <IconButton
+                  disabled={!user || user?.toLowerCase() !== post.data.author.toLowerCase()}
+                  onClick={() => handleEdit(post)}
+                >
                   <EditIcon />
                 </IconButton>
                 <IconButton disabled={!user || user?.toLowerCase() !== post.data.author.toLowerCase()}>

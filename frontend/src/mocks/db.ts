@@ -10,8 +10,8 @@ export const db = factory({
       author: faker.internet.email(),
       created: faker.date.past().getTime(),
       edited: faker.date.recent().getTime(),
-      postId: faker.number.int(),
+      postId: faker.string.uuid(),
     },
-    id: primaryKey(faker.string.uuid),
+    id: primaryKey(faker.number.int),
   },
 });

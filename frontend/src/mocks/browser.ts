@@ -33,7 +33,7 @@ const createPosts = () => {
         body: faker.lorem.paragraphs({ min: 1, max: 6 }),
         created: faker.date.past().getTime(),
         edited: faker.date.recent().getTime(),
-        postId: faker.number.int(),
+        postId: faker.string.uuid(),
       },
       id: counter,
     });
@@ -41,7 +41,24 @@ const createPosts = () => {
   }
 };
 
+const updateTest = () => {
+  db.post.update({
+    where: {
+      id: {
+        equals: 1,
+      },
+    },
+    data: {
+      data: {
+        author: 'Jan Kowalski',
+      },
+    },
+  });
+};
+
 createPosts();
+
+updateTest();
 
 window.mocks = {
   createPosts,

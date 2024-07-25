@@ -23,6 +23,8 @@
     "header": "Utwórz post",
     "inputLabel": "Stwórz coś niesamowitego!!!",
     "noUserAlert": "Aby opublikować post musisz być zalogowany.",
+    "authorEdit": "Możesz edytować wyłącznie własne posty!",
+    "authorDelete": "Możesz usuwać wyłącznie własne posty!",
     "alert": {
       "success": "Opubliikowano post",
       "error": "O nie, coś poszło nie tak"
@@ -30,7 +32,8 @@
     "button": {
       "cancel": "Anuluj",
       "send": "Wyślij!",
-      "login": "Zaloguj"
+      "login": "Zaloguj",
+      "close": "Zamknij"
     }
   }
 }

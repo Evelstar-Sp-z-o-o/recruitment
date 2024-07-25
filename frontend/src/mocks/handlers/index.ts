@@ -1,31 +1,28 @@
 import { http, HttpResponse } from 'msw';
 
-import { faker } from '@faker-js/faker';
-
 import { db } from '../db';
 
 export const handlers = [
   http.get('http://localhost:3000/api/posts', () => {
     return HttpResponse.json(db.post.getAll());
   }),
-  http.put('http://localhost:3000/api/posts/:postId', async ({ request }) => {
+  http.put('http://localhost:3000/api/posts/:postId', async ({ request, params }) => {
     const updatedPost = await request.json();
+    const { postId } = params;
+
     if (updatedPost) {
-      db.article.update({
+      console.log('Updating post "%s" with:', postId, updatedPost);
+      db.post.update({
         where: {
           id: {
-            equals: updatedPost.id,
+            equals: postId,
           },
         },
         data: {
           data: {
             body: updatedPost.data.body,
-            author: updatedPost.data.author,
-            created: updatedPost.data.created,
             edited: Date.now(),
-            postId: updatedPost.data.postId,
           },
-          id: updatedPost.id,
         },
       });
       return HttpResponse.json(updatedPost, { status: 201 });
@@ -39,7 +36,7 @@ export const handlers = [
         author: newPost.data.author,
         created: Date.now(),
         edited: Date.now(),
-        postId: faker.string.uuid(),
+        postId: newPost.data.postId,
       },
       id: newPost.id,
     });
@@ -48,7 +45,7 @@ export const handlers = [
   http.delete('http://localhost:3000/api/posts/:postId', async ({ params }) => {
     const { postId } = params;
     if (!isNaN(Number(postId))) {
-      db.article.delete({
+      db.post.delete({
         where: {
           id: {
             equals: Number(postId),
