@@ -37,7 +37,7 @@ const Post: FC<PostProps> = ({ post }) => {
     setIsDialogOpen(false);
   };
 
-  const handleClose = (event, reason) => {
+  const handleClose = (event: any, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -52,7 +52,6 @@ const Post: FC<PostProps> = ({ post }) => {
       handleDelete();
     }, 1500);
   };
-  console.log(openNotification);
 
   const formatUnixTimestamp = (timestamp: number): string => {
     const date: Date = new Date(timestamp * 1000);
@@ -69,16 +68,16 @@ const Post: FC<PostProps> = ({ post }) => {
       variant="outlined"
       sx={{
         minWidth: 275,
-        margin: '2.5rem 0',
-        paddingTop: '0.5rem',
+        margin: 2,
+        paddingTop: 1,
         background: 'background.paper',
         color: 'text.primary',
-        borderRadius: '0.5rem',
+        borderRadius: 1,
       }}
     >
       <CardContent>
-        <Grid container sx={{ justifyContent: 'space-between' }}>
-          <Grid item role="author-wrapper" sx={{ display: 'flex', gap: '1rem ' }}>
+        <Grid container justifyContent="space-between">
+          <Grid item role="author-wrapper" sx={{ display: 'flex', gap: 1 }}>
             <Avatar alt="Avatar" src={`https://xsgames.co/randomusers/assets/avatars/pixel/${post.id}.jpg`} />
             <Typography component="div">
               {details.author} <br />
@@ -90,7 +89,7 @@ const Post: FC<PostProps> = ({ post }) => {
           <Grid
             item
             role="timeline-wrapper"
-            sx={{ display: { xs: 'none', sm: 'block' }, marginRight: '1rem', textAlign: 'right' }}
+            sx={{ display: { xs: 'none', sm: 'block' }, marginRight: 1, textAlign: 'right' }}
           >
             <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
               {details.created !== details.edited ? 'Edytowano' : ''}
@@ -102,7 +101,7 @@ const Post: FC<PostProps> = ({ post }) => {
           </Grid>
         </Grid>
 
-        <Typography sx={{ padding: { xs: '1rem', sm: '1rem 3.5rem' } }}>{details.body}</Typography>
+        <Typography sx={{ padding: { xs: 1, sm: 3 } }}>{details.body}</Typography>
       </CardContent>
 
       <CardActions sx={{ justifyContent: 'flex-end', padding: '0 2rem 1.5rem 0' }}>
@@ -118,7 +117,7 @@ const Post: FC<PostProps> = ({ post }) => {
         handleClose={handleCloseDialog}
         handleConfirm={handleConfirmDelete}
       />
-      <Notification handleClose={handleClose} open={openNotification} message={'Succesfully deleted post!'} />
+      <Notification handleClose={handleClose} open={openNotification} message={'Successfully deleted post!'} />
     </Card>
   );
 };

@@ -17,8 +17,8 @@ const CreatePost: FC = () => {
   const [post, setPost] = useState<PostData>({
     body: '',
     author: '',
-    created: Date.now() / 1000,
-    edited: Date.now() / 1000,
+    created: Math.floor(Date.now() / 1000),
+    edited: Math.floor(Date.now() / 1000),
     postId: '',
   });
 
@@ -51,8 +51,8 @@ const CreatePost: FC = () => {
       setPost({
         body: '',
         author: '',
-        created: Date.now() / 1000,
-        edited: Date.now() / 1000,
+        created: Math.floor(Date.now() / 1000),
+        edited: Math.floor(Date.now() / 1000),
         postId: generateRandomId(7),
       });
       setErrors({ author: '', body: '' });
@@ -60,7 +60,7 @@ const CreatePost: FC = () => {
     }
   };
 
-  const generateRandomId = (length) => {
+  const generateRandomId = (length: number) => {
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     const charactersLength = characters.length;
@@ -70,7 +70,7 @@ const CreatePost: FC = () => {
     return result;
   };
 
-  const handleClose = (event, reason) => {
+  const handleClose = (event: any, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -78,7 +78,7 @@ const CreatePost: FC = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'flex-end', position: 'relative' }}>
+    <Box display="flex" alignItems="flex-end" position="relative" sx={{ margin: 2 }}>
       <Avatar
         alt="Avatar"
         src="https://xsgames.co/randomusers/assets/avatars/female/11.jpg"
@@ -89,7 +89,7 @@ const CreatePost: FC = () => {
           width: '100%',
           background: 'background.paper',
           position: 'relative',
-          padding: '16px',
+          padding: 2,
           boxShadow: 'none',
           overflow: 'visible',
           '&::after': {
@@ -101,7 +101,7 @@ const CreatePost: FC = () => {
             height: 0,
             borderTop: '10px solid transparent',
             borderBottom: '10px solid transparent',
-            borderRight: '10px solid #1c1c1c ',
+            borderRight: '10px solid #1c1c1c',
             transform: 'translateY(-50%)',
           },
         }}
@@ -111,7 +111,7 @@ const CreatePost: FC = () => {
             label="Your name"
             value={post.author}
             onChange={(e) => setPost({ ...post, author: e.target.value })}
-            sx={{ marginBottom: '16px' }}
+            margin="normal"
             error={!!errors.author}
             helperText={errors.author}
           />
@@ -121,13 +121,13 @@ const CreatePost: FC = () => {
             onChange={(e) => setPost({ ...post, body: e.target.value })}
             multiline
             minRows={5}
-            sx={{ marginBottom: '16px' }}
+            margin="normal"
             error={!!errors.body}
             helperText={errors.body}
           />
           <Grid
             container
-            sx={{ width: 'fit-content', marginLeft: 'auto', alignItems: 'center', gap: '1rem', cursor: 'pointer' }}
+            sx={{ width: 'fit-content', marginLeft: 'auto', alignItems: 'center', gap: 1, cursor: 'pointer' }}
           >
             <AddAPhotoTwoToneIcon />
             <AddPhotoAlternateTwoToneIcon />
@@ -138,7 +138,7 @@ const CreatePost: FC = () => {
           </Grid>
         </form>
       </Card>
-      <Notification handleClose={handleClose} open={openNotification} message={'Succesfully created post!'} />
+      <Notification handleClose={handleClose} open={openNotification} message={'Successfully created post!'} />
     </Box>
   );
 };

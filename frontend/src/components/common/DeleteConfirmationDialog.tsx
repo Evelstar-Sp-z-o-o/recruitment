@@ -11,16 +11,16 @@ interface DeleteConfirmationDialogProps {
 const DeleteConfirmationDialog: FC<DeleteConfirmationDialogProps> = ({ open, handleClose, handleConfirm }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Potwierdzenie usunięcia</DialogTitle>
+      <DialogTitle>Delete Confirmation</DialogTitle>
       <DialogContent>
-        <DialogContentText>Czy na pewno chcesz usunąć ten post? Tej operacji nie można cofnąć.</DialogContentText>
+        <DialogContentText>Are you sure you want to delete this post? This action cannot be undone.</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Anuluj
+          Cancel
         </Button>
         <Button onClick={handleConfirm} color="secondary">
-          Usuń
+          Delete
         </Button>
       </DialogActions>
     </Dialog>

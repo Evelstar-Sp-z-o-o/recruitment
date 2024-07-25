@@ -76,7 +76,7 @@ const EditPost: FC = () => {
     }
   };
 
-  const handleClose = (event, reason) => {
+  const handleClose = (event: any, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -85,7 +85,7 @@ const EditPost: FC = () => {
 
   return (
     <Container component="main" maxWidth="lg">
-      <Paper elevation={3} sx={{ padding: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Paper elevation={3} sx={{ p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Typography variant="h5">Edit Post</Typography>
         {loading ? (
           <CircularProgress />
@@ -122,7 +122,7 @@ const EditPost: FC = () => {
                 marginTop: 2,
                 marginLeft: 'auto',
                 alignItems: 'center',
-                gap: '1rem',
+                gap: 1,
                 flexWrap: 'nowrap',
                 cursor: 'pointer',
               }}
@@ -137,7 +137,7 @@ const EditPost: FC = () => {
           </form>
         )}
       </Paper>
-      <Notification handleClose={handleClose} open={openNotification} message={'Succesfully edited post!'} />
+      <Notification handleClose={handleClose} open={openNotification} message={'Successfully edited post!'} />
     </Container>
   );
 };
