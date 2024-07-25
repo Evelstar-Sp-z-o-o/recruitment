@@ -9,6 +9,7 @@ export default defineConfig(() => {
     test: {
       globals: true,
       environment: 'jsdom',
+      include: ['../frontend/src/__tests__/**/*.{ts,tsx,js,jsx}'],
     },
     build: {
       commonjsOptions: {
