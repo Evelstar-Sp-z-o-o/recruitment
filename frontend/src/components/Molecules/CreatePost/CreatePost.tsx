@@ -52,6 +52,8 @@ const CreatePostModal = ({ open, close }) => {
     e.preventDefault();
     if (!user) {
       setOpenLogin(true);
+
+      return;
     }
 
     const formData = new FormData(e.target);

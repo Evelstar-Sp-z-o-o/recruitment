@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Unknown from '@/src/assets/noUserIcon.svg';
 import Avt from '@/src/assets/userIcon.svg';
 import AddNewPost from '@/src/components/Atoms/AddNewPost/AddNewPost';
+import CreatePostModal from '@/src/components/Molecules/CreatePost/CreatePost';
 import LoginModal from '@/src/components/Molecules/LoginModal/LoginModal';
 import { setLogin, setUser } from '@/src/store';
 import LoginIcon from '@mui/icons-material/Login';
@@ -31,9 +32,14 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
   const { t } = useTranslation();
   const user = useSelector<RootState>((state) => state.user);
   const [openLogin, setOpenLogin] = useState(false);
+  const [openPostModal, setOpenPostModal] = useState(false);
 
   const handleToggleModal = () => {
     setOpenLogin((prevState) => !prevState);
+  };
+
+  const handleTogglePostModal = () => {
+    setOpenPostModal((prevState) => !prevState);
   };
 
   const handleSnackbar = (isOpen) => {
@@ -54,7 +60,7 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
       <Box className="sideMenu">
         <Container className="menuHeader" maxWidth="xl">
           <Avatar alt="User" src={user ? Avt : (Unknown as string)} />
-          <AddNewPost />
+          <AddNewPost onClick={handleTogglePostModal} />
         </Container>
         <Container maxWidth="xl" sx={{ mb: '1rem' }}>
           <Typography color="text.secondary" sx={{ fontWeight: '700' }}>
@@ -91,6 +97,7 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
             </MenuItem>
           )}
         </MenuList>
+        <CreatePostModal open={openPostModal} close={handleTogglePostModal} />
       </Box>
     </Drawer>
   );
