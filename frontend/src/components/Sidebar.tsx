@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import logoSmall from '/assets/logo-sm.svg';
 import logo from '/assets/logo.svg';
@@ -8,8 +7,6 @@ import logo from '/assets/logo.svg';
 import { Home as HomeIcon, Note as NoteIcon, Menu as MenuIcon } from '@mui/icons-material';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
-
-import { openModal } from '../redux/createModalSlice';
 
 const styles = {
   listItemButton: {
@@ -34,9 +31,8 @@ const styles = {
 const Sidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-
-  const dispatch = useDispatch();
 
   const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
@@ -68,12 +64,18 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText primary="My Posts" />
           </MenuItem>
-          <MenuItem onClick={() => dispatch(openModal())}>
-            <ListItemIcon>
-              <PostAddIcon />
-            </ListItemIcon>
-            <ListItemText primary="Create a post" />
-          </MenuItem>
+          <Link
+            to="/create"
+            state={{ background: location }}
+            style={{ textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)' }}
+          >
+            <MenuItem>
+              <ListItemIcon>
+                <PostAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Create a post" />
+            </MenuItem>
+          </Link>
         </Menu>
         <div className="logo-sm-box">
           <img src={logoSmall} alt="logo" className="logo-sm-image" />
@@ -112,12 +114,14 @@ const Sidebar = () => {
           </ListItemIcon>
           <ListItemText primary="My Posts" />
         </ListItemButton>
-        <ListItemButton onClick={() => dispatch(openModal())} sx={styles.creationButton}>
-          <ListItemIcon>
-            <PostAddIcon sx={{ color: 'white' }} />
-          </ListItemIcon>
-          <ListItemText primary="Create a post" />
-        </ListItemButton>
+        <Link to="/create" state={{ background: location }} style={{ textDecoration: 'none' }}>
+          <ListItemButton sx={styles.creationButton}>
+            <ListItemIcon>
+              <PostAddIcon sx={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText primary="Create a post" />
+          </ListItemButton>
+        </Link>
       </List>
     </>
   );

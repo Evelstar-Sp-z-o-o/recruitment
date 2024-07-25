@@ -1,27 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import Posts from '@/src/pages/Posts';
 import { Post } from '@/src/types';
 import { currentUser } from '@/src/utils';
 
-import { openModal as editModal } from '../../redux/editModalSlice';
 import Loader from '../Loader';
 
 function PostsLayout() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const dispatch = useDispatch();
-  const location = useLocation();
-
-  // Open edit modal if current path is /posts/update/
-  useEffect(() => {
-    if (location.pathname.startsWith('/posts/update/')) {
-      dispatch(editModal());
-    }
-  }, [dispatch, location]);
 
   // Fetch current user's posts
   useEffect(() => {

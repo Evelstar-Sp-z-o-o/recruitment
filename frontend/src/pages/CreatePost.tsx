@@ -46,6 +46,7 @@ const CreatePost = () => {
 
   const handleClose = () => {
     dispatch(closeModal());
+    navigate(-1);
   };
 
   return (
