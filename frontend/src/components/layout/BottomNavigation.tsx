@@ -28,9 +28,9 @@ const BottomNav: FC = () => {
     <>
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation showLabels value={value} onChange={handleChange} sx={{ background: '#121212' }}>
-          <BottomNavigationAction sx={{ color: 'secondary.main' }} label="Recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction sx={{ color: 'secondary.main' }} label="Favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction sx={{ color: 'secondary.main' }} label="Archive" icon={<ArchiveIcon />} />
+          <BottomNavigationAction sx={{ color: 'secondary.dark' }} label="Recents" icon={<RestoreIcon />} />
+          <BottomNavigationAction sx={{ color: 'secondary.dark' }} label="Favorites" icon={<FavoriteIcon />} />
+          <BottomNavigationAction sx={{ color: 'secondary.dark' }} label="Archive" icon={<ArchiveIcon />} />
         </BottomNavigation>
       </Paper>
       <Snackbar

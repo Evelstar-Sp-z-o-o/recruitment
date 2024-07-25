@@ -54,7 +54,7 @@ const Post: FC<PostProps> = ({ post }) => {
             <Typography component="div">
               {details.author} <br />
               <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
-                @{details.author.split(/[\s@]+/)[0]}
+                @{details.author.split(/[\s@]+/)[0].toLowerCase()}
               </Typography>
             </Typography>
           </Grid>

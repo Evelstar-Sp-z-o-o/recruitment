@@ -42,7 +42,7 @@ const CreatePost: FC = () => {
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validate()) {
       dispatch(createPost({ id: 0, data: post }));
@@ -101,9 +101,7 @@ const CreatePost: FC = () => {
             label="Your name"
             value={post.author}
             onChange={(e) => setPost({ ...post, author: e.target.value })}
-            // required
             sx={{ marginBottom: '16px' }}
-            color="secondary"
             error={!!errors.author}
             helperText={errors.author}
           />
@@ -111,11 +109,9 @@ const CreatePost: FC = () => {
             label="What's on your mind?"
             value={post.body}
             onChange={(e) => setPost({ ...post, body: e.target.value })}
-            // required
             multiline
-            rows={5}
+            minRows={5}
             sx={{ marginBottom: '16px' }}
-            color="secondary"
             error={!!errors.body}
             helperText={errors.body}
           />

@@ -2,7 +2,10 @@ import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { TextField, Button, Typography } from '@mui/material';
+import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
+import AddPhotoAlternateTwoToneIcon from '@mui/icons-material/AddPhotoAlternateTwoTone';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import { TextField, Button, Typography, Grid, Container, Paper, CircularProgress } from '@mui/material';
 
 import { updatePost, fetchPost } from '../redux/actions/posts';
 import { RootState } from '../redux/reducers';
@@ -14,13 +17,25 @@ const EditPost: FC = () => {
   const { id } = useParams<{ id: string }>();
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const editingPost = useSelector((state: RootState) => state.posts.editingPost);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchPost(Number(id)));
-    }
+    const fetchPostData = () => {
+      try {
+        if (id) {
+          dispatch(fetchPost(Number(id)));
+        }
+      } catch (err) {
+        setError('Failed to fetch post');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPostData();
   }, [id, dispatch]);
 
   useEffect(() => {
@@ -33,39 +48,85 @@ const EditPost: FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (editingPost) {
-      const updatedPost: Post = {
-        ...editingPost,
-        data: {
-          ...editingPost.data,
-          body,
-          author,
-          edited: Math.floor(Date.now() / 1000),
-        },
-      };
-      dispatch(updatePost(updatedPost));
+    if (!body || !author) {
+      setError('All fields are required');
+      return;
     }
 
-    navigate('/');
+    try {
+      if (editingPost) {
+        const updatedPost: Post = {
+          ...editingPost,
+          data: {
+            ...editingPost.data,
+            body,
+            author,
+            edited: Math.floor(Date.now() / 1000),
+          },
+        };
+        dispatch(updatePost(updatedPost));
+        navigate('/');
+      }
+    } catch (err) {
+      setError('Failed to update post');
+    }
   };
 
   return (
-    <div>
-      <Typography variant="h4">Edit Post</Typography>
-      <form onSubmit={handleSubmit}>
-        <TextField label="Body" value={body} onChange={(e) => setBody(e.target.value)} fullWidth margin="normal" />
-        <TextField
-          label="Author"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          fullWidth
-          margin="normal"
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Update Post
-        </Button>
-      </form>
-    </div>
+    <Container component="main" maxWidth="lg">
+      <Paper elevation={3} sx={{ padding: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Typography variant="h5">Edit Post</Typography>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+            <TextField
+              label="Author"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              fullWidth
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="Post text"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              fullWidth
+              margin="normal"
+              multiline
+              minRows={5}
+              variant="outlined"
+            />
+
+            {error && (
+              <Typography color="error" variant="body2" sx={{ margin: '16px 0' }}>
+                {error}
+              </Typography>
+            )}
+            <Grid
+              container
+              sx={{
+                width: 'fit-content',
+                marginTop: 2,
+                marginLeft: 'auto',
+                alignItems: 'center',
+                gap: '1rem',
+                flexWrap: 'nowrap',
+                cursor: 'pointer',
+              }}
+            >
+              <AddAPhotoTwoToneIcon />
+              <AddPhotoAlternateTwoToneIcon />
+              <AttachFileIcon />
+              <Button type="submit" variant="contained" color="primary" fullWidth>
+                Update Post
+              </Button>
+            </Grid>
+          </form>
+        )}
+      </Paper>
+    </Container>
   );
 };
 
