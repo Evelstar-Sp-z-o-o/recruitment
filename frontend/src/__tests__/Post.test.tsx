@@ -45,7 +45,7 @@ describe('Post component', () => {
     expect(screen.getByText('This is a test post')).toBeInTheDocument();
   });
 
-  it('opens delete confirmation dialog', () => {
+  it('opens and closes delete confirmation dialog', () => {
     render(
       <Provider store={createTestStore()}>
         <Post post={mockPost} />
@@ -60,6 +60,14 @@ describe('Post component', () => {
 
     // Sprawdza, czy dialog jest otwarty
     expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+    // Kliknięcie przycisku zamknięcia dialogu
+    fireEvent.click(screen.getByText('Cancel'));
+
+    // Sprawdza, czy dialog jest zamknięty
+    waitFor(async () => {
+      expect(await screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
   });
 
   it('dispatches deletePost action on confirm delete', async () => {

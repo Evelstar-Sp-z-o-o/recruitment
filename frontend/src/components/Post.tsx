@@ -65,6 +65,7 @@ const Post: FC<PostProps> = ({ post }) => {
 
   return (
     <Card
+      role="post"
       variant="outlined"
       sx={{
         minWidth: 275,
