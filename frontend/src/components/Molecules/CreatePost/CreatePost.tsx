@@ -17,7 +17,7 @@ const StyledCreatePost = {
   bgcolor: 'background.paper',
 };
 
-const CreatePostModal = () => {
+const CreatePostModal = ({ open, close }) => {
   const { data: posts } = useGetPostsQuery();
   const [createPost] = useCreatePostMutation();
   const user = useSelector<RootState>((state) => state.user);
@@ -25,8 +25,7 @@ const CreatePostModal = () => {
   const [openLogin, setOpenLogin] = useState(false);
   const dispatch = useDispatch();
   const [isEmailCorrect, setIsEmailCorrect] = useState(true);
-
-  const handleCancel = () => {};
+  const [isPostCorrect, setIsPostCorrect] = useState(true);
 
   const handleClose = () => {
     setOpenLogin(false);
@@ -58,6 +57,13 @@ const CreatePostModal = () => {
     const formData = new FormData(e.target);
     const formJson = Object.fromEntries((formData as any).entries());
     const body = formJson.body;
+
+    if (!body) {
+      setIsPostCorrect(false);
+
+      return;
+    }
+
     const postBody = {
       data: {
         body,
@@ -66,11 +72,12 @@ const CreatePostModal = () => {
       id: posts.length + 1,
     };
     createPost(postBody);
+    close();
   };
 
   return (
     <>
-      <Modal open={true}>
+      <Modal open={open}>
         <Box className="modal" sx={StyledCreatePost}>
           <Typography variant="h3" component="h2" color="textSecondary">
             {t('create.header')}
@@ -80,6 +87,7 @@ const CreatePostModal = () => {
               multiline
               autoFocus
               required
+              error={!isPostCorrect}
               id="body"
               name="body"
               sx={{ width: '100%' }}
@@ -87,7 +95,7 @@ const CreatePostModal = () => {
               label={t('create.inputLabel')}
             />
             <Container sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 3 }}>
-              <Button variant="contained" color="error" onClick={handleCancel}>
+              <Button variant="contained" color="error" onClick={close}>
                 {t('create.button.cancel')}
               </Button>
               <Button variant="contained" color="success" type="submit">
@@ -111,6 +119,7 @@ const CreatePostModal = () => {
           <TextField
             autoFocus
             required
+            error={!isEmailCorrect}
             margin="dense"
             id="email"
             name="email"

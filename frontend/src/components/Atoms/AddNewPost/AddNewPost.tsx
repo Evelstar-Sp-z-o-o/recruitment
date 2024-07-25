@@ -10,7 +10,7 @@ interface IAddNewPostProps {
   isFixed?: boolean;
 }
 
-const AddNewPost: FC<IAddNewPostProps> = ({ isFixed }) => {
+const AddNewPost: FC<IAddNewPostProps> = ({ isFixed, onClick }) => {
   const { t } = useTranslation();
   const StyledIconButton = {
     position: isFixed ? 'fixed' : 'static',
@@ -26,7 +26,7 @@ const AddNewPost: FC<IAddNewPostProps> = ({ isFixed }) => {
   };
   return (
     <Tooltip title={t('addPost')}>
-      <IconButton sx={StyledIconButton}>
+      <IconButton sx={StyledIconButton} onClick={onClick}>
         <AddIcon sx={StyledIcon} />
       </IconButton>
     </Tooltip>

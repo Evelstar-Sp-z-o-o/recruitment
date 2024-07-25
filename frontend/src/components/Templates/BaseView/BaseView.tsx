@@ -11,10 +11,15 @@ import Typography from '@mui/material/Typography';
 
 const BaseView = ({ posts }) => {
   const [open, setOpen] = useState(false);
+  const [openPostModal, setOpenPostModal] = useState(false);
   const { t } = useTranslation();
 
   const toggleMenu = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const handleTogglePostModal = () => {
+    setOpenPostModal((prevState) => !prevState);
   };
 
   return (
@@ -28,8 +33,8 @@ const BaseView = ({ posts }) => {
         </Typography>
       )}
       <Menu open={open} toggleMenu={toggleMenu(false)} />
-      <AddNewPost isFixed />
-      <CreatePostModal />
+      <AddNewPost isFixed onClick={handleTogglePostModal} />
+      <CreatePostModal open={openPostModal} close={handleTogglePostModal} />
       <Footer />
     </>
   );
