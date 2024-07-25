@@ -14,7 +14,7 @@ const Navbar: FC = () => {
         right: 0,
       }}
     >
-      <Container role="wrapper" sx={{ padding: '0 !important' }}>
+      <Container role="top-navigation" sx={{ padding: '0 !important' }}>
         <Toolbar sx={{ maxWidth: '1200px', display: 'flex', justifyContent: 'space-between' }}>
           <Link to="/">
             <HomeIcon fontSize="large" />

@@ -20,7 +20,7 @@ const DeleteConfirmationDialog: FC<DeleteConfirmationDialogProps> = ({ open, han
           Cancel
         </Button>
         <Button onClick={handleConfirm} color="secondary">
-          Delete
+          Confirm
         </Button>
       </DialogActions>
     </Dialog>
