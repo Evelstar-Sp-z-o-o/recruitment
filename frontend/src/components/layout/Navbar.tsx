@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import HomeIcon from '@mui/icons-material/Home';
-import { AppBar, Avatar, Container, Grid, Toolbar } from '@mui/material';
+import { AppBar, Avatar, Container, Toolbar } from '@mui/material';
 
 const Navbar: FC = () => {
   return (
@@ -20,12 +20,7 @@ const Navbar: FC = () => {
             <HomeIcon fontSize="large" />
           </Link>
 
-          <Grid container spacing={8} sx={{ width: 'fit-content', alignItems: 'center', margin: '0' }}>
-            <Link to="/create" style={{ marginRight: '1.5rem' }}>
-              Create Post
-            </Link>
-            <Avatar alt="Avatar" />
-          </Grid>
+          <Avatar alt="Avatar" src="https://xsgames.co/randomusers/assets/avatars/female/11.jpg" />
         </Toolbar>
       </Container>
     </AppBar>

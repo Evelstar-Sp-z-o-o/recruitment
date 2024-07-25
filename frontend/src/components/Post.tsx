@@ -1,8 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { Avatar, Box, Button, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
+import { Avatar, Button, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
 
 import { deletePost } from '../redux/actions/posts';
 import { Post as PostType } from '../types';
@@ -11,7 +11,7 @@ interface PostProps {
   post: PostType;
 }
 
-const Post: React.FC<PostProps> = ({ post }) => {
+const Post: FC<PostProps> = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,7 +40,8 @@ const Post: React.FC<PostProps> = ({ post }) => {
       variant="outlined"
       sx={{
         minWidth: 275,
-        margin: '3.5rem 0',
+        margin: '2.5rem 0',
+        paddingTop: '0.5rem',
         background: 'background.paper',
         color: 'text.primary',
         borderRadius: '0.5rem',
@@ -49,7 +50,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
       <CardContent>
         <Grid container sx={{ justifyContent: 'space-between' }}>
           <Grid item role="author-wrapper" sx={{ display: 'flex', gap: '1rem ' }}>
-            <Avatar alt="Avatar" />
+            <Avatar alt="Avatar" src={`https://xsgames.co/randomusers/assets/avatars/pixel/${post.id}.jpg`} />
             <Typography component="div">
               {details.author} <br />
               <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
@@ -72,7 +73,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
           </Grid>
         </Grid>
 
-        <Typography sx={{ padding: '1rem 3.5rem' }}>{details.body}</Typography>
+        <Typography sx={{ padding: { xs: '1rem', sm: '1rem 3.5rem' } }}>{details.body}</Typography>
       </CardContent>
 
       <CardActions sx={{ justifyContent: 'flex-end', padding: '0 2rem 1.5rem 0' }}>

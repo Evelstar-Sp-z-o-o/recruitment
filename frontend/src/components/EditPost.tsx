@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ import { updatePost, fetchPost } from '../redux/actions/posts';
 import { RootState } from '../redux/reducers';
 import { Post } from '../types';
 
-const EditPost: React.FC = () => {
+const EditPost: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();

@@ -28,9 +28,9 @@ const BottomNav: FC = () => {
     <>
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation showLabels value={value} onChange={handleChange} sx={{ background: '#121212' }}>
-          <BottomNavigationAction sx={{ color: '#e6edf3' }} label="Aktualności" icon={<RestoreIcon />} />
-          <BottomNavigationAction sx={{ color: '#e6edf3' }} label="Ulubione" icon={<FavoriteIcon />} />
-          <BottomNavigationAction sx={{ color: '#e6edf3' }} label="Archiwum" icon={<ArchiveIcon />} />
+          <BottomNavigationAction sx={{ color: 'secondary.main' }} label="Recents" icon={<RestoreIcon />} />
+          <BottomNavigationAction sx={{ color: 'secondary.main' }} label="Favorites" icon={<FavoriteIcon />} />
+          <BottomNavigationAction sx={{ color: 'secondary.main' }} label="Archive" icon={<ArchiveIcon />} />
         </BottomNavigation>
       </Paper>
       <Snackbar
@@ -41,7 +41,7 @@ const BottomNav: FC = () => {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         style={{ marginTop: '4rem' }}
       >
-        <Alert>Nic nie robię. Jestem tutaj dla wyglądu 😊</Alert>
+        <Alert>I'm not actually doing anything. I'm just here for the app's aesthetics 😊</Alert>
       </Snackbar>
     </>
   );
