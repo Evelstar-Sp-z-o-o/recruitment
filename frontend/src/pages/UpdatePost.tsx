@@ -35,7 +35,7 @@ const UpdatePost = () => {
 
         const data = await response.json();
         const dataWithId = data.map((post) => ({ ...post.data, id: post.id }));
-        const selectedPost = dataWithId.find((post) => post.id === parseInt(postId));
+        const selectedPost = dataWithId.find((post) => post.id.toString() === postId);
         setPost(selectedPost);
       } catch (error) {
         console.error(error);
@@ -79,6 +79,10 @@ const UpdatePost = () => {
     dispatch(closeModal());
     navigate('/posts');
   };
+
+  if (!isLoading && !post) {
+    return <PostResponseModal open={true} onClose={() => navigate('/')} content="Requested post doesn't exist" />;
+  }
 
   return (
     <>
