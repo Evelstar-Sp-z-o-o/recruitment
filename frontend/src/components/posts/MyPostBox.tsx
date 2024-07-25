@@ -9,6 +9,7 @@ import PostResponseModal from '../modals/PostResponseModal';
 
 interface PostBoxProps {
   post: Post;
+  removePost: (postId: string) => void;
 }
 
 const styles = {
@@ -62,7 +63,7 @@ const styles = {
   },
 };
 
-const MyPostBox: React.FC<PostBoxProps> = ({ post }) => {
+const MyPostBox: React.FC<PostBoxProps> = ({ post, removePost }) => {
   const { content, imageUrl, id, createdAt, numberOfLikes } = post;
 
   const [responseModal, setResponseModal] = useState(false);
@@ -85,6 +86,7 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post }) => {
 
       setDeletePost(false);
       setResponseMessage('Successfully deleted a post!');
+      removePost(id);
     } catch (error) {
       console.error(error);
     }

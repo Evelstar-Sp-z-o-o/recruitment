@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 
 import PostFormModal from '../components/modals/PostFormModal';
 import PostResponseModal from '../components/modals/PostResponseModal';
@@ -14,6 +14,8 @@ const UpdatePost = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [responseModal, setResponseModal] = useState(false);
   const [responseMessage, setResponseMessage] = useState<string>();
+
+  const updatePosts = useOutletContext<(posts: any) => void>();
 
   const editModal = useSelector((state: RootState) => state.editModal.isOpen);
   const dispatch = useDispatch();
@@ -63,11 +65,11 @@ const UpdatePost = () => {
       }
 
       const data = await response.json();
-      console.log(data);
 
       dispatch(closeModal());
       setResponseMessage('Successfully updated a post!');
       setResponseModal(true);
+      updatePosts({ ...data.data, id: data.id });
     } catch (error) {
       console.error(error);
     }
