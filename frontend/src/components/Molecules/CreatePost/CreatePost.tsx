@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,15 +17,21 @@ const StyledCreatePost = {
   bgcolor: 'background.paper',
 };
 
-const CreatePostModal = ({ open, close }) => {
+const CreatePostModal = ({ open, close, response }) => {
   const { data: posts } = useGetPostsQuery();
-  const [createPost] = useCreatePostMutation();
+  const [createPost, { error, isSuccess }] = useCreatePostMutation();
   const user = useSelector<RootState>((state) => state.user);
   const { t } = useTranslation();
   const [openLogin, setOpenLogin] = useState(false);
   const dispatch = useDispatch();
   const [isEmailCorrect, setIsEmailCorrect] = useState(true);
   const [isPostCorrect, setIsPostCorrect] = useState(true);
+
+  useEffect(() => {
+    if (error || isSuccess) {
+      response(error ?? isSuccess);
+    }
+  }, [error, isSuccess]);
 
   const handleClose = () => {
     setOpenLogin(false);

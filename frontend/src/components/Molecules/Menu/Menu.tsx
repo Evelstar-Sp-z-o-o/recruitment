@@ -27,7 +27,7 @@ interface IMenuProps {
   toggleMenu: () => void;
 }
 
-const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
+const Menu: FC<IMenuProps> = ({ open, toggleMenu, handleResponse }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const user = useSelector<RootState>((state) => state.user);
@@ -97,7 +97,7 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu }) => {
             </MenuItem>
           )}
         </MenuList>
-        <CreatePostModal open={openPostModal} close={handleTogglePostModal} />
+        <CreatePostModal open={openPostModal} close={handleTogglePostModal} response={handleResponse} />
       </Box>
     </Drawer>
   );
