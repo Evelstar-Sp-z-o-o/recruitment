@@ -13,15 +13,19 @@ const root = createRoot(container);
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#5b8564',
-      // main: '#73b625',
-      // light: will be calculated from palette.primary.main,
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: will be calculated to contrast with palette.primary.main
+      main: '#256d64',
     },
     secondary: {
-      main: '#fff',
-      contrastText: '#5b8564',
+      main: '#e6edf3',
+      contrastText: '#256d64',
+    },
+    background: {
+      default: '#0d1117',
+      paper: '#1c1c1c',
+    },
+    text: {
+      primary: '#e6edf3',
+      secondary: '#707070',
     },
   },
   breakpoints: {
@@ -32,6 +36,12 @@ const theme = createTheme({
       lg: 1200,
       xl: 1536,
     },
+  },
+  typography: {
+    fontFamily: 'Noto Sans, sans-serif',
+    h1: { fontSize: '2rem' },
+    h2: { fontSize: '1.5rem' },
+    body1: { fontSize: '1rem' },
   },
 });
 

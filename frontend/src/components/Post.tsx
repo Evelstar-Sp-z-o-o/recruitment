@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { Button } from '@mui/material';
+import { Avatar, Box, Button, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
 
-import { deletePost, setEditingPost } from '../redux/actions/posts';
+import { deletePost } from '../redux/actions/posts';
 import { Post as PostType } from '../types';
 
 interface PostProps {
@@ -15,6 +15,8 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const details = post.data;
+
   const handleDelete = () => {
     dispatch(deletePost(post.id));
   };
@@ -23,20 +25,65 @@ const Post: React.FC<PostProps> = ({ post }) => {
     navigate(`/edit/${post.id}`);
   };
 
+  const formatUnixTimestamp = (timestamp: number): string => {
+    const date: Date = new Date(timestamp * 1000);
+    const day: string = String(date.getDate()).padStart(2, '0');
+    const month: string = String(date.getMonth() + 1).padStart(2, '0');
+    const year: number = date.getFullYear();
+    const hours: string = String(date.getHours()).padStart(2, '0');
+    const minutes: string = String(date.getMinutes()).padStart(2, '0');
+    return `${day}.${month}.${year} ${hours}:${minutes}`;
+  };
+
   return (
-    <div>
-      <h2>{post?.data?.body}</h2>
-      <p>ID: {post?.id}</p>
-      <p>Author: {post?.data?.author}</p>
-      <p>Created: {new Date(post?.data?.created * 1000).toLocaleString()}</p>
-      <p>Edited: {new Date(post?.data?.edited * 1000).toLocaleString()}</p>
-      <Button variant="contained" color="primary" onClick={handleEdit}>
-        Edit
-      </Button>
-      <Button variant="contained" color="secondary" onClick={handleDelete}>
-        Delete
-      </Button>
-    </div>
+    <Card
+      variant="outlined"
+      sx={{
+        minWidth: 275,
+        margin: '3.5rem 0',
+        background: 'background.paper',
+        color: 'text.primary',
+        borderRadius: '0.5rem',
+      }}
+    >
+      <CardContent>
+        <Grid container sx={{ justifyContent: 'space-between' }}>
+          <Grid item role="author-wrapper" sx={{ display: 'flex', gap: '1rem ' }}>
+            <Avatar alt="Avatar" />
+            <Typography component="div">
+              {details.author} <br />
+              <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
+                @{details.author.split(/[\s@]+/)[0]}
+              </Typography>
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            role="timeline-wrapper"
+            sx={{ display: { xs: 'none', sm: 'block' }, marginRight: '1rem', textAlign: 'right' }}
+          >
+            <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
+              {details.created !== details.edited ? 'Edytowano' : ''}
+            </Typography>
+
+            <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
+              {formatUnixTimestamp(details.created)}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Typography sx={{ padding: '1rem 3.5rem' }}>{details.body}</Typography>
+      </CardContent>
+
+      <CardActions sx={{ justifyContent: 'flex-end', padding: '0 2rem 1.5rem 0' }}>
+        <Button variant="outlined" color="primary" onClick={handleEdit}>
+          Edit
+        </Button>
+        <Button variant="text" color="secondary" onClick={handleDelete}>
+          Delete
+        </Button>
+      </CardActions>
+    </Card>
   );
 };
 
