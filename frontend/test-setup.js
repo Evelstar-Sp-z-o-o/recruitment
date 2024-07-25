@@ -4,12 +4,13 @@
  * @link http://airbnb.io/enzyme/docs/installation/#working-with-react-16
  * @copyright 2017 Airbnb, Inc.
  */
-import enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+// import enzyme from 'enzyme';
+// import Adapter from 'enzyme-adapter-react-16';
+import '@testing-library/jest-dom';
 
 import { server } from './src/__tests__/mocks/server';
 
-enzyme.configure({ adapter: new Adapter() });
+// enzyme.configure({ adapter: new Adapter() });
 
 // MSW setup
 beforeAll(() => server.listen());

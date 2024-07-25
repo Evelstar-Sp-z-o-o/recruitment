@@ -78,12 +78,14 @@ const Home = () => {
         <Box
           sx={{ ...style.base, ...(sortOption === 'latest' ? style.active : style.inactive) }}
           onClick={() => setSortOption('latest')}
+          data-testid="latest-box"
         >
           Latest
         </Box>
         <Box
           sx={{ ...style.base, ...(sortOption === 'popular' ? style.active : style.inactive) }}
           onClick={() => setSortOption('popular')}
+          data-testid="popular-box"
         >
           Most popular
         </Box>

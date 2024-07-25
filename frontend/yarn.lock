@@ -1849,6 +1849,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/redux-mock-store@npm:^1":
+  version: 1.0.6
+  resolution: "@types/redux-mock-store@npm:1.0.6"
+  dependencies:
+    redux: "npm:^4.0.5"
+  checksum: 26f3b5091f131e0bcd150e3a621f21dc1ba059352729ee4d5154812042ea0cf8d1ae2880263367e55222130db14ec912bfda0b7ca184413f4989959fd5a2a70b
+  languageName: node
+  linkType: hard
+
 "@types/scheduler@npm:*":
   version: 0.16.8
   resolution: "@types/scheduler@npm:0.16.8"
@@ -3427,6 +3436,7 @@ __metadata:
     "@types/react-dom": "npm:^18.0.6"
     "@types/react-redux": "npm:^7.1.33"
     "@types/react-router-dom": "npm:^5.3.3"
+    "@types/redux-mock-store": "npm:^1"
     "@typescript-eslint/eslint-plugin": "npm:^5.47.1"
     "@typescript-eslint/parser": "npm:^5.47.1"
     "@vitejs/plugin-react": "npm:^4.1.0"
@@ -3444,6 +3454,7 @@ __metadata:
     react-redux: "npm:^9.1.2"
     react-router-dom: "npm:^6.25.1"
     react-test-renderer: "npm:^18.2.0"
+    redux-mock-store: "npm:^1.5.4"
     sass: "npm:^1.54.4"
     ts-jest: "npm:^28.0.7"
     ts-loader: "npm:^9.3.1"
@@ -4593,6 +4604,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isplainobject@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "lodash.isplainobject@npm:4.0.6"
+  checksum: afd70b5c450d1e09f32a737bed06ff85b873ecd3d3d3400458725283e3f2e0bb6bf48e67dbe7a309eb371a822b16a26cca4a63c8c52db3fc7dc9d5f9dd324cbb
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:4.x":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -5535,6 +5553,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"redux-mock-store@npm:^1.5.4":
+  version: 1.5.4
+  resolution: "redux-mock-store@npm:1.5.4"
+  dependencies:
+    lodash.isplainobject: "npm:^4.0.6"
+  checksum: 674fc7a68ffdb9a9ad50c9f987a2711387b1fc348a8ed3d07b7abd4d2560762347a9565cf9080e786d9f66012ff47f90bef244623c62136511d9b4f2411fb658
+  languageName: node
+  linkType: hard
+
 "redux-thunk@npm:^3.1.0":
   version: 3.1.0
   resolution: "redux-thunk@npm:3.1.0"
@@ -5544,7 +5571,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux@npm:^4.0.0":
+"redux@npm:^4.0.0, redux@npm:^4.0.5":
   version: 4.2.1
   resolution: "redux@npm:4.2.1"
   dependencies:
