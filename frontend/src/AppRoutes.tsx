@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
+import NotFound from './components/NotFound';
 import Sidebar from './components/Sidebar';
 import MainLayout from './components/layout/MainLayout';
 import PostsLayout from './components/layout/PostsLayout';
@@ -41,6 +42,7 @@ const AppRoutes = () => {
           <Route path="posts" element={<PostsLayout />}>
             <Route path="update/:postId" element={<UpdatePost />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
       {background && (
