@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -11,25 +11,35 @@ import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, Men
 
 import { openModal } from '../redux/createModalSlice';
 
+const styles = {
+  listItemButton: {
+    '&.Mui-selected': {
+      backgroundColor: 'grey.300',
+    },
+    width: 250,
+  },
+  creationButton: {
+    backgroundColor: '#028391',
+    borderRadius: '25px',
+    color: 'white',
+    mt: 4,
+    mx: 'auto',
+    width: 230,
+    '&:hover': {
+      backgroundColor: 'rgba(2, 131, 145, 0.7)',
+    },
+  },
+};
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [selectedPage, setSelectedPage] = useState<string>();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setSelectedPage(pathname);
-  }, [pathname]);
-
-  const handleClick = (path) => {
-    setSelectedPage(path);
-    navigate(path);
-  };
-
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(e.currentTarget);
   };
 
   const handleMenuClose = () => {
@@ -40,19 +50,19 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Dropdown menu ponizej 768px */}
+      {/* Dropdown under 768px */}
       <div className="sidebar-menu">
         <IconButton edge="start" color="inherit" onClick={handleMenuClick} aria-label="menu">
           <MenuIcon sx={{ fontSize: 30 }} />
         </IconButton>
         <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleMenuClose}>
-          <MenuItem selected={selectedPage === '/'} onClick={() => handleClick('/')}>
+          <MenuItem selected={pathname === '/'} onClick={() => navigate('/')}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </MenuItem>
-          <MenuItem selected={selectedPage === '/posts'} onClick={() => handleClick('/posts')}>
+          <MenuItem selected={pathname === '/posts'} onClick={() => navigate('/posts')}>
             <ListItemIcon>
               <NoteIcon />
             </ListItemIcon>
@@ -70,20 +80,18 @@ const Sidebar = () => {
           <span className="page-name">{pathname === '/' ? 'Home' : 'My Posts'}</span>
         </div>
       </div>
-      {/* Sidebar powyzej 768px */}
+      {/* Sidebar over 768px */}
       <List className="sidebar-list">
         <div className="logo-box">
           <img src={logo} alt="logo" className="logo-image" />
         </div>
         <ListItemButton
-          selected={selectedPage === '/'}
-          onClick={() => handleClick('/')}
+          aria-label="menu"
+          selected={pathname === '/'}
+          onClick={() => navigate('/')}
           sx={{
-            backgroundColor: selectedPage === '/' ? 'grey.300' : 'transparent',
-            '&.Mui-selected': {
-              backgroundColor: 'grey.300',
-            },
-            width: 250,
+            backgroundColor: pathname === '/' ? 'grey.300' : 'transparent',
+            ...styles.listItemButton,
           }}
         >
           <ListItemIcon>
@@ -92,14 +100,11 @@ const Sidebar = () => {
           <ListItemText primary="Home" />
         </ListItemButton>
         <ListItemButton
-          selected={selectedPage === '/posts'}
-          onClick={() => handleClick('/posts')}
+          selected={pathname === '/posts'}
+          onClick={() => navigate('/posts')}
           sx={{
-            backgroundColor: selectedPage === '/posts' ? 'grey.300' : 'transparent',
-            '&.Mui-selected': {
-              backgroundColor: 'grey.300',
-            },
-            width: 250,
+            backgroundColor: pathname === '/posts' ? 'grey.300' : 'transparent',
+            ...styles.listItemButton,
           }}
         >
           <ListItemIcon>
@@ -107,20 +112,7 @@ const Sidebar = () => {
           </ListItemIcon>
           <ListItemText primary="My Posts" />
         </ListItemButton>
-        <ListItemButton
-          onClick={() => dispatch(openModal())}
-          sx={{
-            backgroundColor: '#028391',
-            borderRadius: '25px',
-            color: 'white',
-            mt: 4,
-            mx: 'auto',
-            width: 230,
-            '&:hover': {
-              backgroundColor: 'rgba(2, 131, 145, 0.7)',
-            },
-          }}
-        >
+        <ListItemButton onClick={() => dispatch(openModal())} sx={styles.creationButton}>
           <ListItemIcon>
             <PostAddIcon sx={{ color: 'white' }} />
           </ListItemIcon>
