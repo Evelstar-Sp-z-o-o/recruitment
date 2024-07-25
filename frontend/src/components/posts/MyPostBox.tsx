@@ -77,13 +77,15 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post }) => {
         method: 'DELETE',
       });
       if (!response.ok) {
-        throw new Error('Failed to delete the post');
+        setDeletePost(false);
+        setResponseMessage('Failed to delete the post');
+        setResponseModal(true);
+        return;
       }
 
       setDeletePost(false);
       setResponseMessage('Successfully deleted a post!');
     } catch (error) {
-      setResponseMessage('An error occurred while deleting the post');
       console.error(error);
     }
   };

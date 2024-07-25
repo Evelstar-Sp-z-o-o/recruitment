@@ -6,16 +6,17 @@ import PostFormModal from '../components/modals/PostFormModal';
 import PostResponseModal from '../components/modals/PostResponseModal';
 import { closeModal } from '../redux/createModalSlice';
 import { RootState } from '../redux/store';
+import { Post } from '../types';
 
 const CreatePost = () => {
   const [responseModal, setResponseModal] = useState(false);
-  const [responseMessage, setResponseMessage] = useState<string>();
+  const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const createModal = useSelector((state: RootState) => state.createModal.isOpen);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (newPost) => {
+  const handleSubmit = async (newPost: Post) => {
     try {
       const response = await fetch('/api/posts', {
         method: 'POST',
@@ -39,7 +40,7 @@ const CreatePost = () => {
       setResponseMessage('Successfully created a post!');
       setResponseModal(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

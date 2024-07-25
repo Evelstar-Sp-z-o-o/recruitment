@@ -11,6 +11,7 @@ import { Post } from '../types';
 const UpdatePost = () => {
   const { postId } = useParams();
   const [post, setPost] = useState<Post>();
+  const [isLoading, setIsLoading] = useState(true);
   const [responseModal, setResponseModal] = useState(false);
   const [responseMessage, setResponseMessage] = useState<string>();
 
@@ -20,12 +21,24 @@ const UpdatePost = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await fetch('/api/posts');
-      if (response.ok) {
+      setIsLoading(true);
+      try {
+        const response = await fetch('/api/posts');
+
+        if (!response.ok) {
+          setResponseMessage('Failed to fetch a post');
+          setResponseModal(true);
+          return;
+        }
+
         const data = await response.json();
         const dataWithId = data.map((post) => ({ ...post.data, id: post.id }));
         const selectedPost = dataWithId.find((post) => post.id === parseInt(postId));
         setPost(selectedPost);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     if (postId) {
@@ -33,7 +46,7 @@ const UpdatePost = () => {
     }
   }, [postId]);
 
-  const handleSubmit = async (updatedPost) => {
+  const handleSubmit = async (updatedPost: Post) => {
     try {
       const response = await fetch(`/api/posts/${postId}`, {
         method: 'PUT',
@@ -46,6 +59,7 @@ const UpdatePost = () => {
         dispatch(closeModal());
         setResponseMessage('Failed to update a post!');
         setResponseModal(true);
+        return;
       }
 
       const data = await response.json();
@@ -55,7 +69,7 @@ const UpdatePost = () => {
       setResponseMessage('Successfully updated a post!');
       setResponseModal(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -64,27 +78,26 @@ const UpdatePost = () => {
     navigate('/posts');
   };
 
-  if (post) {
-    return (
-      <>
-        <PostFormModal
-          initialData={post}
-          isOpen={editModal}
-          onClose={handleClose}
-          type="edit"
-          onSubmit={handleSubmit}
-        />
-        <PostResponseModal
-          open={responseModal}
-          onClose={() => {
-            setResponseModal(false);
-            navigate('/posts');
-          }}
-          content={responseMessage}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <PostFormModal
+        initialData={post}
+        isOpen={editModal}
+        onClose={handleClose}
+        type="edit"
+        onSubmit={handleSubmit}
+        isLoading={isLoading}
+      />
+      <PostResponseModal
+        open={responseModal}
+        onClose={() => {
+          setResponseModal(false);
+          navigate('/posts');
+        }}
+        content={responseMessage}
+      />
+    </>
+  );
 };
 
 export default UpdatePost;

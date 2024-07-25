@@ -4,17 +4,25 @@ import { Post } from '@/src/types';
 import { currentUser } from '@/src/utils';
 import { CancelPresentation, PhotoSizeSelectActual } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button, IconButton, Input, Modal, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, IconButton, Input, Modal, TextField, Typography } from '@mui/material';
 
-const formStyle = {
-  position: 'relative',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-  maxWidth: 500,
+import Loader from '../Loader';
+
+const styles = {
+  formContainer: {
+    position: 'relative',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    maxWidth: 500,
+  },
+  closeButton: { position: 'absolute', top: 2, right: 4 },
+  title: { flex: '1', mb: 1 },
+  imageContainer: { position: 'relative', width: 100, height: 100 },
+  imageCancelButton: { position: 'absolute', top: -5, right: -5, color: 'gray' },
 };
 
 interface PostFormModalProps {
@@ -23,11 +31,13 @@ interface PostFormModalProps {
   onClose: () => void;
   onSubmit: (post) => void;
   type: string;
+  isLoading?: boolean;
 }
 
-const PostFormModal: React.FC<PostFormModalProps> = ({ initialData, onClose, onSubmit, type, isOpen }) => {
-  const [text, setText] = useState<string>();
+const PostFormModal: React.FC<PostFormModalProps> = ({ initialData, onClose, onSubmit, type, isOpen, isLoading }) => {
+  const [text, setText] = useState<string>('');
   const [tempImage, setTempImage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (initialData) {
@@ -36,12 +46,19 @@ const PostFormModal: React.FC<PostFormModalProps> = ({ initialData, onClose, onS
     }
   }, [initialData]);
 
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null);
+
+    if (!text.trim()) {
+      setErrorMessage('Text must be input!');
+      return;
+    }
+
     const post = {
-      content: text,
+      content: text.trim(),
       imageUrl: tempImage || null,
       createdAt: type === 'edit' ? initialData.createdAt : new Date().getTime(),
       updatedAt: new Date().getTime(),
@@ -68,48 +85,55 @@ const PostFormModal: React.FC<PostFormModalProps> = ({ initialData, onClose, onS
 
   return (
     <Modal open={isOpen} onClose={onClose}>
-      <Box component="form" onSubmit={handleSubmit} sx={formStyle}>
-        <IconButton onClick={onClose} sx={{ position: 'absolute', top: 2, right: 4 }}>
-          <CloseIcon sx={{ color: 'black', fontSize: 18 }} />
-        </IconButton>
-        <Typography variant="h6" component="h2" sx={{ flex: '1', mb: 1 }}>
-          {type === 'create' ? 'Create Your Post' : 'Edit Your Post'}
-        </Typography>
-        <TextField
-          label="Text"
-          variant="outlined"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          required
-          multiline
-          rows={3}
-          sx={{ width: '100%' }}
-        />
-        <Box>
-          <Input type="file" onChange={handleFileChange} inputRef={fileInputRef} sx={{ display: 'none' }} />
-          <IconButton
-            onClick={() => {
-              fileInputRef.current.click();
-            }}
-          >
-            <PhotoSizeSelectActual sx={{ fontSize: 26 }} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Box component="form" onSubmit={handleSubmit} sx={styles.formContainer}>
+          <IconButton onClick={onClose} sx={styles.closeButton} aria-label="close">
+            <CloseIcon sx={{ color: 'black', fontSize: 18 }} />
           </IconButton>
-        </Box>
-        {tempImage && (
-          <Box sx={{ position: 'relative', width: 100, height: 100 }}>
-            <img src={tempImage} alt="post image" className="post-form-image" />
+          <Typography variant="h6" component="h2" sx={styles.title}>
+            {type === 'create' ? 'Create Your Post' : 'Edit Your Post'}
+          </Typography>
+          <TextField
+            label="Text"
+            variant="outlined"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            required
+            multiline
+            rows={3}
+            sx={{ width: '100%' }}
+          />
+          <Box>
+            <Input type="file" onChange={handleFileChange} inputRef={fileInputRef} sx={{ display: 'none' }} />
             <IconButton
-              sx={{ position: 'absolute', top: -5, right: -5, color: 'gray' }}
-              onClick={() => setTempImage(null)}
+              aria-label="image upload"
+              onClick={() => {
+                fileInputRef.current?.click();
+              }}
             >
-              <CancelPresentation />
+              <PhotoSizeSelectActual sx={{ fontSize: 26 }} />
             </IconButton>
           </Box>
-        )}
-        <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-          Submit
-        </Button>
-      </Box>
+          {tempImage && (
+            <Box sx={styles.imageContainer}>
+              <img src={tempImage} alt="post image" className="post-form-image" />
+              <IconButton sx={styles.imageCancelButton} onClick={() => setTempImage(null)} aria-label="image-cancel">
+                <CancelPresentation />
+              </IconButton>
+            </Box>
+          )}
+          <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+            Submit
+          </Button>
+          {errorMessage && (
+            <Alert color="error" sx={{ mt: 2 }}>
+              {errorMessage}
+            </Alert>
+          )}
+        </Box>
+      )}
     </Modal>
   );
 };
