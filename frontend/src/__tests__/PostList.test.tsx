@@ -58,7 +58,7 @@ describe('PostList component', () => {
     store = createTestStore();
 
     // Ustawienie wstępnego stanu Redux
-    store.dispatch = vi.fn(); // Zamockowanie dispatch, aby śledzić wywołania
+    store.dispatch = vi.fn();
     store.getState = () =>
       ({
         posts: {
