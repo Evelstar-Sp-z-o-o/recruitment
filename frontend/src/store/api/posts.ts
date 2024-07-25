@@ -30,7 +30,7 @@ export const postsApi = createApi({
           id: body.id,
         },
       }),
-      invalidatesTags: ['Articles'],
+      invalidatesTags: ['Posts'],
     }),
     createPost: builder.mutation({
       query: (body) => ({
