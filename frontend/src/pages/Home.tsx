@@ -46,14 +46,14 @@ const Home = () => {
     fetchPosts();
   }, []);
 
-  // sortowac posty wg wybranej opcji
+  // Sort posts based on the selected option
   useEffect(() => {
     if (posts) {
       const sortedPosts = [...posts].sort((a, b) => {
         if (sortOption === 'popular') {
-          return b.numberOfLikes - a.numberOfLikes; // wg ilosci like
+          return b.numberOfLikes - a.numberOfLikes; // based on number of likes
         }
-        return b.createdAt - a.createdAt; // wg daty stworzenia
+        return b.createdAt - a.createdAt; // based on creation date
       });
       setPosts(sortedPosts);
     }

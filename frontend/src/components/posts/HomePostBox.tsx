@@ -29,7 +29,7 @@ const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
     setLikeUsers(likes);
   }, [numberOfLikes, likes]);
 
-  // Dodac lub usunac like
+  // Add or remove like
   const handleLike = async () => {
     try {
       const isLiked = likeUsers.includes(currentUser);

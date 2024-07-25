@@ -11,11 +11,62 @@ interface PostBoxProps {
   post: Post;
 }
 
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+    alignItems: 'start',
+    maxWidth: 400,
+    margin: '0 auto',
+    '@media (min-width: 768px)': {
+      maxWidth: 600,
+      flexDirection: 'row',
+    },
+  },
+  card: {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    flexShrink: 0,
+    '@media (min-width: 768px)': {
+      width: 200,
+    },
+  },
+  cardMedia: {
+    width: '100%',
+    height: 'auto',
+    aspectRatio: '1/1',
+  },
+  contentContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+  },
+  infoContainer: {
+    display: 'flex',
+    gap: 2,
+  },
+  likesContainer: {
+    display: 'flex',
+    gap: 1,
+    alignItems: 'center',
+  },
+  actionContainer: {
+    display: 'flex',
+    gap: 1,
+    mt: 2,
+  },
+  button: {
+    fontSize: '12px',
+  },
+};
+
 const MyPostBox: React.FC<PostBoxProps> = ({ post }) => {
   const { content, imageUrl, id, createdAt, numberOfLikes } = post;
 
   const [responseModal, setResponseModal] = useState(false);
-  const [responseMessage, setResponseMessage] = useState<string>();
+  const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const [deletePost, setDeletePost] = useState(true);
 
   const navigate = useNavigate();
@@ -25,12 +76,15 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post }) => {
       const response = await fetch(`/api/posts/${id}`, {
         method: 'DELETE',
       });
-      if (response.ok) {
-        setDeletePost(false);
-        setResponseMessage('Successfully deleted a post!');
+      if (!response.ok) {
+        throw new Error('Failed to delete the post');
       }
+
+      setDeletePost(false);
+      setResponseMessage('Successfully deleted a post!');
     } catch (error) {
-      console.log(error);
+      setResponseMessage('An error occurred while deleting the post');
+      console.error(error);
     }
   };
 
@@ -42,68 +96,32 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-          alignItems: 'start',
-          maxWidth: 400,
-          '@media (min-width: 768px)': {
-            maxWidth: 600,
-            flexDirection: 'row',
-          },
-          margin: '0 auto',
-        }}
-      >
+      <Box sx={styles.container}>
         {imageUrl && (
-          <Card
-            sx={{
-              display: 'flex',
-              width: '100%',
-              height: '100%',
-              flexShrink: 0,
-              '@media (min-width: 768px)': {
-                width: 200,
-              },
-            }}
-          >
-            <CardMedia
-              component="img"
-              image={imageUrl}
-              sx={{
-                width: '100%',
-                height: 'auto',
-                aspectRatio: '1/1',
-              }}
-            />
+          <Card sx={styles.card}>
+            <CardMedia component="img" image={imageUrl} sx={styles.cardMedia} />
           </Card>
         )}
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box sx={styles.contentContainer}>
           <Typography variant="body1">{content}</Typography>
-          <Box sx={{ display: 'flex', gap: 2 }}>
+          <Box sx={styles.infoContainer}>
             <Typography variant="body2" color="text.secondary">
               {getFormattedDate(createdAt)}
             </Typography>
-            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+            <Box sx={styles.likesContainer}>
               <Typography variant="body2" color="text.secondary">
                 {`${numberOfLikes} ${numberOfLikes <= 1 ? 'Like' : 'Likes'}`}
               </Typography>
             </Box>
           </Box>
-          <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
-            <Button
-              size="small"
-              variant="contained"
-              sx={{ fontSize: '12px' }}
-              onClick={() => navigate(`/posts/update/${id}`)}
-            >
+          <Box sx={styles.actionContainer}>
+            <Button size="small" variant="contained" sx={styles.button} onClick={() => navigate(`/posts/update/${id}`)}>
               Edit
             </Button>
             <Button
               size="small"
               variant="outlined"
-              sx={{ fontSize: '12px' }}
+              sx={styles.button}
               onClick={() => {
                 setResponseMessage('Are you sure to delete?');
                 setResponseModal(true);
