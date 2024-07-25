@@ -2,13 +2,23 @@
   "posts": [
     {
       "data": {
-        "body": "This is example post",
-        "author": "john.doe@gmail.com",
-        "created": 1528871013,
-        "edited": 1528871013,
-        "postId": "8q7wm5"
+        "body": "My first post that I want to show the world",
+        "author": "mat",
+        "created": "2024-07-25T19:40:33.045Z",
+        "edited": "2024-07-25T19:40:33.045Z",
+        "postId": "f1df12c9-eeb6-4410-ac4b-ffc7459a29cf"
       },
-      "id": 1
+      "id": "c962aed6-73ee-4584-8b8f-3e2655410db9"
+    },
+    {
+      "data": {
+        "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+        "author": "another buddy",
+        "created": "2024-07-25T21:09:01.711Z",
+        "edited": "2024-07-25T21:09:01.711Z",
+        "postId": "2b054b76-d4fb-40e6-9367-2a3fe84e84e6"
+      },
+      "id": "7f67af90-9409-41e9-beab-515fb700fbb2"
     }
   ]
 }
