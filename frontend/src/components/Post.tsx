@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,6 +6,8 @@ import { Avatar, Button, Card, CardActions, CardContent, Grid, Typography } from
 
 import { deletePost } from '../redux/actions/posts';
 import { Post as PostType } from '../types';
+import DeleteConfirmationDialog from './common/DeleteConfirmationDialog';
+import { Notification } from './common/Notification';
 
 interface PostProps {
   post: PostType;
@@ -14,6 +16,8 @@ interface PostProps {
 const Post: FC<PostProps> = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [openNotification, setOpenNotification] = useState<boolean>(false);
 
   const details = post.data;
 
@@ -24,6 +28,31 @@ const Post: FC<PostProps> = ({ post }) => {
   const handleEdit = () => {
     navigate(`/edit/${post.id}`);
   };
+
+  const handleOpenDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenNotification(false);
+  };
+
+  const handleConfirmDelete = () => {
+    handleCloseDialog();
+    setOpenNotification(true);
+
+    setTimeout(() => {
+      handleDelete();
+    }, 1500);
+  };
+  console.log(openNotification);
 
   const formatUnixTimestamp = (timestamp: number): string => {
     const date: Date = new Date(timestamp * 1000);
@@ -80,10 +109,16 @@ const Post: FC<PostProps> = ({ post }) => {
         <Button variant="outlined" color="primary" onClick={handleEdit}>
           Edit
         </Button>
-        <Button variant="text" color="secondary" onClick={handleDelete}>
+        <Button variant="text" color="secondary" onClick={handleOpenDialog}>
           Delete
         </Button>
       </CardActions>
+      <DeleteConfirmationDialog
+        open={isDialogOpen}
+        handleClose={handleCloseDialog}
+        handleConfirm={handleConfirmDelete}
+      />
+      <Notification handleClose={handleClose} open={openNotification} message={'Succesfully deleted post!'} />
     </Card>
   );
 };

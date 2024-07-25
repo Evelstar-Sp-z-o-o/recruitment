@@ -75,7 +75,6 @@ const EditPost: FC = () => {
       setError('Failed to update post');
     }
   };
-  console.log(openNotification);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {

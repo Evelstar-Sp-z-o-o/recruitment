@@ -82,7 +82,7 @@ const CreatePost: FC = () => {
       <Avatar
         alt="Avatar"
         src="https://xsgames.co/randomusers/assets/avatars/female/11.jpg"
-        sx={{ alignSelf: 'flex-end', margin: '10px 20px 5px 0' }}
+        sx={{ alignSelf: 'flex-end', margin: '10px 20px 5px 16px' }}
       />
       <Card
         sx={{
