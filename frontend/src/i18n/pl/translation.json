@@ -18,5 +18,15 @@
     "header": "Chyba się zgubiłeś",
     "description": "strona, której szukasz jest niedostępna!",
     "cta": "Wróć"
+  },
+  "create": {
+    "header": "Utwórz post",
+    "inputLabel": "Stwórz coś niesamowitego!!!",
+    "noUserAlert": "Aby opublikować post musisz być zalogowany.",
+    "button": {
+      "cancel": "Anuluj",
+      "send": "Wyślij!",
+      "login": "Zaloguj"
+    }
   }
 }

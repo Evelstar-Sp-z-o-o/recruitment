@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AddNewPost from '@/src/components/Atoms/AddNewPost/AddNewPost';
+import CreatePostModal from '@/src/components/Molecules/CreatePost/CreatePost';
 import Menu from '@/src/components/Molecules/Menu/Menu';
 import Footer from '@/src/components/Organisms/Footer/Footer';
 import Header from '@/src/components/Organisms/Header/Header';
@@ -28,6 +29,7 @@ const BaseView = ({ posts }) => {
       )}
       <Menu open={open} toggleMenu={toggleMenu(false)} />
       <AddNewPost isFixed />
+      <CreatePostModal />
       <Footer />
     </>
   );

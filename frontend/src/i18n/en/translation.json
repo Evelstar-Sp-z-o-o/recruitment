@@ -18,5 +18,15 @@
     "header": "Look like you're lost",
     "description": "the page you are looking for not available!",
     "cta": "Go to Home"
+  },
+  "create": {
+    "header": "Create post",
+    "inputLabel": "Let's create somethin awesome!!!",
+    "noUserAlert": "You must be logged in to publish a post.",
+    "button": {
+      "cancel": "Cancel",
+      "send": "Send!",
+      "login": "Login"
+    }
   }
 }
