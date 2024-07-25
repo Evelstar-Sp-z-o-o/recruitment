@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ import { TextField, Button, Typography, Grid, Container, Paper, CircularProgress
 import { updatePost, fetchPost } from '../redux/actions/posts';
 import { RootState } from '../redux/reducers';
 import { Post } from '../types';
+import { Notification } from './common/Notification';
 
 const EditPost: FC = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const EditPost: FC = () => {
   const [author, setAuthor] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [openNotification, setOpenNotification] = useState<boolean>(false);
 
   const editingPost = useSelector((state: RootState) => state.posts.editingPost);
 
@@ -45,7 +47,7 @@ const EditPost: FC = () => {
     }
   }, [editingPost]);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     if (!body || !author) {
@@ -64,12 +66,22 @@ const EditPost: FC = () => {
             edited: Math.floor(Date.now() / 1000),
           },
         };
+
         dispatch(updatePost(updatedPost));
-        navigate('/');
+        setTimeout(() => navigate('/'), 1500);
+        setOpenNotification(true);
       }
     } catch (err) {
       setError('Failed to update post');
     }
+  };
+  console.log(openNotification);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenNotification(false);
   };
 
   return (
@@ -126,6 +138,7 @@ const EditPost: FC = () => {
           </form>
         )}
       </Paper>
+      <Notification handleClose={handleClose} open={openNotification} message={'Succesfully edited post!'} />
     </Container>
   );
 };

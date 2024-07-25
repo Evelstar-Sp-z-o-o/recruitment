@@ -8,9 +8,11 @@ import { Avatar, Box, Button, Card, Grid, TextField } from '@mui/material';
 
 import { createPost } from '../redux/actions/posts';
 import { PostData } from '../types';
+import { Notification } from './common/Notification';
 
 const CreatePost: FC = () => {
   const dispatch = useDispatch();
+  const [openNotification, setOpenNotification] = useState<boolean>(false);
 
   const [post, setPost] = useState<PostData>({
     body: '',
@@ -54,6 +56,7 @@ const CreatePost: FC = () => {
         postId: generateRandomId(7),
       });
       setErrors({ author: '', body: '' });
+      setOpenNotification(true);
     }
   };
 
@@ -65,6 +68,13 @@ const CreatePost: FC = () => {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenNotification(false);
   };
 
   return (
@@ -128,6 +138,7 @@ const CreatePost: FC = () => {
           </Grid>
         </form>
       </Card>
+      <Notification handleClose={handleClose} open={openNotification} message={'Succesfully created post!'} />
     </Box>
   );
 };
