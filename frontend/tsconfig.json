@@ -21,6 +21,6 @@
       "js-cookie": ["./node_modules/@types/js-cookie"]
     }
   },
-  "include": ["src", "test", "__mocks__", "src/components/modal/documents/.tsx", "utils"],
+  "include": ["src", "test", "__mocks__", "src/pages/modal/documents/.tsx", "utils"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
