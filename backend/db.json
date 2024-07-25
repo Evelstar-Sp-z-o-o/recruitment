@@ -1,33 +1,33 @@
 {
   "posts": [
     {
+      "id": 1,
       "data": {
-        "body": "This is example post232",
-        "author": "john.doe@gmail.com",
-        "created": 1528871013,
-        "edited": 1721776337,
-        "postId": "8q7wm5"
-      },
-      "id": 1
+        "body": "example post",
+        "author": "Alex",
+        "created": 1721878629.25,
+        "edited": 1721878904,
+        "postId": "r250kic"
+      }
+    },
+    {
+      "id": 2,
+      "data": {
+        "body": "This is an example post with a longer body text to provide more context and detail about the content of the post. This ensures that the text field can handle more information and display it correctly within the UI.",
+        "author": "martyna.filipiak@gmail.com",
+        "created": 1721878738.41,
+        "edited": 1721878738.41,
+        "postId": "kltr5th"
+      }
     },
     {
       "id": 3,
       "data": {
-        "body": "1234",
-        "author": "bleble",
-        "created": 1721772290.754,
-        "edited": 1721772290.754,
-        "postId": ""
-      }
-    },
-    {
-      "id": 4,
-      "data": {
-        "body": "12345",
-        "author": "asd",
-        "created": 1721772297.283,
-        "edited": 1721772297.283,
-        "postId": ""
+        "body": "This is an extensively long example post body intended to test the limits and capabilities of the text component within the application. The content of this post includes a variety of sections and topics, each discussed in detail to provide a comprehensive understanding. The first section introduces the main subject of the post, offering background information and context. The second section delves into the specifics, discussing the key points and arguments in a structured manner. The third section provides examples and case studies to illustrate the concepts discussed. Finally, the post concludes with a summary and final thoughts, emphasizing the important takeaways and potential future implications. This long-form post is designed to ensure that the text component can handle and display large blocks of text without performance issues or formatting problems.",
+        "author": "Martyna Filipiak",
+        "created": 1721878762.277,
+        "edited": 1721878897,
+        "postId": "3bb6qlx"
       }
     }
   ]
