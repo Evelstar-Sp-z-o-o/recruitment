@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import logoSmall from '/assets/logo-sm.svg';
+import logo from '/assets/logo.svg';
+
 import { Home as HomeIcon, Note as NoteIcon, Menu as MenuIcon } from '@mui/icons-material';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
-import logoSmall from '../../public/assets/logo-sm.svg';
-import logo from '../../public/assets/logo.svg';
 import { openModal } from '../redux/createModalSlice';
 
 const Sidebar = () => {
