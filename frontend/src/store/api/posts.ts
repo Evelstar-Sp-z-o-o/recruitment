@@ -2,6 +2,17 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+export interface IPost {
+  data: {
+    body: string;
+    author: string;
+    created: number;
+    edited: number;
+    postId: string;
+  };
+  id: number;
+}
+
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   baseQuery: fetchBaseQuery({
@@ -9,7 +20,7 @@ export const postsApi = createApi({
   }),
   tagTypes: ['Posts'],
   endpoints: (builder) => ({
-    getPosts: builder.query<IArticlesDataTypes, void>({
+    getPosts: builder.query<IPost>({
       query: () => ({
         url: '/',
       }),

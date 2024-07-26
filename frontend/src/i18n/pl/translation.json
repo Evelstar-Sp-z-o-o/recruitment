@@ -4,7 +4,11 @@
   "noPosts": "Stwórz pierwszy post",
   "menu": {
     "home": "Strona główna",
-    "profile": "Moje posty"
+    "profile": "Moje posty",
+    "log": {
+      "in": "Zaloguj",
+      "out": "Wyloguj"
+    }
   },
   "login": {
     "header": "Czy chcesz się zalogować?",
@@ -12,7 +16,16 @@
     "incorrect": "Niepoprawny e-mail",
     "email": "E-mail",
     "confirmLogin": "Zalogowano jako {{user}}",
-    "confirmLogout": "Wylogowano poprawnie!"
+    "confirmLogout": "Wylogowano poprawnie!",
+    "dialog": {
+      "title": "Zaloguj się",
+      "message": "Musisz się zalogować, aby publikować posty.",
+      "email": "E-mail",
+      "button": {
+        "cancel": "Anuluj",
+        "login": "Zaloguj"
+      }
+    }
   },
   "404": {
     "header": "Chyba się zgubiłeś",

@@ -1,21 +1,24 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AddNewPost from '@/src/components/Atoms/AddNewPost/AddNewPost';
-import CreatePostModal from '@/src/components/Molecules/CreatePost/CreatePost';
 import Menu from '@/src/components/Molecules/Menu/Menu';
+import PostModal from '@/src/components/Molecules/PostModal/PostModal';
 import Footer from '@/src/components/Organisms/Footer/Footer';
 import Header from '@/src/components/Organisms/Header/Header';
 import PostsList from '@/src/components/Organisms/PostsList/PostsList';
+import { IPost } from '@/src/store';
 import { Alert, Snackbar } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-const BaseView = ({ posts }) => {
-  const [open, setOpen] = useState(false);
-  const [openPostModal, setOpenPostModal] = useState(false);
-  const [isPostSent, setIsPostSent] = useState(null);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [singlePost, setSinglePost] = useState(null);
+const BaseView: FC = ({ posts }: { posts: IPost[] }) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [openPostModal, setOpenPostModal] = useState<boolean>(false);
+  const [isPostSent, setIsPostSent] = useState<null | boolean>(null);
+  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+  const [singlePost, setSinglePost] = useState<null | IPost>(null);
   const { t } = useTranslation();
 
   const toggleMenu = (newOpen: boolean) => () => {
@@ -27,7 +30,7 @@ const BaseView = ({ posts }) => {
     setOpenPostModal((prevState) => !prevState);
   };
 
-  const handleResponse = (res) => {
+  const handleResponse = (res: FetchBaseQueryError | SerializedError | boolean) => {
     if (res) {
       setIsPostSent(typeof res === 'boolean');
       setOpenSnackbar(true);
@@ -38,7 +41,7 @@ const BaseView = ({ posts }) => {
     setOpenSnackbar(false);
   };
 
-  const handleEdit = (post) => {
+  const handleEdit = (post: IPost) => {
     setSinglePost(post);
     setOpenPostModal((prevState) => !prevState);
   };
@@ -55,7 +58,7 @@ const BaseView = ({ posts }) => {
       )}
       <Menu open={open} toggleMenu={toggleMenu(false)} handleResponse={handleResponse} />
       <AddNewPost isFixed onClick={handleTogglePostModal} />
-      <CreatePostModal
+      <PostModal
         open={openPostModal}
         close={handleTogglePostModal}
         response={handleResponse}

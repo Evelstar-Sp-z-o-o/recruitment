@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import BaseView from '@/src/components/Templates/BaseView/BaseView';
-import { useGetPostsQuery } from '@/src/store';
+import { useGetPostsQuery, RootState } from '@/src/store';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { RootState } from '@reduxjs/toolkit/query';
 
 const Profile = () => {
   const user = useSelector<RootState>((state) => state.user);
