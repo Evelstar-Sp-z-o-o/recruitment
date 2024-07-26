@@ -11,8 +11,8 @@ interface IAlertDialogProps {
 
 const AlertDialog: FC<IAlertDialogProps> = ({ title, label, open, closeDialog }) => {
   return (
-    <Dialog open={open}>
-      <DialogTitle>{title}</DialogTitle>
+    <Dialog open={open} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogActions>
         <Button onClick={closeDialog}>{label}</Button>
       </DialogActions>

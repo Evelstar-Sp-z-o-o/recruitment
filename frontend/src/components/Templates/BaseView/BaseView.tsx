@@ -56,13 +56,19 @@ const BaseView: FC = ({ posts }: { posts: IPost[] }) => {
           {t('noPosts')}
         </Typography>
       )}
-      <Menu open={open} toggleMenu={toggleMenu(false)} handleResponse={handleResponse} />
+      <Menu
+        open={open}
+        toggleMenu={toggleMenu(false)}
+        handleResponse={handleResponse}
+        postsCount={posts?.length ?? 0}
+      />
       <AddNewPost isFixed onClick={handleTogglePostModal} />
       <PostModal
         open={openPostModal}
         close={handleTogglePostModal}
         response={handleResponse}
         initialPost={singlePost}
+        postsCount={posts?.length ?? 0}
       />
       <Snackbar open={openSnackbar} autoHideDuration={6000}>
         <Alert

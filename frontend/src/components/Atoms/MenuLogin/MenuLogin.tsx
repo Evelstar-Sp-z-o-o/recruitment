@@ -17,7 +17,13 @@ const MenuLogin: FC<IMenuLoginProps> = ({ isLogin, handleLogout, handleToggleMod
 
   return (
     <MenuItem sx={{ mt: '3rem' }} onClick={isLogin ? handleToggleModal : handleLogout}>
-      <ListItemIcon>{isLogin ? <LoginIcon fontSize="small" /> : <LogoutIcon fontSize="small" />}</ListItemIcon>
+      <ListItemIcon>
+        {isLogin ? (
+          <LoginIcon data-testid="LoginIcon" fontSize="small" />
+        ) : (
+          <LogoutIcon data-testid="LogoutIcon" fontSize="small" />
+        )}
+      </ListItemIcon>
       <ListItemText>{isLogin ? t('menu.log.in') : t('menu.log.out')}</ListItemText>
     </MenuItem>
   );

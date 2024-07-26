@@ -26,6 +26,7 @@ const LoginDialog: FC<ILoginDialogProps> = ({ open, closeDialog, handleLogin, is
       PaperProps={{
         component: 'form',
         onSubmit: handleLogin,
+        role: 'form',
       }}
     >
       <DialogTitle>{t('login.dialog.title')}</DialogTitle>
