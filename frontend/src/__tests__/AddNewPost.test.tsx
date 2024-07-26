@@ -20,7 +20,7 @@ vi.mock('react-i18next', async (importOriginal) => {
   };
 });
 
-describe('AddNewPost Component', () => {
+describe('AddNewPost', () => {
   it('renders AddNewPost component', () => {
     renderWithProviders(<AddNewPost />);
 
