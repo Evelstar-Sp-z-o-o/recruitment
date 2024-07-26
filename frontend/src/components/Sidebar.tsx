@@ -8,26 +8,6 @@ import { Home as HomeIcon, Note as NoteIcon, Menu as MenuIcon } from '@mui/icons
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
-const styles = {
-  listItemButton: {
-    '&.Mui-selected': {
-      backgroundColor: 'grey.300',
-    },
-    width: 250,
-  },
-  creationButton: {
-    backgroundColor: '#028391',
-    borderRadius: '25px',
-    color: 'white',
-    mt: 4,
-    mx: 'auto',
-    width: 230,
-    '&:hover': {
-      backgroundColor: 'rgba(2, 131, 145, 0.7)',
-    },
-  },
-};
-
 const Sidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -128,3 +108,23 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+const styles = {
+  listItemButton: {
+    '&.Mui-selected': {
+      backgroundColor: 'grey.300',
+    },
+    width: 250,
+  },
+  creationButton: {
+    backgroundColor: '#028391',
+    borderRadius: '25px',
+    color: 'white',
+    mt: 4,
+    mx: 'auto',
+    width: 230,
+    '&:hover': {
+      backgroundColor: 'rgba(2, 131, 145, 0.7)',
+    },
+  },
+};

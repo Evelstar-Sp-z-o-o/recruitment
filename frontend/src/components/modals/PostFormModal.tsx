@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
-import { Post } from '@/src/types';
+import { NewPost, Post } from '@/src/types';
 import { currentUser } from '@/src/utils';
 import { CancelPresentation, PhotoSizeSelectActual } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,28 +8,11 @@ import { Alert, Box, Button, IconButton, Input, Modal, TextField, Typography } f
 
 import Loader from '../Loader';
 
-const styles = {
-  formContainer: {
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-    maxWidth: 500,
-  },
-  closeButton: { position: 'absolute', top: 2, right: 4 },
-  title: { flex: '1', mb: 1 },
-  imageContainer: { position: 'relative', width: 100, height: 100 },
-  imageCancelButton: { position: 'absolute', top: -5, right: -5, color: 'gray' },
-};
-
 interface PostFormModalProps {
   isOpen: boolean;
   initialData?: Post;
   onClose: () => void;
-  onSubmit: (post) => void;
+  onSubmit: (post: NewPost) => void;
   type: string;
   isLoading?: boolean;
 }
@@ -49,6 +32,7 @@ const PostFormModal: React.FC<PostFormModalProps> = React.forwardRef(
 
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+    // Check validation and send post data to parent component
     const handleSubmit = async (e: FormEvent) => {
       e.preventDefault();
       setErrorMessage(null);
@@ -70,6 +54,7 @@ const PostFormModal: React.FC<PostFormModalProps> = React.forwardRef(
       onSubmit(post);
     };
 
+    // Store local image path
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files) {
         const fileReader = new FileReader();
@@ -147,3 +132,20 @@ const PostFormModal: React.FC<PostFormModalProps> = React.forwardRef(
 );
 
 export default PostFormModal;
+
+const styles = {
+  formContainer: {
+    position: 'relative',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    maxWidth: 500,
+  },
+  closeButton: { position: 'absolute', top: 2, right: 4 },
+  title: { flex: '1', mb: 1 },
+  imageContainer: { position: 'relative', width: 100, height: 100 },
+  imageCancelButton: { position: 'absolute', top: -5, right: -5, color: 'gray' },
+};

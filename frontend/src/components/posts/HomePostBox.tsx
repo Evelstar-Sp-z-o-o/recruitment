@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Post } from '@/src/types';
 import { currentUser, getFormattedDate } from '@/src/utils';
@@ -7,27 +7,13 @@ import { Avatar, Box, Card, CardMedia, IconButton, Typography } from '@mui/mater
 
 interface PostBoxProps {
   post: Post;
+  onUpdate: (updatedPost: Post) => void;
 }
 
-const styles = {
-  container: { display: 'flex', gap: 1, alignItems: 'start', maxWidth: 600, margin: '0 auto' },
-  contentContainer: { display: 'flex', flexDirection: 'column', width: '100%' },
-  header: { display: 'flex', gap: 2 },
-  likeContainer: { display: 'flex', gap: 1, alignItems: 'center', ml: 'auto', pr: 4 },
-  image: { width: '100%', height: 'auto', aspectRatio: '1/1' },
-  avatar: { width: 30, height: 30 },
-  likeIcon: { width: 20, height: 20 },
-};
-
-const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
+const HomePostBox: React.FC<PostBoxProps> = ({ post, onUpdate }) => {
   const { content, imageUrl, username, createdAt, id, numberOfLikes, likes } = post;
   const [likeCount, setLikeCount] = useState<number>(numberOfLikes);
   const [likeUsers, setLikeUsers] = useState<string[]>(likes);
-
-  useEffect(() => {
-    setLikeCount(numberOfLikes);
-    setLikeUsers(likes);
-  }, [numberOfLikes, likes]);
 
   // Add or remove like
   const handleLike = async () => {
@@ -43,13 +29,14 @@ const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: { ...post, ...updatedPost } }),
+        body: JSON.stringify({ data: { content, imageUrl, username, createdAt, ...updatedPost } }),
       });
 
       if (response.ok) {
         const data = await response.json();
         setLikeCount(data.data.numberOfLikes);
         setLikeUsers(data.data.likes);
+        onUpdate({ ...data.data, id: data.id });
       }
     } catch (error) {
       console.error(error);
@@ -72,7 +59,7 @@ const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
               {`${likeCount} ${likeCount <= 1 ? 'Like' : 'Likes'}`}
             </Typography>
             <IconButton sx={styles.likeIcon} onClick={handleLike}>
-              <ThumbUpIcon sx={{ color: `${likeUsers.includes(currentUser) ? 'dodgerBlue' : 'gray'}` }} />
+              <ThumbUpIcon sx={{ color: `${likeUsers?.includes(currentUser) ? 'dodgerBlue' : 'gray'}` }} />
             </IconButton>
           </Box>
         </Box>
@@ -90,3 +77,13 @@ const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
 };
 
 export default HomePostBox;
+
+const styles = {
+  container: { display: 'flex', gap: 1, alignItems: 'start', maxWidth: 600, margin: '0 auto' },
+  contentContainer: { display: 'flex', flexDirection: 'column', width: '100%' },
+  header: { display: 'flex', gap: 2 },
+  likeContainer: { display: 'flex', gap: 1, alignItems: 'center', ml: 'auto', pr: 4 },
+  image: { width: '100%', height: 'auto', aspectRatio: '1/1' },
+  avatar: { width: 30, height: 30 },
+  likeIcon: { width: 20, height: 20 },
+};

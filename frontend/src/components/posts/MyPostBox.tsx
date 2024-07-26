@@ -9,61 +9,10 @@ import PostResponseModal from '../modals/PostResponseModal';
 
 interface PostBoxProps {
   post: Post;
-  removePost: (postId: string) => void;
+  onDelete: (postId: string) => void;
 }
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 2,
-    alignItems: 'start',
-    maxWidth: 400,
-    margin: '0 auto',
-    '@media (min-width: 768px)': {
-      maxWidth: 600,
-      flexDirection: 'row',
-    },
-  },
-  card: {
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-    flexShrink: 0,
-    '@media (min-width: 768px)': {
-      width: 200,
-    },
-  },
-  cardMedia: {
-    width: '100%',
-    height: 'auto',
-    aspectRatio: '1/1',
-  },
-  contentContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-  },
-  infoContainer: {
-    display: 'flex',
-    gap: 2,
-  },
-  likesContainer: {
-    display: 'flex',
-    gap: 1,
-    alignItems: 'center',
-  },
-  actionContainer: {
-    display: 'flex',
-    gap: 1,
-    mt: 2,
-  },
-  button: {
-    fontSize: '12px',
-  },
-};
-
-const MyPostBox: React.FC<PostBoxProps> = ({ post, removePost }) => {
+const MyPostBox: React.FC<PostBoxProps> = ({ post, onDelete }) => {
   const { content, imageUrl, id, createdAt, numberOfLikes } = post;
 
   const [responseModal, setResponseModal] = useState(false);
@@ -72,6 +21,7 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post, removePost }) => {
 
   const navigate = useNavigate();
 
+  // Remove a selected post frome database
   const handleDelete = async () => {
     try {
       const response = await fetch(`/api/posts/${id}`, {
@@ -86,7 +36,7 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post, removePost }) => {
 
       setDeletePost(false);
       setResponseMessage('Successfully deleted a post!');
-      removePost(id);
+      onDelete(id);
     } catch (error) {
       console.error(error);
     }
@@ -148,3 +98,54 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post, removePost }) => {
 };
 
 export default MyPostBox;
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+    alignItems: 'start',
+    maxWidth: 400,
+    margin: '0 auto',
+    '@media (min-width: 768px)': {
+      maxWidth: 600,
+      flexDirection: 'row',
+    },
+  },
+  card: {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    flexShrink: 0,
+    '@media (min-width: 768px)': {
+      width: 200,
+    },
+  },
+  cardMedia: {
+    width: '100%',
+    height: 'auto',
+    aspectRatio: '1/1',
+  },
+  contentContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+  },
+  infoContainer: {
+    display: 'flex',
+    gap: 2,
+  },
+  likesContainer: {
+    display: 'flex',
+    gap: 1,
+    alignItems: 'center',
+  },
+  actionContainer: {
+    display: 'flex',
+    gap: 1,
+    mt: 2,
+  },
+  button: {
+    fontSize: '12px',
+  },
+};

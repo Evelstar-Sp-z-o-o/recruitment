@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import PostFormModal from '../components/modals/PostFormModal';
 import PostResponseModal from '../components/modals/PostResponseModal';
-import { closeModal } from '../redux/createModalSlice';
-import { RootState } from '../redux/store';
 import { Post } from '../types';
 
-const CreatePost = () => {
+interface CreatePostProps {
+  refetchPosts: () => void;
+}
+
+const CreatePost: React.FC<CreatePostProps> = ({ refetchPosts }) => {
+  const { pathname } = useLocation();
   const [responseModal, setResponseModal] = useState(false);
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
-  const createModal = useSelector((state: RootState) => state.createModal.isOpen);
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
+  // Create a new post
   const handleSubmit = async (newPost: Post) => {
     try {
       const response = await fetch('/api/posts', {
@@ -27,16 +27,10 @@ const CreatePost = () => {
       });
 
       if (!response.ok) {
-        dispatch(closeModal());
         setResponseMessage('Failed to create a post!');
         setResponseModal(true);
         return;
       }
-
-      const data = await response.json();
-      console.log(data);
-
-      dispatch(closeModal());
       setResponseMessage('Successfully created a post!');
       setResponseModal(true);
     } catch (error) {
@@ -44,22 +38,23 @@ const CreatePost = () => {
     }
   };
 
-  const handleClose = () => {
-    dispatch(closeModal());
-    navigate(-1);
+  const handleCloseResponse = () => {
+    setResponseModal(false);
+    navigate('/');
+    refetchPosts();
   };
 
   return (
     <>
-      <PostFormModal onClose={handleClose} onSubmit={handleSubmit} type="create" isOpen={createModal} />
-      <PostResponseModal
-        open={responseModal}
-        onClose={() => {
-          setResponseModal(false);
-          navigate('/');
-        }}
-        content={responseMessage}
-      />
+      {!responseModal && (
+        <PostFormModal
+          onClose={() => navigate(-1)}
+          onSubmit={handleSubmit}
+          type="create"
+          isOpen={pathname === '/create'}
+        />
+      )}
+      <PostResponseModal open={responseModal} onClose={handleCloseResponse} content={responseMessage} />
     </>
   );
 };

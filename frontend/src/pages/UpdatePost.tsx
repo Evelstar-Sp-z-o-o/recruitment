@@ -1,53 +1,34 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import PostFormModal from '../components/modals/PostFormModal';
 import PostResponseModal from '../components/modals/PostResponseModal';
-import { closeModal } from '../redux/editModalSlice';
-import { RootState } from '../redux/store';
 import { Post } from '../types';
 
-const UpdatePost = () => {
+interface UpdatePostProps {
+  editPost: (updatedPost: Post) => void;
+  fetchPostById: (postId: string) => Post;
+}
+
+const UpdatePost: React.FC<UpdatePostProps> = ({ editPost, fetchPostById }) => {
   const { postId } = useParams();
+  const { pathname } = useLocation();
   const [post, setPost] = useState<Post>();
   const [isLoading, setIsLoading] = useState(true);
   const [responseModal, setResponseModal] = useState(false);
   const [responseMessage, setResponseMessage] = useState<string>();
 
-  const updatePosts = useOutletContext<(posts: any) => void>();
-
-  const editModal = useSelector((state: RootState) => state.editModal.isOpen);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPost = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch('/api/posts');
-
-        if (!response.ok) {
-          setResponseMessage('Failed to fetch a post');
-          setResponseModal(true);
-          return;
-        }
-
-        const data = await response.json();
-        const dataWithId = data.map((post) => ({ ...post.data, id: post.id }));
-        const selectedPost = dataWithId.find((post) => post.id.toString() === postId);
-        setPost(selectedPost);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    setIsLoading(true);
     if (postId) {
-      fetchPost();
+      setPost(fetchPostById(postId));
     }
-  }, [postId]);
+    setIsLoading(false);
+  }, [postId, fetchPostById]);
 
+  // Update post in database
   const handleSubmit = async (updatedPost: Post) => {
     try {
       const response = await fetch(`/api/posts/${postId}`, {
@@ -58,7 +39,6 @@ const UpdatePost = () => {
         body: JSON.stringify({ data: updatedPost }),
       });
       if (!response.ok) {
-        dispatch(closeModal());
         setResponseMessage('Failed to update a post!');
         setResponseModal(true);
         return;
@@ -66,18 +46,12 @@ const UpdatePost = () => {
 
       const data = await response.json();
 
-      dispatch(closeModal());
       setResponseMessage('Successfully updated a post!');
       setResponseModal(true);
-      updatePosts({ ...data.data, id: data.id });
+      editPost({ ...data.data, id: data.id });
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const handleClose = () => {
-    dispatch(closeModal());
-    navigate('/posts');
   };
 
   if (!isLoading && !post) {
@@ -86,14 +60,16 @@ const UpdatePost = () => {
 
   return (
     <>
-      <PostFormModal
-        initialData={post}
-        isOpen={editModal}
-        onClose={handleClose}
-        type="edit"
-        onSubmit={handleSubmit}
-        isLoading={isLoading}
-      />
+      {!responseModal && (
+        <PostFormModal
+          initialData={post}
+          isOpen={pathname.startsWith('/posts/update/')}
+          onClose={() => navigate('/posts')}
+          type="edit"
+          onSubmit={handleSubmit}
+          isLoading={isLoading}
+        />
+      )}
       <PostResponseModal
         open={responseModal}
         onClose={() => {

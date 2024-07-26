@@ -1,62 +1,27 @@
-import { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Posts from '@/src/pages/Posts';
 import { Post } from '@/src/types';
 import { currentUser } from '@/src/utils';
 
-import Loader from '../Loader';
+interface PostsLayoutProps {
+  posts: Post[];
+  deletePost: (postId: string) => void;
+}
 
-function PostsLayout() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch current user's posts
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`/api/posts`);
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch post');
-        }
-
-        const data = await response.json();
-        const dataWithId = data.map((post) => ({ ...post.data, id: post.id }));
-        dataWithId.sort((a, b) => b.createdAt - a.createdAt);
-        const currentUserPosts = dataWithId.filter((post) => post.username === currentUser);
-        setPosts(currentUserPosts);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchPosts();
-  }, []);
-
-  // Update posts list after editing
-  const updatePosts = (updatedPost: Post) => {
-    const postsAfterEdit = posts.map((post) => (post.id === updatedPost.id ? updatedPost : post));
-    setPosts(postsAfterEdit);
-  };
-
-  // Remove deleted post from the list
-  const deletePost = (postId: string) => {
-    const postsAfterDeletion = posts.filter((post) => post.id !== postId);
-    setPosts(postsAfterDeletion);
-  };
-
-  if (isLoading) {
-    return <Loader />;
-  }
+const PostsLayout: React.FC<PostsLayoutProps> = ({ posts, deletePost }) => {
+  // Filter current user's posts
+  const currentUserPosts = useMemo(() => {
+    return posts?.filter((post) => post.username === currentUser) || [];
+  }, [posts]);
 
   return (
     <>
-      <Posts posts={posts} removePost={deletePost} />
-      <Outlet context={updatePosts} />
+      <Posts currentUserPosts={currentUserPosts} onDelete={deletePost} />
+      <Outlet />
     </>
   );
-}
+};
 
 export default PostsLayout;
