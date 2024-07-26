@@ -26,7 +26,6 @@ const Header: FC = ({ toggleMenu }: { toggleMenu: () => void }) => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     fontSize: '3rem',
-    display: isProfile ? 'none' : 'block',
   } as const;
 
   const StyledAvatarButton = {
@@ -67,10 +66,11 @@ const Header: FC = ({ toggleMenu }: { toggleMenu: () => void }) => {
         >
           {user.substring(0, user.indexOf('@'))}
         </Typography>
-      ) : null}
-      <SvgIcon inheritViewBox sx={StyledLogo}>
-        <Logo className="logo" />
-      </SvgIcon>
+      ) : (
+        <SvgIcon inheritViewBox sx={StyledLogo} aria-label="logo">
+          <Logo className="logo" />
+        </SvgIcon>
+      )}
     </AppBar>
   );
 };
