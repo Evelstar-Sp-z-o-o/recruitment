@@ -39,7 +39,7 @@ exports[`PostsList > should match snapshot 1`] = `
           <span
             class="MuiTypography-root MuiTypography-body2 MuiCardHeader-subheader css-83ijpv-MuiTypography-root"
           >
-            26.07.2024, 23:00null
+            26.07.2024, 23:04
           </span>
         </div>
       </div>
@@ -136,7 +136,7 @@ exports[`PostsList > should match snapshot 1`] = `
           <span
             class="MuiTypography-root MuiTypography-body2 MuiCardHeader-subheader css-83ijpv-MuiTypography-root"
           >
-            26.07.2024, 23:00null
+            26.07.2024, 23:04
           </span>
         </div>
       </div>

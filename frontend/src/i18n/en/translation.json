@@ -2,6 +2,7 @@
   "noPosts": "Let's create first post!",
   "addPost": "Add new post",
   "noPosts": "Create first post",
+  "error": "Posts failed to download",
   "menu": {
     "home": "Home",
     "profile": "My posts",

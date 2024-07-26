@@ -2,6 +2,7 @@
   "noPosts": "Stwórz pierwszy wpis!",
   "addPost": "Stwórz wpis",
   "noPosts": "Stwórz pierwszy post",
+  "error": "Nie udało się pobrać postów",
   "menu": {
     "home": "Strona główna",
     "profile": "Moje posty",
