@@ -1,29 +1,38 @@
-import { FC } from 'react';
-import { useQuery } from 'react-query';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { Avatar, Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+
+import { AppDispatch, RootState } from '../store/postStore';
+import { fetchPosts } from '../store/postsSlice';
 
 import PostItem from '../shared/components/PostItem';
-import { useGetPostById } from '../shared/react-query/use-post-queries';
 
 const PostPage: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: post, error, isLoading } = useGetPostById(id);
+  const dispatch = useDispatch<AppDispatch>();
 
-  if (isLoading) {
-    return <Typography variant="h6">Loading...</Typography>;
-  }
+  const state = useSelector((state: RootState) => state.posts);
+  const { posts, status, error } = state;
 
-  if (error instanceof Error) {
-    return <Typography variant="h6">Error: {error.message}</Typography>;
+  const post = posts.find((post) => post.id === +id);
+
+  useEffect(() => {
+    if (id && !post && status === 'idle') {
+      dispatch(fetchPosts());
+    }
+  }, [id, post, status, dispatch]);
+
+  if (status === 'failed' && error) {
+    return <Typography variant="h6">Error: {error}</Typography>;
   }
 
   if (!post) {
     return <Typography variant="h6">Post not found</Typography>;
   }
 
-  return <PostItem post={post}></PostItem>;
+  return <PostItem post={post} />;
 };
 
 export default PostPage;

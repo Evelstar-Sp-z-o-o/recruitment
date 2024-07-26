@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import PostForm from '@/src/components/PostForm';
+import { AppDispatch } from '@/src/store/postStore';
+import { deletePost } from '@/src/store/postsSlice';
 import { Post } from '@/src/types/types';
 import { Typography, Grid, Avatar, Button } from '@mui/material';
-
-import { useDeletePost } from '../react-query/use-post-queries';
 
 interface PostItemProps {
   post: Post;
@@ -14,11 +14,11 @@ interface PostItemProps {
 }
 const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
   const navigate = useNavigate();
-  const { mutate: deletePost } = useDeletePost();
+  const dispatch = useDispatch<AppDispatch>();
   const [editMode, setEditMode] = useState(false);
 
   const handleDelete = () => {
-    deletePost(post.id);
+    dispatch(deletePost(post.id));
   };
 
   const handlePostClick = () => {

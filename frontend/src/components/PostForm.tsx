@@ -1,8 +1,11 @@
 import { FC, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 
-import { useCreatePost, useUpdatePost } from '../shared/react-query/use-post-queries';
+import { AppDispatch } from '../store/postStore';
+import { addPost, updatePost } from '../store/postsSlice';
+
 import { Post } from '../types/types';
 
 interface PostFormProps {
@@ -12,9 +15,8 @@ interface PostFormProps {
 
 const PostForm: FC<PostFormProps> = ({ selectedPost, onClose }) => {
   const [content, setContent] = useState('');
-
-  const { mutate: createPost } = useCreatePost();
-  const { mutate: updatePost } = useUpdatePost();
+  const [error, setError] = useState('');
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (selectedPost) {
@@ -22,14 +24,27 @@ const PostForm: FC<PostFormProps> = ({ selectedPost, onClose }) => {
     }
   }, [selectedPost]);
 
+  const validateContent = (content: string) => {
+    if (content.trim() === '') {
+      setError('Content cannot be empty.');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
   const handleSubmit = async () => {
+    if (!validateContent(content)) {
+      return;
+    }
+
     if (selectedPost) {
-      updatePost({ ...selectedPost, data: { ...selectedPost.data, body: content } });
+      dispatch(updatePost({ ...selectedPost, data: { ...selectedPost.data, body: content } }));
     } else {
-      createPost(content);
+      dispatch(addPost(content));
     }
     setContent('');
-    onClose();
+    onClose?.();
   };
 
   return (
@@ -41,8 +56,10 @@ const PostForm: FC<PostFormProps> = ({ selectedPost, onClose }) => {
         fullWidth
         margin="normal"
         multiline
+        error={!!error}
+        helperText={error}
       />
-      <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
+      <Button type="submit" variant="contained" color="primary" onClick={handleSubmit} disabled={content.trim() === ''}>
         Submit
       </Button>
     </>

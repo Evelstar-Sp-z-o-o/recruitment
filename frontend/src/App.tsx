@@ -6,12 +6,14 @@ import { Box } from '@mui/material';
 import HomePage from './pages/HomePage';
 import PostPage from './pages/PostPage';
 import Footer from './shared/components/Footer';
+import LoadingScreen from './shared/components/LoadingScreen';
 import Navbar from './shared/components/Navbar';
 import './styles/main.scss';
 
 const App: FC = () => {
   return (
     <Router>
+      <LoadingScreen />
       <Navbar />
       <Box className="main">
         <Routes>

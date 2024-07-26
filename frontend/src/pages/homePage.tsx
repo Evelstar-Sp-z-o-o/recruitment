@@ -1,39 +1,38 @@
-import { FC } from 'react';
-
-import styled from 'styled-components';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, Typography } from '@mui/material';
 
+import { AppDispatch, RootState } from '../store/postStore';
+import { fetchPosts } from '../store/postsSlice';
+
 import PostForm from '../components/PostForm';
 import PostItem from '../shared/components/PostItem';
-import { useGetPosts } from '../shared/react-query/use-post-queries';
-
-const ModalContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #364fc7;
-`;
 
 const HomePage: FC = () => {
-  const { data: posts, error, isLoading } = useGetPosts();
+  const dispatch = useDispatch<AppDispatch>();
+  const state = useSelector((state: RootState) => state.posts);
+  const { posts, status, error } = state;
 
-  if (isLoading) {
-    return <Typography variant="h6">Loading...</Typography>;
-  }
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, status]);
 
-  if (error instanceof Error) {
-    return <Typography variant="h6">Error: {error.message}</Typography>;
+  if (status === 'failed') {
+    return <Typography variant="h6">Error: {error}</Typography>;
   }
 
   return (
     <>
       <Container>
         <PostForm />
-        {posts?.map((post) => (
-          <PostItem post={post} reducedView={true} />
-        ))}
+        {posts.length > 0 ? (
+          posts.map((post) => <PostItem key={post.id} post={post} reducedView={true} />)
+        ) : (
+          <Typography variant="h6">No posts available</Typography>
+        )}
       </Container>
     </>
   );
