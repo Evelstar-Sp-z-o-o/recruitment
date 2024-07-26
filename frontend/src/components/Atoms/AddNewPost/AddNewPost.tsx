@@ -30,7 +30,7 @@ const AddNewPost: FC<IAddNewPostProps> = ({ isFixed, onClick }) => {
 
   return (
     <Tooltip title={t('addPost')}>
-      <IconButton sx={StyledIconButton} onClick={onClick}>
+      <IconButton aria-label={t('addPost')} role="button" sx={StyledIconButton} onClick={onClick}>
         <AddIcon sx={StyledIcon} />
       </IconButton>
     </Tooltip>
