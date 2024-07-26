@@ -5,5 +5,3 @@ exports[`PostModal > should match snapshot 1`] = `
   <div />
 </DocumentFragment>
 `;
-
-exports[`PostModal Component > should match snapshot 1`] = `<DocumentFragment />`;
