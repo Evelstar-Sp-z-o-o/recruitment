@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import PostFormModal from '../components/modals/PostFormModal';
 import PostResponseModal from '../components/modals/PostResponseModal';
+import { closeModal, openModal } from '../redux/responseModalSlice';
+import { RootState } from '../redux/store';
 import { Post } from '../types';
 
 interface CreatePostProps {
@@ -11,9 +13,10 @@ interface CreatePostProps {
 
 const CreatePost: React.FC<CreatePostProps> = ({ refetchPosts }) => {
   const { pathname } = useLocation();
-  const [responseModal, setResponseModal] = useState(false);
-  const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const isModalOpen = useSelector((state: RootState) => state.responseModal.isOpen);
 
   // Create a new post
   const handleSubmit = async (newPost: Post) => {
@@ -27,26 +30,24 @@ const CreatePost: React.FC<CreatePostProps> = ({ refetchPosts }) => {
       });
 
       if (!response.ok) {
-        setResponseMessage('Failed to create a post!');
-        setResponseModal(true);
+        dispatch(openModal('Failed to create a post!'));
         return;
       }
-      setResponseMessage('Successfully created a post!');
-      setResponseModal(true);
+      dispatch(openModal('Successfully created a post!'));
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleCloseResponse = () => {
-    setResponseModal(false);
+    dispatch(closeModal());
     navigate('/');
     refetchPosts();
   };
 
   return (
     <>
-      {!responseModal && (
+      {!isModalOpen && (
         <PostFormModal
           onClose={() => navigate(-1)}
           onSubmit={handleSubmit}
@@ -54,7 +55,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ refetchPosts }) => {
           isOpen={pathname === '/create'}
         />
       )}
-      <PostResponseModal open={responseModal} onClose={handleCloseResponse} content={responseMessage} />
+      <PostResponseModal onClose={handleCloseResponse} />
     </>
   );
 };

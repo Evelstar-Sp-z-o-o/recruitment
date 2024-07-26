@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { closeModal, openModal } from '@/src/redux/responseModalSlice';
 import { Post } from '@/src/types';
 import { getFormattedDate } from '@/src/utils';
 import { Box, Button, Card, CardMedia, Typography } from '@mui/material';
@@ -15,36 +16,30 @@ interface PostBoxProps {
 const MyPostBox: React.FC<PostBoxProps> = ({ post, onDelete }) => {
   const { content, imageUrl, id, createdAt, numberOfLikes } = post;
 
-  const [responseModal, setResponseModal] = useState(false);
-  const [responseMessage, setResponseMessage] = useState<string | null>(null);
-  const [deletePost, setDeletePost] = useState(true);
-
   const navigate = useNavigate();
 
-  // Remove a selected post frome database
+  const dispatch = useDispatch();
+
+  // Remove a selected post from database
   const handleDelete = async () => {
     try {
       const response = await fetch(`/api/posts/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
-        setDeletePost(false);
-        setResponseMessage('Failed to delete the post');
-        setResponseModal(true);
+        dispatch(openModal('Failed to delete the post'));
         return;
       }
 
-      setDeletePost(false);
-      setResponseMessage('Successfully deleted a post!');
       onDelete(id);
+      dispatch(openModal('Successfully deleted a post!'));
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleClose = () => {
-    setResponseModal(false);
-    setDeletePost(true);
+    dispatch(closeModal());
     navigate('/posts');
   };
 
@@ -72,27 +67,13 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post, onDelete }) => {
             <Button size="small" variant="contained" sx={styles.button} onClick={() => navigate(`/posts/update/${id}`)}>
               Edit
             </Button>
-            <Button
-              size="small"
-              variant="outlined"
-              sx={styles.button}
-              onClick={() => {
-                setResponseMessage('Are you sure to delete?');
-                setResponseModal(true);
-              }}
-            >
+            <Button size="small" variant="outlined" sx={styles.button} onClick={handleDelete}>
               Delete
             </Button>
           </Box>
         </Box>
       </Box>
-      <PostResponseModal
-        open={responseModal}
-        onClose={handleClose}
-        content={responseMessage}
-        deleteAction={deletePost}
-        onDelete={handleDelete}
-      />
+      <PostResponseModal onClose={handleClose} />
     </>
   );
 };

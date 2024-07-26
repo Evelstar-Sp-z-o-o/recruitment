@@ -2,102 +2,11 @@
   "posts": [
     {
       "data": {
-        "content": "Exploring new places is a journey of self-discovery. From the tranquil beaches of Bali to the vibrant streets of Tokyo, every destination offers a unique experience. Remember to travel light, capture moments, and leave only footprints. Adventure awaits!",
-        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130585/samples/breakfast.jpg",
-        "createdAt": 1718439825000,
-        "updatedAt": 1721844589365,
-        "username": "haniakim",
-        "numberOfLikes": 24,
-        "likes": [
-          "NsDahn",
-          "pJswtA",
-          "2G5GZ3",
-          "Tp7n5F",
-          "1Tx8Cy",
-          "XHSTOi",
-          "7Oih9Y",
-          "lVNedO",
-          "qu7GM3",
-          "vpGD31",
-          "gJg1nh",
-          "6pRAhh",
-          "8DQ2Kw",
-          "gVJwYB",
-          "728JcW",
-          "PPIkWs",
-          "ZYO6Xo",
-          "dBb3Ce",
-          "yT682g",
-          "t5H1T1",
-          "2XwSay",
-          "rOeXSf",
-          "GUzgHE",
-          "4Wl03A"
-        ]
-      },
-      "id": 2
-    },
-    {
-      "data": {
-        "content": "Eating healthy doesn't have to be boring! Try incorporating a variety of colorful vegetables into your meals, and don't forget to stay hydrated. A balanced diet combined with regular exercise is the key to a vibrant and energetic life. Cheers to your health!",
-        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130593/cld-sample-4.jpg",
-        "createdAt": 1716193425000,
-        "updatedAt": 1721844606481,
-        "username": "haniakim",
-        "numberOfLikes": 7,
-        "likes": [
-          "y5XZKT",
-          "UXKUxd",
-          "fCLejG",
-          "R1j7Hj",
-          "hKQQtk",
-          "FglGOh",
-          "qnEQJ2"
-        ]
-      },
-      "id": 3
-    },
-    {
-      "data": {
-        "content": "The future is here, and it's powered by technology! From AI advancements to groundbreaking gadgets, innovation is shaping our world. Stay curious, keep learning, and embrace new technologies that make life easier and more exciting. The tech revolution continues!",
-        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130567/samples/landscapes/architecture-signs.jpg",
-        "createdAt": 1717403025000,
-        "updatedAt": 1721844592546,
-        "username": "haniakim",
-        "numberOfLikes": 20,
-        "likes": [
-          "vdsMms",
-          "L93Zud",
-          "sFc3L4",
-          "QHsOd6",
-          "i5dAll",
-          "4lr3MK",
-          "GiL8Jo",
-          "1kIRYk",
-          "9fbhDi",
-          "IpBeqm",
-          "TXIGbp",
-          "GDz3mH",
-          "ZeelyS",
-          "AXodEN",
-          "Wqzg6S",
-          "YfBFCm",
-          "xz73GW",
-          "gKEkpO",
-          "jeGQ3z",
-          "c8vy91"
-        ]
-      },
-      "id": 4
-    },
-    {
-      "data": {
-        "content": "Personal growth is a lifelong journey. Set goals, face your fears, and step out of your comfort zone. Every challenge you overcome makes you stronger and wiser. Celebrate your progress, no matter how small, and keep striving for greatness. You've got this!",
+        "content": "poooioPersonal growth is a lifelong journey. Set goals, face your fears, and step out of your comfort zone. Every challenge you overcome makes you stronger and wiser. Celebrate your progress, no matter how small, and keep striving for greatness. You've got this!",
         "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130564/samples/landscapes/girl-urban-view.jpg",
-        "createdAt": 1719908625000,
-        "updatedAt": 1721923527747,
         "username": "haniakim",
-        "numberOfLikes": 7,
+        "createdAt": 1719908625000,
+        "numberOfLikes": 8,
         "likes": [
           "5yvkNx",
           "Owojtm",
@@ -105,113 +14,11 @@
           "aCSVBF",
           "uDscvw",
           "zMCoNT",
-          "MbboSW"
-        ],
-        "id": 5
+          "MbboSW",
+          "haniakim"
+        ]
       },
       "id": 5
-    },
-    {
-      "data": {
-        "content": "Consistency is key to achieving your fitness goals. Mix up your workouts with cardio, strength training, and flexibility exercises. Remember, it's not about being the best; it's about being better than you were yesterday. Stay motivated and keep moving!",
-        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130568/samples/landscapes/beach-boat.jpg",
-        "createdAt": 1719044625000,
-        "updatedAt": 1721844579360,
-        "username": "haniakim",
-        "numberOfLikes": 28,
-        "likes": [
-          "F77k5k",
-          "Tf9jH9",
-          "eFkGgV",
-          "IIrnAj",
-          "46hfJ3",
-          "EWVoag",
-          "W7ZElt",
-          "CMFtbd",
-          "0hQgMD",
-          "UwAfcr",
-          "G7iWpK",
-          "vHG54n",
-          "erfVop",
-          "K5VAes",
-          "fWFRwm",
-          "hPp0xG",
-          "G1Fd70",
-          "ZDmjZl",
-          "QpsfiF",
-          "TsGXNY",
-          "1BglYw",
-          "GTW4Uc",
-          "yGOF92",
-          "Je8mwq",
-          "wuenWk",
-          "VNmw8l",
-          "adY5Re",
-          "7jriAI"
-        ]
-      },
-      "id": 6
-    },
-    {
-      "data": {
-        "content": "Taking care of your mental health is just as important as physical health. Practice mindfulness, take breaks when needed, and don't hesitate to seek support. Remember, it's okay to not be okay, and taking care of yourself is a sign of strength.",
-        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130569/samples/ecommerce/leather-bag-gray.jpg",
-        "createdAt": 1714551825000,
-        "updatedAt": 1721844619335,
-        "username": "haniakim",
-        "numberOfLikes": 27,
-        "likes": [
-          "Fi3OFQ",
-          "0arVim",
-          "cpijk8",
-          "4HENB6",
-          "WY2ZUt",
-          "JVodTV",
-          "AAf4Ey",
-          "WwxmPN",
-          "d3avD5",
-          "2rt7Gq",
-          "GqF8Vv",
-          "Elxuj7",
-          "9rBqta",
-          "LEcK2w",
-          "TfV5ps",
-          "Ch0qPK",
-          "9prrU0",
-          "hsDrxv",
-          "bufjYg",
-          "bCCWhe",
-          "vOUuEe",
-          "AHiLEj",
-          "4oP46e",
-          "Ysxb27",
-          "btKb7v",
-          "r0DZeF",
-          "vioiCE"
-        ]
-      },
-      "id": 7
-    },
-    {
-      "data": {
-        "content": "Cooking is an art that brings joy to the table. Experiment with new recipes, try cooking techniques, and enjoy the process of creating delicious meals. Sharing a home-cooked meal with loved ones makes every dish taste better. Bon appétit!",
-        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130570/samples/food/spices.jpg",
-        "createdAt": 1713169425000,
-        "updatedAt": 1721844622627,
-        "username": "haniakim",
-        "numberOfLikes": 8,
-        "likes": [
-          "bZI4Cc",
-          "mayKqP",
-          "OZ03rr",
-          "q9eJTT",
-          "5k6Ir9",
-          "SgZ2Px",
-          "s720ir",
-          "L3DICP"
-        ]
-      },
-      "id": 8
     },
     {
       "data": {
@@ -321,44 +128,6 @@
     },
     {
       "data": {
-        "content": "Science is unlocking the mysteries of our universe. From space exploration to medical breakthroughs, every discovery has the potential to change our lives. Stay curious and keep exploring the wonders of science. The journey of discovery never ends!",
-        "imageUrl": null,
-        "createdAt": 1714897425000,
-        "updatedAt": 1721922843337,
-        "username": "haniakim",
-        "numberOfLikes": 25,
-        "likes": [
-          "DeHfC9",
-          "tWgOe1",
-          "oKRHhO",
-          "v3D9gc",
-          "IHY649",
-          "j25h3e",
-          "PgAxrp",
-          "eYG7BV",
-          "y6MKal",
-          "2yE2yt",
-          "3vuHUV",
-          "d0kEFJ",
-          "hIzXMG",
-          "AXbTao",
-          "6k0six",
-          "UXVR1E",
-          "M7cAQf",
-          "GqanJK",
-          "L7kz4t",
-          "eZdciJ",
-          "Tbwiwv",
-          "UYxyI4",
-          "f05vVG",
-          "noMbny",
-          "0OPrbn"
-        ]
-      },
-      "id": 15
-    },
-    {
-      "data": {
         "content": "Creating a cozy and stylish home starts with thoughtful decor choices. Personalize your space with colors, textures, and accessories that reflect your taste. A well-decorated home is a place where you can truly relax and feel at ease.",
         "imageUrl": null,
         "createdAt": 1721463825000,
@@ -421,6 +190,227 @@
         ]
       },
       "id": 17
+    },
+    {
+      "data": {
+        "content": "Consistency is key to achieving your fitness goals. Mix up your workouts with cardio, strength training, and flexibility exercises. Remember, it's not about being the best; it's about being better than you were yesterday. Stay motivated and keep moving!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130568/samples/landscapes/beach-boat.jpg",
+        "createdAt": 1719044625000,
+        "updatedAt": 1721844579360,
+        "username": "haniakim",
+        "numberOfLikes": 28,
+        "likes": [
+          "F77k5k",
+          "Tf9jH9",
+          "eFkGgV",
+          "IIrnAj",
+          "46hfJ3",
+          "EWVoag",
+          "W7ZElt",
+          "CMFtbd",
+          "0hQgMD",
+          "UwAfcr",
+          "G7iWpK",
+          "vHG54n",
+          "erfVop",
+          "K5VAes",
+          "fWFRwm",
+          "hPp0xG",
+          "G1Fd70",
+          "ZDmjZl",
+          "QpsfiF",
+          "TsGXNY",
+          "1BglYw",
+          "GTW4Uc",
+          "yGOF92",
+          "Je8mwq",
+          "wuenWk",
+          "VNmw8l",
+          "adY5Re",
+          "7jriAI"
+        ]
+      },
+      "id": 19
+    },
+    {
+      "data": {
+        "content": "Taking care of your mental health is just as important as physical health. Practice mindfulness, take breaks when needed, and don't hesitate to seek support. Remember, it's okay to not be okay, and taking care of yourself is a sign of strength.",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130569/samples/ecommerce/leather-bag-gray.jpg",
+        "createdAt": 1714551825000,
+        "updatedAt": 1721844619335,
+        "username": "haniakim",
+        "numberOfLikes": 27,
+        "likes": [
+          "Fi3OFQ",
+          "0arVim",
+          "cpijk8",
+          "4HENB6",
+          "WY2ZUt",
+          "JVodTV",
+          "AAf4Ey",
+          "WwxmPN",
+          "d3avD5",
+          "2rt7Gq",
+          "GqF8Vv",
+          "Elxuj7",
+          "9rBqta",
+          "LEcK2w",
+          "TfV5ps",
+          "Ch0qPK",
+          "9prrU0",
+          "hsDrxv",
+          "bufjYg",
+          "bCCWhe",
+          "vOUuEe",
+          "AHiLEj",
+          "4oP46e",
+          "Ysxb27",
+          "btKb7v",
+          "r0DZeF",
+          "vioiCE"
+        ]
+      },
+      "id": 20
+    },
+    {
+      "data": {
+        "content": "Exploring new places is a journey of self-discovery. From the tranquil beaches of Bali to the vibrant streets of Tokyo, every destination offers a unique experience. Remember to travel light, capture moments, and leave only footprints. Adventure awaits!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130585/samples/breakfast.jpg",
+        "createdAt": 1718439825000,
+        "updatedAt": 1721844589365,
+        "username": "haniakim",
+        "numberOfLikes": 24,
+        "likes": [
+          "NsDahn",
+          "pJswtA",
+          "2G5GZ3",
+          "Tp7n5F",
+          "1Tx8Cy",
+          "XHSTOi",
+          "7Oih9Y",
+          "lVNedO",
+          "qu7GM3",
+          "vpGD31",
+          "gJg1nh",
+          "6pRAhh",
+          "8DQ2Kw",
+          "gVJwYB",
+          "728JcW",
+          "PPIkWs",
+          "ZYO6Xo",
+          "dBb3Ce",
+          "yT682g",
+          "t5H1T1",
+          "2XwSay",
+          "rOeXSf",
+          "GUzgHE",
+          "4Wl03A"
+        ]
+      },
+      "id": 21
+    },
+    {
+      "data": {
+        "content": "Eating healthy doesn't have to be boring! Try incorporating a variety of colorful vegetables into your meals, and don't forget to stay hydrated. A balanced diet combined with regular exercise is the key to a vibrant and energetic life. Cheers to your health!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130593/cld-sample-4.jpg",
+        "createdAt": 1716193425000,
+        "updatedAt": 1721844606481,
+        "username": "haniakim",
+        "numberOfLikes": 7,
+        "likes": [
+          "y5XZKT",
+          "UXKUxd",
+          "fCLejG",
+          "R1j7Hj",
+          "hKQQtk",
+          "FglGOh",
+          "qnEQJ2"
+        ]
+      },
+      "id": 22
+    },
+    {
+      "data": {
+        "content": "The future is here, and it's powered by technology! From AI advancements to groundbreaking gadgets, innovation is shaping our world. Stay curious, keep learning, and embrace new technologies that make life easier and more exciting. The tech revolution continues!",
+        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130567/samples/landscapes/architecture-signs.jpg",
+        "createdAt": 1717403025000,
+        "updatedAt": 1721844592546,
+        "username": "haniakim",
+        "numberOfLikes": 20,
+        "likes": [
+          "vdsMms",
+          "L93Zud",
+          "sFc3L4",
+          "QHsOd6",
+          "i5dAll",
+          "4lr3MK",
+          "GiL8Jo",
+          "1kIRYk",
+          "9fbhDi",
+          "IpBeqm",
+          "TXIGbp",
+          "GDz3mH",
+          "ZeelyS",
+          "AXodEN",
+          "Wqzg6S",
+          "YfBFCm",
+          "xz73GW",
+          "gKEkpO",
+          "jeGQ3z",
+          "c8vy91"
+        ]
+      },
+      "id": 23
+    },
+    {
+      "data": {
+        "content": "Science is unlocking the mysteries of our universe. From space exploration to medical breakthroughs, every discovery has the potential to change our lives. Stay curious and keep exploring the wonders of science. The journey of discovery never ends!",
+        "imageUrl": null,
+        "createdAt": 1714897425000,
+        "updatedAt": 1721922843337,
+        "username": "haniakim",
+        "numberOfLikes": 25,
+        "likes": [
+          "DeHfC9",
+          "tWgOe1",
+          "oKRHhO",
+          "v3D9gc",
+          "IHY649",
+          "j25h3e",
+          "PgAxrp",
+          "eYG7BV",
+          "y6MKal",
+          "2yE2yt",
+          "3vuHUV",
+          "d0kEFJ",
+          "hIzXMG",
+          "AXbTao",
+          "6k0six",
+          "UXVR1E",
+          "M7cAQf",
+          "GqanJK",
+          "L7kz4t",
+          "eZdciJ",
+          "Tbwiwv",
+          "UYxyI4",
+          "f05vVG",
+          "noMbny",
+          "0OPrbn"
+        ]
+      },
+      "id": 24
+    },
+    {
+      "data": {
+        "content": "new post",
+        "imageUrl": null,
+        "createdAt": 1722026100533,
+        "updatedAt": 1722026100533,
+        "username": "haniakim",
+        "numberOfLikes": 0,
+        "likes": []
+      },
+      "id": 25
     }
   ]
 }

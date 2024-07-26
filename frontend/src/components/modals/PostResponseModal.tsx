@@ -1,17 +1,22 @@
-import { Button, Dialog, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { useSelector } from 'react-redux';
+
+import { RootState } from '@/src/redux/store';
+import { Button, Dialog, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
 
 interface PostResponseModalProps {
-  open: boolean;
   onClose: () => void;
-  content: string;
   deleteAction?: boolean;
   onDelete?: () => void;
 }
 
-const PostResponseModal: React.FC<PostResponseModalProps> = ({ open, onClose, content, deleteAction, onDelete }) => {
+const PostResponseModal: React.FC<PostResponseModalProps> = ({ onClose, deleteAction, onDelete }) => {
+  const { isOpen, content } = useSelector((state: RootState) => state.responseModal);
+
+  if (!isOpen) return null;
+
   return (
     <Dialog
-      open={open}
+      open={isOpen}
       onClose={onClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
@@ -21,7 +26,7 @@ const PostResponseModal: React.FC<PostResponseModalProps> = ({ open, onClose, co
       </DialogContent>
       <DialogActions>
         {deleteAction && (
-          <Button onClick={onDelete} color="primary" autoFocus>
+          <Button onClick={onDelete} color="primary">
             Delete
           </Button>
         )}

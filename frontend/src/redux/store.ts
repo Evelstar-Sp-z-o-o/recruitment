@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import createModalReducer from './createModalSlice';
-import editModalReducer from './editModalSlice';
+import responseModalReducer from './responseModalSlice';
 
 const store = configureStore({
   reducer: {
-    createModal: createModalReducer,
-    editModal: editModalReducer,
+    responseModal: responseModalReducer,
   },
 });
 
