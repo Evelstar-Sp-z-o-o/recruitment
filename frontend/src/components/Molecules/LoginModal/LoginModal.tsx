@@ -49,7 +49,7 @@ const LoginModal: FC<ILoginModalProps> = ({ isOpen, handleClose, handleSnackbar 
   return (
     <Modal open={isOpen}>
       <>
-        <Box sx={StyledModal} className="modal">
+        <Box sx={StyledModal} className="modal" role="dialog">
           <CloseModal handleClose={handleClose} />
           <Typography variant="h6" component="h2">
             {t('login.header')}
