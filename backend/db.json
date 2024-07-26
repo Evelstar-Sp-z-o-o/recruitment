@@ -130,9 +130,8 @@
       "data": {
         "content": "Creating a cozy and stylish home starts with thoughtful decor choices. Personalize your space with colors, textures, and accessories that reflect your taste. A well-decorated home is a place where you can truly relax and feel at ease.",
         "imageUrl": null,
-        "createdAt": 1721463825000,
-        "updatedAt": 1721995144947,
         "username": "user3",
+        "createdAt": 1721463825000,
         "numberOfLikes": 27,
         "likes": [
           "Tdf4uK",
@@ -404,9 +403,8 @@
       "data": {
         "content": "new post",
         "imageUrl": null,
-        "createdAt": 1722026100533,
-        "updatedAt": 1722026100533,
         "username": "haniakim",
+        "createdAt": 1722026100533,
         "numberOfLikes": 0,
         "likes": []
       },

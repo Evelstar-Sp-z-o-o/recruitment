@@ -1,14 +1,14 @@
-import { logRoles, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import HomePostBox from '../../../components/posts/HomePostBox';
 import { mockPost } from '../../mocks/mockData';
 
 test('updates color and number of likes when clicked', async () => {
-  const { container } = render(<HomePostBox post={mockPost} />);
+  render(<HomePostBox post={mockPost} />);
   const user = userEvent.setup();
 
-  const likeButton = await screen.findByTestId('ThumbUpIcon');
+  const likeButton = screen.getByTestId('ThumbUpIcon');
   const numberOfLikes = screen.getByTestId('numOfLikes');
 
   // Check initial status
@@ -17,11 +17,11 @@ test('updates color and number of likes when clicked', async () => {
 
   // Click like button
   await user.click(likeButton);
-  logRoles(container);
-
-  const increasedLikes = mockPost.numberOfLikes + 1;
 
   // Check changes after click
-  expect(likeButton).toHaveStyle('color: rgb(30, 144, 255)');
-  expect(numberOfLikes).toHaveTextContent(`${increasedLikes} Likes`);
+  await waitFor(() => {
+    const increasedLikes = mockPost.numberOfLikes + 1;
+    expect(likeButton).toHaveStyle('color: rgb(30, 144, 255)');
+    expect(numberOfLikes).toHaveTextContent(`${increasedLikes} Likes`);
+  });
 });
