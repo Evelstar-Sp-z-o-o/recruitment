@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 
-interface IMenuListItemProps {
+interface IMenuLinkItemProps {
   target?: string;
   label: string;
 }
 
-const MenuListItem: FC<IMenuListItemProps> = ({ target, label }) => {
+const MenuLinkItem: FC<IMenuLinkItemProps> = ({ target, label }) => {
   return (
     <MenuItem>
       <Link to={target} className="menuItem">
@@ -18,4 +18,4 @@ const MenuListItem: FC<IMenuListItemProps> = ({ target, label }) => {
   );
 };
 
-export default MenuListItem;
+export default MenuLinkItem;
