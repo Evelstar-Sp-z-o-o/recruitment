@@ -14,14 +14,19 @@ const Home = () => {
   const user = useSelector<RootState>((state) => state.user);
   const login = useSelector<RootState>((state) => state.login);
   const wasHomeModalShown = !!localStorage.getItem('wasHomeModalShown');
-  const { data: posts, isLoading } = useGetPostsQuery();
+  const { data: posts, isLoading, isError } = useGetPostsQuery();
   const [openLogin, setOpenLogin] = useState(!wasHomeModalShown && !user);
+  const [postsError, setPostsError] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   useEffect(() => {
     setOpenLogin(!wasHomeModalShown && !user);
   }, [wasHomeModalShown, user]);
+
+  useEffect(() => {
+    setPostsError(isError);
+  }, [isError]);
 
   const handleClose = () => {
     setOpenLogin(false);
@@ -30,6 +35,9 @@ const Home = () => {
 
   const handleSnackbar = (isOpen) => {
     dispatch(setLogin(isOpen));
+    if (isError) {
+      setPostsError(false);
+    }
   };
 
   return (
@@ -42,6 +50,11 @@ const Home = () => {
       <Snackbar open={!!login} autoHideDuration={6000}>
         <Alert onClose={() => handleSnackbar(false)} severity="success" variant="filled" sx={{ width: '100%' }}>
           {user ? t('login.confirmLogin', { user: user }) : t('login.confirmLogout')}
+        </Alert>
+      </Snackbar>
+      <Snackbar open={postsError} autoHideDuration={6000}>
+        <Alert onClose={() => handleSnackbar(false)} severity="error" variant="filled" sx={{ width: '100%' }}>
+          {t('error')}
         </Alert>
       </Snackbar>
     </Box>
