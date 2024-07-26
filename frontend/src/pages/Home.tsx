@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginModal from '@/src/components/Molecules/LoginModal/LoginModal';
 import BaseView from '@/src/components/Templates/BaseView/BaseView';
-import { setLogin, useGetPostsQuery } from '@/src/store';
+import { setLogin, useGetPostsQuery, RootState } from '@/src/store';
 import { Alert, Snackbar } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { RootState } from '@reduxjs/toolkit/query';
 
 const Home = () => {
   const user = useSelector<RootState>((state) => state.user);

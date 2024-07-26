@@ -11,19 +11,29 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 
 const StyledModal = {
-  width: 400,
+  width: 300,
   bgcolor: 'background.paper',
 };
 
-const LoginModal = ({ isOpen, handleClose, handleSnackbar }) => {
+interface ILoginModalProps {
+  isOpen: boolean;
+  handleClose: () => void;
+  handleSnackbar: () => void;
+}
+
+const LoginModal: FC<ILoginModalProps> = ({ isOpen, handleClose, handleSnackbar }) => {
   const dispatch = useDispatch();
-  const [isEmailCorrect, setIsEmailCorrect] = useState(true);
+  const [isEmailCorrect, setIsEmailCorrect] = useState<boolean>(true);
   const { t } = useTranslation();
 
   const submitLogin = (e) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     e.preventDefault();
-    if (!emailRegex.test(e.target[0].value)) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const formData = new FormData(e.currentTarget);
+    const formJson = Object.fromEntries((formData as any).entries());
+    const email: string = formJson.email;
+
+    if (!emailRegex.test(email)) {
       setIsEmailCorrect(false);
       return;
     }
@@ -31,9 +41,9 @@ const LoginModal = ({ isOpen, handleClose, handleSnackbar }) => {
     handleClose(true);
     handleSnackbar(true);
     localStorage.removeItem('wasHomeModalShown');
-    sessionStorage.setItem('user', e.target[0].value);
+    sessionStorage.setItem('user', email);
 
-    return dispatch(setUser(e.target[0].value));
+    return dispatch(setUser(email));
   };
 
   return (
@@ -58,6 +68,7 @@ const LoginModal = ({ isOpen, handleClose, handleSnackbar }) => {
                 }}
                 helperText={isEmailCorrect ? ' ' : t('login.incorrect')}
                 label={t('login.email')}
+                name="email"
                 variant="standard"
               />{' '}
               <Button type="submit" variant="outlined">

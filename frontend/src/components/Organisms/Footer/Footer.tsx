@@ -1,16 +1,22 @@
+import { FC } from 'react';
+
+import { getYear } from '@/src/utils/helpers/getYear';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
-const Footer = () => {
-  const StyledFooter = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    p: '2rem',
-  };
+const StyledFooter = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  p: '2rem',
+};
 
+const Footer: FC = () => {
   return (
     <Container component="footer" className="footer" sx={StyledFooter}>
-      TWIXER
+      <Typography className="appName">TWIXER</Typography>
+      <Typography className="copyrights">&copy; {getYear()}</Typography>
     </Container>
   );
 };

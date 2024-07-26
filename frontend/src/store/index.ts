@@ -1,7 +1,7 @@
 import { postsApi } from '@/src/store/api/posts';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-const initialUser = null;
+const initialUser: null | string = null;
 const initialLogin = false;
 
 const userSlice = createSlice({
@@ -37,3 +37,5 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(postsApi.middleware),
 });
+
+export type RootState = ReturnType<typeof store.getState>;

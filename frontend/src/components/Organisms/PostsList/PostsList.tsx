@@ -1,22 +1,13 @@
-import { Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { useRemovePostMutation } from '@/src/store';
+import PostListAlerts from '@/src/components/Molecules/PostListAlerts/PostListAlerts';
+import { IPost, useRemovePostMutation, RootState } from '@/src/store';
 import { formatDate } from '@/src/utils/helpers/formatDate';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
-import {
-  Alert,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Snackbar,
-} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -27,17 +18,21 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import { RootState } from '@reduxjs/toolkit/query';
 
-const PostsList = ({ posts, handleEdit }) => {
+interface IPostsListProps {
+  posts: IPost[];
+  handleEdit: () => void;
+}
+
+const PostsList: FC<IPostsListProps> = ({ posts, handleEdit }) => {
   const user = useSelector<RootState>((state) => state.user);
   const [removePost, { isError, isSuccess }] = useRemovePostMutation();
   const { t } = useTranslation();
-  const [sortedPosts, setSortedPosts] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [postId, setPostId] = useState(null);
-  const [alert, setAlert] = useState(false);
-  const [authorAlert, setAuthorAlert] = useState(false);
+  const [sortedPosts, setSortedPosts] = useState<IPost[]>([]);
+  const [open, setOpen] = useState<boolean>(false);
+  const [postId, setPostId] = useState<null | number>(null);
+  const [alert, setAlert] = useState<boolean>(false);
+  const [authorAlert, setAuthorAlert] = useState<boolean>(false);
 
   useEffect(() => {
     if (isError || isSuccess) {
@@ -58,7 +53,7 @@ const PostsList = ({ posts, handleEdit }) => {
     setOpen(false);
   };
 
-  const handleDelete = (post) => {
+  const handleDelete = (post: IPost) => {
     if (post.data.author !== user) {
       setPostId(null);
       setAuthorAlert(true);
@@ -130,34 +125,16 @@ const PostsList = ({ posts, handleEdit }) => {
           {t('noPosts')}
         </Box>
       )}
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{t('delete.confirm.confirmHeader')}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>{t('delete.confirm.confirmMessage')}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>{t('delete.confirm.button.cancel')}</Button>
-          <Button onClick={handleConfirmDelete} autoFocus>
-            {t('delete.confirm.button.confirm')}
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog open={authorAlert} onClose={handleClose}>
-        <DialogTitle>{t('delete.authorDelete')}</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleAlertClose}>{t('delete.button.close')}</Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar open={alert} autoHideDuration={6000}>
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity={isSuccess ? 'success' : 'error'}
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-          {isSuccess ? t('delete.alert.success') : t('delete.alert.error')}
-        </Alert>
-      </Snackbar>
+      <PostListAlerts
+        open={open}
+        handleClose={handleClose}
+        handleAlertClose={handleAlertClose}
+        authorAlert={authorAlert}
+        alert={alert}
+        handleCloseSnackbar={handleCloseSnackbar}
+        handleConfirmDelete={handleConfirmDelete}
+        isSuccess={isSuccess}
+      />
     </>
   );
 };

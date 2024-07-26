@@ -5,8 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Page404 from '@/src/pages/404';
 import Home from '@/src/pages/Home';
 import Profile from '@/src/pages/Profile';
-import { setLogin, setUser } from '@/src/store';
-import { RootState } from '@reduxjs/toolkit/query';
+import { setLogin, setUser, RootState } from '@/src/store';
 
 const Root = () => {
   const user = useSelector<RootState>((state) => state.user);

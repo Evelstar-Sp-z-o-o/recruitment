@@ -11,19 +11,23 @@ interface IAddNewPostProps {
 }
 
 const AddNewPost: FC<IAddNewPostProps> = ({ isFixed, onClick }) => {
-  const { t } = useTranslation();
   const StyledIconButton = {
     position: isFixed ? 'fixed' : 'static',
     bottom: '3rem',
     right: '1rem',
+    height: '5rem',
+    width: '5rem',
   };
+
   const StyledIcon = {
     color: grey['A100'],
-    fontSize: '3.5rem',
+    fontSize: '3rem',
     bgcolor: blue[700],
     borderRadius: '50%',
     p: 0,
   };
+  const { t } = useTranslation();
+
   return (
     <Tooltip title={t('addPost')}>
       <IconButton sx={StyledIconButton} onClick={onClick}>

@@ -1,38 +1,34 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import Unknown from '@/src/assets/noUserIcon.svg';
 import Avt from '@/src/assets/userIcon.svg';
 import AddNewPost from '@/src/components/Atoms/AddNewPost/AddNewPost';
-import CreatePostModal from '@/src/components/Molecules/CreatePost/CreatePost';
+import MenuLinkItem from '@/src/components/Atoms/MenuLinkItem/MenuLinkItem';
+import MenuLogin from '@/src/components/Atoms/MenuLogin/MenuLogin';
 import LoginModal from '@/src/components/Molecules/LoginModal/LoginModal';
-import { setLogin, setUser } from '@/src/store';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
+import PostModal from '@/src/components/Molecules/PostModal/PostModal';
+import { setLogin, setUser, RootState } from '@/src/store';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Typography from '@mui/material/Typography';
-import { RootState } from '@reduxjs/toolkit/query';
 
 interface IMenuProps {
   open: boolean;
   toggleMenu: () => void;
+  handleResponse: () => void;
 }
 
 const Menu: FC<IMenuProps> = ({ open, toggleMenu, handleResponse }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const user = useSelector<RootState>((state) => state.user);
-  const [openLogin, setOpenLogin] = useState(false);
-  const [openPostModal, setOpenPostModal] = useState(false);
+  const user: string = useSelector<RootState>((state) => state.user);
+  const [openLogin, setOpenLogin] = useState<boolean>(false);
+  const [openPostModal, setOpenPostModal] = useState<boolean>(false);
 
   const handleToggleModal = () => {
     setOpenLogin((prevState) => !prevState);
@@ -68,36 +64,18 @@ const Menu: FC<IMenuProps> = ({ open, toggleMenu, handleResponse }) => {
           </Typography>
         </Container>
 
-        <MenuList>
-          <Link to="/" className="menuLink">
-            <MenuItem>
-              <ListItemText>{t('menu.home')}</ListItemText>
-            </MenuItem>
-          </Link>
-          {user ? (
-            <Link to="/profile" className="menuLink">
-              <MenuItem>
-                <ListItemText>{t('menu.profile')}</ListItemText>
-              </MenuItem>
-            </Link>
-          ) : null}
-          {user ? (
-            <MenuItem sx={{ mt: '3rem' }} onClick={handleLogout}>
-              <ListItemIcon>
-                <LogoutIcon fontSize="small" />
-              </ListItemIcon>
-              <ListItemText>Logout</ListItemText>
-            </MenuItem>
-          ) : (
-            <MenuItem sx={{ mt: '3rem' }} onClick={handleToggleModal}>
-              <ListItemIcon>
-                <LoginIcon fontSize="small" />
-              </ListItemIcon>
-              <ListItemText>Login</ListItemText>
-            </MenuItem>
-          )}
-        </MenuList>
-        <CreatePostModal open={openPostModal} close={handleTogglePostModal} response={handleResponse} />
+        <Box component="nav">
+          <MenuList>
+            <MenuLinkItem target="/" label={t('menu.home')} />
+            {user ? <MenuLinkItem target="/profile" label={t('menu.profile')} /> : null}
+            {user ? (
+              <MenuLogin handleLogout={handleLogout} />
+            ) : (
+              <MenuLogin isLogin handleToggleModal={handleToggleModal} />
+            )}
+          </MenuList>
+        </Box>
+        <PostModal open={openPostModal} close={handleTogglePostModal} response={handleResponse} />
       </Box>
     </Drawer>
   );

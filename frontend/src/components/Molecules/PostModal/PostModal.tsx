@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setUser, useCreatePostMutation, useGetPostsQuery, useUpdatePostMutation } from '@/src/store';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
+import AlertDialog from '@/src/components/Atoms/AlertDialog/AlertDialog';
+import LoginDialog from '@/src/components/Molecules/LoginDialog/LoginDialog';
+import { setUser, useCreatePostMutation, useGetPostsQuery, useUpdatePostMutation, RootState, IPost } from '@/src/store';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { RootState } from '@reduxjs/toolkit/query';
 
 const StyledCreatePost = {
   width: '80%',
@@ -17,18 +19,26 @@ const StyledCreatePost = {
   bgcolor: 'background.paper',
 };
 
-const CreatePostModal = ({ open, close, response, initialPost }) => {
+interface IPostModalProps {
+  open: boolean;
+  close: () => void;
+  response: () => void;
+  initialPost: IPost | null;
+}
+
+const PostModal: FC<IPostModalProps> = ({ open, close, response, initialPost }) => {
   const { data: posts } = useGetPostsQuery();
   const [createPost, { error, isSuccess }] = useCreatePostMutation();
   const [updatePost, { error: updateError, isSuccess: updateIsSuccess }] = useUpdatePostMutation();
   const user = useSelector<RootState>((state) => state.user);
   const { t } = useTranslation();
-  const [openLogin, setOpenLogin] = useState(false);
   const dispatch = useDispatch();
-  const [isEmailCorrect, setIsEmailCorrect] = useState(true);
-  const [isPostCorrect, setIsPostCorrect] = useState(true);
-  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-  const [isWrongAuthor, setIsWrongAuthor] = useState(false);
+
+  const [openLogin, setOpenLogin] = useState<boolean>(false);
+  const [isEmailCorrect, setIsEmailCorrect] = useState<boolean>(true);
+  const [isPostCorrect, setIsPostCorrect] = useState<boolean>(true);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState<boolean>(false);
+  const [isWrongAuthor, setIsWrongAuthor] = useState<boolean>(false);
 
   useEffect(() => {
     if (error || isSuccess || updateError || updateIsSuccess) {
@@ -145,44 +155,17 @@ const CreatePostModal = ({ open, close, response, initialPost }) => {
           </Container>
         </Box>
       </Modal>
-      <Dialog
-        open={openLogin}
-        onClose={handleClose}
-        PaperProps={{
-          component: 'form',
-          onSubmit: handleLogin,
-        }}
-      >
-        <DialogTitle>Login</DialogTitle>
-        <DialogContent>
-          <DialogContentText>You must be logged in to publish a post.</DialogContentText>
-          <TextField
-            autoFocus
-            required
-            error={!isEmailCorrect}
-            margin="dense"
-            id="email"
-            name="email"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>{t('create.button.cancel')}</Button>
-          <Button type="submit">{t('create.button.login')}</Button>
-        </DialogActions>
-      </Dialog>
 
-      <Dialog open={isWrongAuthor}>
-        <DialogTitle>{t('create.authorEdit')}</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleAlertClose}>{t('create.button.close')}</Button>
-        </DialogActions>
-      </Dialog>
+      <LoginDialog open={openLogin} closeDialog={handleClose} handleLogin={handleLogin} isError={!isEmailCorrect} />
+
+      <AlertDialog
+        open={isWrongAuthor}
+        closeDialog={handleAlertClose}
+        label={t('create.button.close')}
+        title={t('create.authorEdit')}
+      />
     </>
   );
 };
 
-export default CreatePostModal;
+export default PostModal;

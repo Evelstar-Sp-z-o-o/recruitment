@@ -4,7 +4,11 @@
   "noPosts": "Create first post",
   "menu": {
     "home": "Home",
-    "profile": "My posts"
+    "profile": "My posts",
+    "log": {
+      "in": "Login",
+      "out": "Logout"
+    }
   },
   "login": {
     "header": "Do you want to login?",
@@ -12,7 +16,16 @@
     "incorrect": "Incorrect email",
     "email": "E-mail",
     "confirmLogin": "Logged in as {{user}}",
-    "confirmLogout": "Logged out successfully!"
+    "confirmLogout": "Logged out successfully!",
+    "dialog": {
+      "title": "Login",
+      "message": "You must be logged in to publish a post.",
+      "email": "Email Address",
+      "button": {
+        "cancel": "Cancel",
+        "login": "Login"
+      }
+    }
   },
   "404": {
     "header": "Look like you're lost",
