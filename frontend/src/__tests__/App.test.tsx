@@ -10,7 +10,7 @@ import '@testing-library/jest-dom';
 const mockStore = configureMockStore();
 
 const initialState = {
-  creationModal: {
+  createModal: {
     isOpen: false,
   },
   editModal: {
@@ -18,7 +18,7 @@ const initialState = {
   },
 };
 
-const store = mockStore(initialState);
+export const store = mockStore(initialState);
 
 describe('App', () => {
   it('should match snapshot', () => {
