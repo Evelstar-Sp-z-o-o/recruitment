@@ -57,7 +57,7 @@ const Home: React.FC<HomeProps> = ({ posts, editPost }) => {
       ) : (
         <>
           {sortedPosts.map((post) => (
-            <Box key={post.id} sx={styles.postBox}>
+            <Box key={post.id} sx={styles.postBox} data-testid="post-box">
               <HomePostBox post={post} onUpdate={editPost} />
             </Box>
           ))}

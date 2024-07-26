@@ -38,7 +38,7 @@ export const mockData = [
 ];
 
 // Sample list of posts
-export const mockPosts = mockData.map((post) => ({ ...post.data, id: post.id }));
+export const mockPosts = mockData.map((post) => ({ ...post.data, id: post.id.toString() }));
 
 // Single post
 export const mockPost = mockPosts[0];
