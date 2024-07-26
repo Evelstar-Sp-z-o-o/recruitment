@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PostModal > should match snapshot 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;
+
+exports[`PostModal Component > should match snapshot 1`] = `<DocumentFragment />`;

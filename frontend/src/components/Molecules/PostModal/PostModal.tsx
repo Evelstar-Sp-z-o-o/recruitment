@@ -23,11 +23,11 @@ interface IPostModalProps {
   open: boolean;
   close: () => void;
   response: () => void;
-  initialPost: IPost | null;
+  initialPost?: IPost | null;
+  postsCount: number;
 }
 
-const PostModal: FC<IPostModalProps> = ({ open, close, response, initialPost }) => {
-  const { data: posts } = useGetPostsQuery();
+const PostModal: FC<IPostModalProps> = ({ open, close, response, initialPost, postsCount }) => {
   const [createPost, { error, isSuccess }] = useCreatePostMutation();
   const [updatePost, { error: updateError, isSuccess: updateIsSuccess }] = useUpdatePostMutation();
   const user = useSelector<RootState>((state) => state.user);
@@ -80,6 +80,7 @@ const PostModal: FC<IPostModalProps> = ({ open, close, response, initialPost }) 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!user) {
       setOpenLogin(true);
 
@@ -108,7 +109,7 @@ const PostModal: FC<IPostModalProps> = ({ open, close, response, initialPost }) 
         author: user,
         created: initialPost ? initialPost.data.created : null,
       },
-      id: initialPost ? initialPost.id : posts.length + 1,
+      id: initialPost ? initialPost.id : postsCount + 1,
     };
 
     initialPost ? updatePost(postBody) : createPost(postBody);

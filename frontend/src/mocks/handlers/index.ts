@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { db } from '../db';
 
 export const handlers = [
-  http.get('http://localhost:3000/api/posts', () => {
+  http.get('http://localhost:3000/api/posts/', () => {
     return HttpResponse.json(db.post.getAll());
   }),
   http.put('http://localhost:3000/api/posts/:postId', async ({ request, params }) => {

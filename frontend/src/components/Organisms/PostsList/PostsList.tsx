@@ -104,7 +104,7 @@ const PostsList: FC<IPostsListProps> = ({ posts, handleEdit }) => {
               </CardContent>
               <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
                 <IconButton
-                  disabled={!user || user?.toLowerCase() !== post.data.author.toLowerCase()}
+                  disabled={!user || user?.toLowerCase() === post.data.author.toLowerCase()}
                   onClick={() => handleEdit(post)}
                 >
                   <EditIcon />
