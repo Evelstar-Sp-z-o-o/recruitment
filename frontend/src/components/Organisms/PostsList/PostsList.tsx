@@ -96,7 +96,7 @@ const PostsList: FC<IPostsListProps> = ({ posts, handleEdit }) => {
                 }
                 title={post.data.author}
                 subheader={`${formatDate(post.data.created)}${
-                  post.data.created !== post.data.edited ? ' (edited)' : null
+                  post.data.created !== post.data.edited ? ' (edited)' : ''
                 }`}
               />
               <CardContent>
