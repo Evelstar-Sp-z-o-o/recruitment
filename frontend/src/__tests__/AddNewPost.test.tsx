@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { vi } from 'vitest';
-
 import AddNewPost from '@/src/components/Atoms/AddNewPost/AddNewPost';
 import { renderWithProviders } from '@/src/utils/providers/renderWithProviders';
 import { blue, grey } from '@mui/material/colors';

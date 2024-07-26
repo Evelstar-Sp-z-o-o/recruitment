@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { describe, it, expect, vi } from 'vitest';
-
 import AlertDialog from '@/src/components/Atoms/AlertDialog/AlertDialog';
 import { renderWithProviders } from '@/src/utils/providers/renderWithProviders';
 import '@testing-library/jest-dom';

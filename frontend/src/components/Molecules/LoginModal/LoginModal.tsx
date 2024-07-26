@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
-import CloseModal from '@/src/components/Atoms/ClaseModal/CloseModal';
+import CloseModal from '@/src/components/Atoms/CloseModal/CloseModal';
 import { setUser } from '@/src/store';
 import { Button, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
