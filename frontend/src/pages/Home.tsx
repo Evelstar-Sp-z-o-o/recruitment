@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 import HomePostBox from '../components/posts/HomePostBox';
 import { Post } from '../types';
 
-const style = {
+const styles = {
   base: {
     width: '50%',
     display: 'flex',
@@ -21,6 +21,14 @@ const style = {
   },
   inactive: {
     backgroundColor: 'lightgray',
+  },
+  postBox: {
+    borderBottom: '1px solid lightgray',
+    paddingX: 2,
+    paddingY: 4,
+    '@media (min-width: 768px)': {
+      p: 4,
+    },
   },
 };
 
@@ -76,14 +84,14 @@ const Home = () => {
     >
       <Box sx={{ height: 50, width: '100%', display: 'flex' }}>
         <Box
-          sx={{ ...style.base, ...(sortOption === 'latest' ? style.active : style.inactive) }}
+          sx={{ ...styles.base, ...(sortOption === 'latest' ? styles.active : styles.inactive) }}
           onClick={() => setSortOption('latest')}
           data-testid="latest-box"
         >
           Latest
         </Box>
         <Box
-          sx={{ ...style.base, ...(sortOption === 'popular' ? style.active : style.inactive) }}
+          sx={{ ...styles.base, ...(sortOption === 'popular' ? styles.active : styles.inactive) }}
           onClick={() => setSortOption('popular')}
           data-testid="popular-box"
         >
@@ -97,17 +105,7 @@ const Home = () => {
       ) : (
         <>
           {posts.map((post) => (
-            <Box
-              key={post.id}
-              sx={{
-                borderBottom: '1px solid lightgray',
-                paddingX: 2,
-                paddingY: 4,
-                '@media (min-width: 768px)': {
-                  p: 4,
-                },
-              }}
-            >
+            <Box key={post.id} sx={styles.postBox}>
               <HomePostBox post={post} />
             </Box>
           ))}

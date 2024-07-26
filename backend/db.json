@@ -2,41 +2,6 @@
   "posts": [
     {
       "data": {
-        "content": "Start your day with a positive mindset and see how everything changes. Believe in yourself, work hard, and stay focused. Every challenge is an opportunity in disguise. Embrace the journey, and success will follow. Keep pushing forward and never give up!",
-        "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130562/samples/food/fish-vegetables.jpg",
-        "createdAt": 1705307025000,
-        "updatedAt": 1721844626715,
-        "username": "haniakim",
-        "numberOfLikes": 22,
-        "likes": [
-          "JOh3hV",
-          "lFitdZ",
-          "TY6hpQ",
-          "eA6N8o",
-          "5lsyvS",
-          "sACc8j",
-          "4NaAxA",
-          "Uu7mNJ",
-          "w7EB1F",
-          "vaqBUH",
-          "FTOhjt",
-          "RHrwui",
-          "0TAa1G",
-          "Hvo6RR",
-          "Cd8wi0",
-          "yBBkFS",
-          "WRcuER",
-          "TSZg1m",
-          "rQbrJh",
-          "apD1bA",
-          "hUsnzJ",
-          "wVhcOe"
-        ]
-      },
-      "id": 1
-    },
-    {
-      "data": {
         "content": "Exploring new places is a journey of self-discovery. From the tranquil beaches of Bali to the vibrant streets of Tokyo, every destination offers a unique experience. Remember to travel light, capture moments, and leave only footprints. Adventure awaits!",
         "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130585/samples/breakfast.jpg",
         "createdAt": 1718439825000,
@@ -314,33 +279,6 @@
     },
     {
       "data": {
-        "content": "Strong relationships are built on trust, communication, and mutual respect. Make time for the people who matter most, show appreciation, and work through challenges together. Cherish the moments and create lasting memories with loved ones.",
-        "imageUrl": null,
-        "createdAt": 1721291025000,
-        "updatedAt": 1721844701227,
-        "username": "user2",
-        "numberOfLikes": 13,
-        "likes": [
-          "6iBWzB",
-          "gZtIUV",
-          "GaAnhE",
-          "mVDmHk",
-          "bpNTb3",
-          "hIPsXH",
-          "wEIj4Y",
-          "dCWqcm",
-          "zFleOc",
-          "CLwm6p",
-          "kShkWR",
-          "SkYcVs",
-          "haniakim"
-        ],
-        "id": 13
-      },
-      "id": 13
-    },
-    {
-      "data": {
         "content": "Self-care is not selfish; it's essential. Take time for yourself, whether it's through a relaxing bath, a good book, or a walk in nature. Prioritize activities that recharge your energy and bring you joy. Remember, you can't pour from an empty cup.",
         "imageUrl": null,
         "createdAt": 1712305425000,
@@ -423,7 +361,7 @@
         "content": "Creating a cozy and stylish home starts with thoughtful decor choices. Personalize your space with colors, textures, and accessories that reflect your taste. A well-decorated home is a place where you can truly relax and feel at ease.",
         "imageUrl": null,
         "createdAt": 1721463825000,
-        "updatedAt": 1721844727439,
+        "updatedAt": 1721995144947,
         "username": "user3",
         "numberOfLikes": 27,
         "likes": [
@@ -454,8 +392,7 @@
           "Yl1MX7",
           "3QM1wS",
           "haniakim"
-        ],
-        "id": 16
+        ]
       },
       "id": 16
     },

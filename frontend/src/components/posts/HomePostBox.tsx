@@ -68,7 +68,7 @@ const HomePostBox: React.FC<PostBoxProps> = ({ post }) => {
             {getFormattedDate(createdAt)}
           </Typography>
           <Box sx={styles.likeContainer}>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" data-testid="numOfLikes">
               {`${likeCount} ${likeCount <= 1 ? 'Like' : 'Likes'}`}
             </Typography>
             <IconButton sx={styles.likeIcon} onClick={handleLike}>

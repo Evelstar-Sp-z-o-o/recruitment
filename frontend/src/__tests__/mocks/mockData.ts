@@ -36,3 +36,9 @@ export const mockData = [
     id: 3,
   },
 ];
+
+// Sample list of posts
+export const mockPosts = mockData.map((post) => ({ ...post.data, id: post.id }));
+
+// Single post
+export const mockPost = mockPosts[0];
