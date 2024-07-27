@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Container, Typography } from '@mui/material';
 
 import { AppDispatch, RootState } from '../store/postStore';
-import { fetchPosts } from '../store/postsSlice';
+import { fetchPosts } from '../store/slices/postsSlice';
 
 import PostItem from '../components/PostItem/PostItem';
 

@@ -5,8 +5,8 @@ import {
   createPost,
   updatePost as updatePostService,
   deletePost as deletePostService,
-} from '../services/postService';
-import { Post } from '../types/types';
+} from '../../services/postService';
+import { Post } from '../../types/types';
 
 interface PostsState {
   posts: Post[];

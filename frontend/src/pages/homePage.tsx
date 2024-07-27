@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container, Typography } from '@mui/material';
 
 import { AppDispatch, RootState } from '../store/postStore';
-import { fetchPosts } from '../store/postsSlice';
+import { fetchPosts } from '../store/slices/postsSlice';
 
 import PostForm from '../components/PostForm';
 import PostItem from '../components/PostItem/PostItem';

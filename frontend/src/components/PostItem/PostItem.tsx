@@ -6,7 +6,7 @@ import { formatDistanceToNow } from 'date-fns';
 
 import PostForm from '@/src/components/PostForm';
 import { AppDispatch } from '@/src/store/postStore';
-import { deletePost } from '@/src/store/postsSlice';
+import { deletePost } from '@/src/store/slices/postsSlice';
 import { Post } from '@/src/types/types';
 import CloseIcon from '@mui/icons-material/Close';
 import { Typography, Avatar, styled, Container, Box, Dialog, IconButton } from '@mui/material';
@@ -81,7 +81,7 @@ const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setEditMode(false); // Reset editMode when modal closes
+    setEditMode(false);
   };
 
   return (
@@ -96,7 +96,7 @@ const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
             </Typography>
           ) : null}
         </Box>
-        <Typography variant="body1" sx={{ marginBottom: '16px' }}>
+        <Typography variant="body1" sx={{ marginBottom: '16px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {post.data.body}
         </Typography>
         {reducedView ? null : <PostItemAdditionalInfo post={post} />}
