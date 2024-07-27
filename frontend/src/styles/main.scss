@@ -1,3 +1,10 @@
+// Variable
+@import './variables';
+
+// Elements
+@import './sidebar.scss';
+@import './postForm';
+
 .center {
   display: flex;
   align-items: center;
@@ -11,4 +18,22 @@
 
 body {
   margin: 0;
+  font-family: $main-font;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  border-left: 1px solid lightgray;
+}
+
+@media (min-width: $md-size) {
+  .main {
+    flex-direction: row;
+  }
 }

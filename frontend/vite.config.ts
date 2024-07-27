@@ -9,6 +9,8 @@ export default defineConfig(() => {
     test: {
       globals: true,
       environment: 'jsdom',
+      setupFiles: ['./test-setup.js'],
+      css: true,
     },
     build: {
       commonjsOptions: {
@@ -17,6 +19,14 @@ export default defineConfig(() => {
     },
     resolve: {
       alias: [{ find: '@', replacement: path.resolve(__dirname, '.') }],
+    },
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3000',
+          secure: false,
+        },
+      },
     },
   };
 });
