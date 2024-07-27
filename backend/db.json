@@ -2,7 +2,7 @@
   "posts": [
     {
       "data": {
-        "content": "poooioPersonal growth is a lifelong journey. Set goals, face your fears, and step out of your comfort zone. Every challenge you overcome makes you stronger and wiser. Celebrate your progress, no matter how small, and keep striving for greatness. You've got this!",
+        "content": "Personal growth is a lifelong journey. Set goals, face your fears, and step out of your comfort zone. Every challenge you overcome makes you stronger and wiser. Celebrate your progress, no matter how small, and keep striving for greatness. You've got this!",
         "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130564/samples/landscapes/girl-urban-view.jpg",
         "username": "haniakim",
         "createdAt": 1719908625000,
@@ -132,7 +132,7 @@
         "imageUrl": null,
         "username": "user3",
         "createdAt": 1721463825000,
-        "numberOfLikes": 27,
+        "numberOfLikes": 26,
         "likes": [
           "Tdf4uK",
           "1EoQzX",
@@ -159,8 +159,7 @@
           "Wn2uAQ",
           "IjXHhK",
           "Yl1MX7",
-          "3QM1wS",
-          "haniakim"
+          "3QM1wS"
         ]
       },
       "id": 16
@@ -398,18 +397,6 @@
         ]
       },
       "id": 24
-    },
-    {
-      "data": {
-        "content": "ㅇ",
-        "imageUrl": null,
-        "createdAt": 1722099898323,
-        "updatedAt": 1722099898323,
-        "username": "haniakim",
-        "numberOfLikes": 0,
-        "likes": []
-      },
-      "id": 25
     }
   ]
 }

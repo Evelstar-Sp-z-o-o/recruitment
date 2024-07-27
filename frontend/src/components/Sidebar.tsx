@@ -57,15 +57,20 @@ const Sidebar = () => {
             </MenuItem>
           </Link>
         </Menu>
+
         <div className="logo-sm-box">
-          <img src={logoSmall} alt="logo" className="logo-sm-image" />
+          <Link to="/">
+            <img src={logoSmall} alt="logo" className="logo-sm-image" />
+          </Link>
           <span className="page-name">{pathname === '/' ? 'Home' : 'My Posts'}</span>
         </div>
       </div>
       {/* Sidebar over 768px */}
       <List className="sidebar-list">
         <div className="logo-box">
-          <img src={logo} alt="logo" className="logo-image" />
+          <Link to="/">
+            <img src={logo} alt="logo" className="logo-image" />
+          </Link>
         </div>
         <ListItemButton
           aria-label="menu"
