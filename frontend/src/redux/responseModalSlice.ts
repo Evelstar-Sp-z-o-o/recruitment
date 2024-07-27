@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { isOpen: false, content: '' };
+const initialState = { isOpen: false, content: '', deleteAction: false };
 
 const responseModalSlice = createSlice({
   name: 'responseModal',
@@ -12,10 +12,18 @@ const responseModalSlice = createSlice({
     },
     closeModal: (state) => {
       state.isOpen = false;
+      state.deleteAction = false;
+      state.content = '';
+    },
+    onDeleteAction: (state) => {
+      state.deleteAction = true;
+    },
+    resetDeleteAction: (state) => {
+      state.deleteAction = false;
     },
   },
 });
 
-export const { openModal, closeModal } = responseModalSlice.actions;
+export const { openModal, closeModal, onDeleteAction, resetDeleteAction } = responseModalSlice.actions;
 
 export default responseModalSlice.reducer;

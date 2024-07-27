@@ -1,16 +1,15 @@
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/src/redux/store';
-import { Button, Dialog, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
+import { Button, Dialog, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 
 interface PostResponseModalProps {
   onClose: () => void;
-  deleteAction?: boolean;
   onDelete?: () => void;
 }
 
-const PostResponseModal: React.FC<PostResponseModalProps> = ({ onClose, deleteAction, onDelete }) => {
-  const { isOpen, content } = useSelector((state: RootState) => state.responseModal);
+const PostResponseModal: React.FC<PostResponseModalProps> = ({ onClose, onDelete }) => {
+  const { isOpen, content, deleteAction } = useSelector((state: RootState) => state.responseModal);
 
   if (!isOpen) return null;
 

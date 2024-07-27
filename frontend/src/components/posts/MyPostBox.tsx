@@ -1,12 +1,8 @@
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { closeModal, openModal } from '@/src/redux/responseModalSlice';
 import { Post } from '@/src/types';
 import { getFormattedDate } from '@/src/utils';
 import { Box, Button, Card, CardMedia, Typography } from '@mui/material';
-
-import PostResponseModal from '../modals/PostResponseModal';
 
 interface PostBoxProps {
   post: Post;
@@ -17,31 +13,6 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post, onDelete }) => {
   const { content, imageUrl, id, createdAt, numberOfLikes } = post;
 
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
-  // Remove a selected post from database
-  const handleDelete = async () => {
-    try {
-      const response = await fetch(`/api/posts/${id}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) {
-        dispatch(openModal('Failed to delete the post'));
-        return;
-      }
-
-      onDelete(id);
-      dispatch(openModal('Successfully deleted a post!'));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleClose = () => {
-    dispatch(closeModal());
-    navigate('/posts');
-  };
 
   return (
     <>
@@ -67,13 +38,12 @@ const MyPostBox: React.FC<PostBoxProps> = ({ post, onDelete }) => {
             <Button size="small" variant="contained" sx={styles.button} onClick={() => navigate(`/posts/update/${id}`)}>
               Edit
             </Button>
-            <Button size="small" variant="outlined" sx={styles.button} onClick={handleDelete}>
+            <Button size="small" variant="outlined" sx={styles.button} onClick={() => onDelete(id)}>
               Delete
             </Button>
           </Box>
         </Box>
       </Box>
-      <PostResponseModal onClose={handleClose} />
     </>
   );
 };
