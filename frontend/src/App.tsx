@@ -1,16 +1,14 @@
 import { FC } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-import { Box, Paper, Typography } from '@mui/material';
-
+import AppRoutes from './AppRoutes';
 import './styles/main.scss';
 
 const App: FC = () => {
   return (
-    <Box className="center">
-      <Paper sx={{ padding: 4 }}>
-        <Typography variant="h6">Hello, please start here. 🙂</Typography>
-      </Paper>
-    </Box>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 };
 

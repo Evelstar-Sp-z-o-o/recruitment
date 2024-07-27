@@ -1,0 +1,135 @@
+import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+import logoSmall from '/assets/logo-sm.svg';
+import logo from '/assets/logo.svg';
+
+import { Home as HomeIcon, Note as NoteIcon, Menu as MenuIcon } from '@mui/icons-material';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import { IconButton, List, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+
+const Sidebar = () => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const location = useLocation();
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const menuOpen = Boolean(anchorEl);
+
+  return (
+    <>
+      {/* Dropdown under 768px */}
+      <div className="sidebar-menu">
+        <IconButton edge="start" color="inherit" onClick={handleMenuClick} aria-label="menu">
+          <MenuIcon sx={{ fontSize: 30 }} />
+        </IconButton>
+        <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleMenuClose}>
+          <MenuItem selected={pathname === '/'} onClick={() => navigate('/')}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </MenuItem>
+          <MenuItem selected={pathname === '/posts'} onClick={() => navigate('/posts')}>
+            <ListItemIcon>
+              <NoteIcon />
+            </ListItemIcon>
+            <ListItemText primary="My Posts" />
+          </MenuItem>
+          <Link
+            to="/create"
+            state={{ background: location }}
+            style={{ textDecoration: 'none', color: 'rgba(0, 0, 0, 0.87)' }}
+          >
+            <MenuItem>
+              <ListItemIcon>
+                <PostAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Create a post" />
+            </MenuItem>
+          </Link>
+        </Menu>
+
+        <div className="logo-sm-box">
+          <Link to="/">
+            <img src={logoSmall} alt="logo" className="logo-sm-image" />
+          </Link>
+          <span className="page-name">{pathname === '/' ? 'Home' : 'My Posts'}</span>
+        </div>
+      </div>
+      {/* Sidebar over 768px */}
+      <List className="sidebar-list">
+        <div className="logo-box">
+          <Link to="/">
+            <img src={logo} alt="logo" className="logo-image" />
+          </Link>
+        </div>
+        <ListItemButton
+          aria-label="menu"
+          selected={pathname === '/'}
+          onClick={() => navigate('/')}
+          sx={{
+            backgroundColor: pathname === '/' ? 'grey.300' : 'transparent',
+            ...styles.listItemButton,
+          }}
+        >
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItemButton>
+        <ListItemButton
+          selected={pathname === '/posts'}
+          onClick={() => navigate('/posts')}
+          sx={{
+            backgroundColor: pathname === '/posts' ? 'grey.300' : 'transparent',
+            ...styles.listItemButton,
+          }}
+        >
+          <ListItemIcon>
+            <NoteIcon />
+          </ListItemIcon>
+          <ListItemText primary="My Posts" />
+        </ListItemButton>
+        <Link to="/create" state={{ background: location }} style={{ textDecoration: 'none' }}>
+          <ListItemButton sx={styles.creationButton}>
+            <ListItemIcon>
+              <PostAddIcon sx={{ color: 'white' }} />
+            </ListItemIcon>
+            <ListItemText primary="Create a post" />
+          </ListItemButton>
+        </Link>
+      </List>
+    </>
+  );
+};
+
+export default Sidebar;
+
+const styles = {
+  listItemButton: {
+    '&.Mui-selected': {
+      backgroundColor: 'grey.300',
+    },
+    width: 250,
+  },
+  creationButton: {
+    backgroundColor: '#028391',
+    borderRadius: '25px',
+    color: 'white',
+    mt: 4,
+    mx: 'auto',
+    width: 230,
+    '&:hover': {
+      backgroundColor: 'rgba(2, 131, 145, 0.7)',
+    },
+  },
+};
