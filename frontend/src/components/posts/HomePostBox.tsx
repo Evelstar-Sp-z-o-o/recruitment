@@ -59,7 +59,10 @@ const HomePostBox: React.FC<PostBoxProps> = ({ post, onUpdate }) => {
               {`${likeCount} ${likeCount <= 1 ? 'Like' : 'Likes'}`}
             </Typography>
             <IconButton sx={styles.likeIcon} onClick={handleLike}>
-              <ThumbUpIcon sx={{ color: `${likeUsers?.includes(currentUser) ? 'dodgerBlue' : 'gray'}` }} />
+              <ThumbUpIcon
+                sx={{ color: `${likeUsers?.includes(currentUser) ? 'dodgerBlue' : 'gray'}` }}
+                data-testid="thumbUpIcon"
+              />
             </IconButton>
           </Box>
         </Box>

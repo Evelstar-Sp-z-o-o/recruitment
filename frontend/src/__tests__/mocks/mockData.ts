@@ -19,7 +19,7 @@ export const mockData = [
       updatedAt: 1721844589365,
       username: 'user1',
       numberOfLikes: 2,
-      likes: ['NsDahn', 'pJswtA'],
+      likes: ['NsDahn', 'haniakim'],
     },
     id: 2,
   },
@@ -42,3 +42,6 @@ export const mockPosts = mockData.map((post) => ({ ...post.data, id: post.id.toS
 
 // Single post
 export const mockPost = mockPosts[0];
+
+// Single post where user exists on likes
+export const mockPostLiked = mockPosts[1];

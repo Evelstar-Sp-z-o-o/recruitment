@@ -8,13 +8,6 @@ import userEvent from '@testing-library/user-event';
 import { mockPosts } from '../mocks/mockData';
 
 describe('Home page functionality', () => {
-  test.skip('renders loading state initially', () => {
-    const { container } = render(<Home posts={[]} editPost={vi.fn()} />);
-    const loader = container.querySelector('.MuiCircularProgress-svg');
-
-    // Check if loader appears when page is mounting
-    expect(loader).toBeInTheDocument();
-  });
   test('renders posts when data is loaded', () => {
     render(<Home posts={mockPosts} editPost={vi.fn()} />);
 
@@ -23,6 +16,7 @@ describe('Home page functionality', () => {
     // Check if all posts are rendered
     expect(posts).toHaveLength(3);
   });
+
   test('changes sort option when clicked', async () => {
     render(<Home posts={mockPosts} editPost={vi.fn()} />);
 

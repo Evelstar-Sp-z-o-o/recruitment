@@ -53,7 +53,8 @@ describe('Post update flow', () => {
       expect(image).toBeInTheDocument();
     });
   });
-  test.skip('opens modal when invalid postId is provided', async () => {
+
+  test('opens modal when invalid postId is provided', async () => {
     // Mocking fetchPostById with null
     const mockFetchPostById = vi.fn().mockReturnValue(null);
 
