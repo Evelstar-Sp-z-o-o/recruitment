@@ -398,6 +398,18 @@
         ]
       },
       "id": 24
+    },
+    {
+      "data": {
+        "content": "ㅇ",
+        "imageUrl": null,
+        "createdAt": 1722099898323,
+        "updatedAt": 1722099898323,
+        "username": "haniakim",
+        "numberOfLikes": 0,
+        "likes": []
+      },
+      "id": 25
     }
   ]
 }
