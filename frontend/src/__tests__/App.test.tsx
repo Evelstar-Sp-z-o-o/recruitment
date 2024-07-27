@@ -13,6 +13,7 @@ const initialState = {
   responseModal: {
     isOpen: false,
     content: '',
+    deletionAction: false,
   },
 };
 

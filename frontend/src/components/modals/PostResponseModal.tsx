@@ -25,7 +25,7 @@ const PostResponseModal: React.FC<PostResponseModalProps> = ({ onClose, onDelete
       </DialogContent>
       <DialogActions>
         {deleteAction && (
-          <Button onClick={onDelete} color="primary">
+          <Button onClick={onDelete} color="primary" data-testid="modal-delete">
             Delete
           </Button>
         )}

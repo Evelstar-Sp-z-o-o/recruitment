@@ -322,18 +322,6 @@
     },
     {
       "data": {
-        "content": "post",
-        "imageUrl": null,
-        "createdAt": 1722106471604,
-        "updatedAt": 1722106471604,
-        "username": "haniakim",
-        "numberOfLikes": 0,
-        "likes": []
-      },
-      "id": 25
-    },
-    {
-      "data": {
         "content": "Taking care of your mental health is just as important as physical health. Practice mindfulness, take breaks when needed, and don't hesitate to seek support. Remember, it's okay to not be okay, and taking care of yourself is a sign of strength.",
         "imageUrl": "https://res.cloudinary.com/dwrj7jem6/image/upload/v1712130569/samples/ecommerce/leather-bag-gray.jpg",
         "createdAt": 1714551825000,

@@ -5,7 +5,6 @@ import type * as ReactRouterDom from 'react-router-dom';
 import { vi } from 'vitest';
 
 import MyPostBox from '@/src/components/posts/MyPostBox';
-import { openModal } from '@/src/redux/responseModalSlice';
 import { fireEvent, logRoles, render, screen, waitFor } from '@testing-library/react';
 
 import { store } from '../App.test';
@@ -61,57 +60,5 @@ describe('My post box flow', () => {
 
     // Check if update page is opened
     await waitFor(() => expect(mockedUserNavigate).toHaveBeenCalledWith(expect.stringMatching('/posts/update/1')));
-  });
-
-  test('dispatches openModal action with success message when delete is successful', async () => {
-    // Mocking fetch
-    global.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-    });
-
-    const mockOnDelete = vi.fn();
-
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MyPostBox post={mockPost} onDelete={mockOnDelete} />
-        </MemoryRouter>
-      </Provider>,
-    );
-
-    const deleteButton = screen.getByRole('button', { name: /delete/i });
-    // Click delete button
-    fireEvent.click(deleteButton);
-
-    // Check if success message is opened
-    await waitFor(() => {
-      expect(store.dispatch).toHaveBeenCalledWith(openModal('Successfully deleted a post!'));
-    });
-  });
-
-  test('dispatches openModal action with failure message when delete fails', async () => {
-    // Mocking fetch
-    global.fetch = vi.fn().mockResolvedValue({
-      ok: false,
-    });
-
-    const mockOnDelete = vi.fn();
-
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MyPostBox post={mockPost} onDelete={mockOnDelete} />
-        </MemoryRouter>
-      </Provider>,
-    );
-
-    const deleteButton = screen.getByRole('button', { name: /delete/i });
-    // Click delete button
-    fireEvent.click(deleteButton);
-
-    // Check if failure message is opened
-    await waitFor(() => {
-      expect(store.dispatch).toHaveBeenCalledWith(openModal('Failed to delete the post'));
-    });
   });
 });
