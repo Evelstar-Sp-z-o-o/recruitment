@@ -8,8 +8,8 @@ import MyPostBox from '@/src/components/posts/MyPostBox';
 import { openModal } from '@/src/redux/responseModalSlice';
 import { fireEvent, logRoles, render, screen, waitFor } from '@testing-library/react';
 
-import { store } from '../../App.test';
-import { mockPost } from '../../mocks/mockData';
+import { store } from '../App.test';
+import { mockPost } from '../mocks/mockData';
 
 // Mocking useNavigate
 const mockedUserNavigate = vi.fn();

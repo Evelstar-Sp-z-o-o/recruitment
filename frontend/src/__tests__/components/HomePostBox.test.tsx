@@ -3,8 +3,8 @@ import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import HomePostBox from '../../../components/posts/HomePostBox';
-import { mockPost } from '../../mocks/mockData';
+import HomePostBox from '../../components/posts/HomePostBox';
+import { mockPost } from '../mocks/mockData';
 
 test('updates color and number of likes when clicked', async () => {
   render(<HomePostBox post={mockPost} onUpdate={vi.fn()} />);
