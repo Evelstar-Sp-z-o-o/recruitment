@@ -38,7 +38,14 @@ export const createPost = async (content: string) => {
 };
 
 export const updatePost = async (post: Post) => {
-  const response = await axios.put(`${API_URL}/${post.id}`, post);
+  const editedPost: Post = {
+    id: post.id,
+    data: {
+      ...post.data,
+      edited: new Date().getTime(),
+    },
+  };
+  const response = await axios.put(`${API_URL}/${post.id}`, editedPost);
   return response.data;
 };
 

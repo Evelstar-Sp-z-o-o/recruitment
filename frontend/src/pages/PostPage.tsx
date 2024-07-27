@@ -2,12 +2,12 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 
 import { AppDispatch, RootState } from '../store/postStore';
 import { fetchPosts } from '../store/postsSlice';
 
-import PostItem from '../shared/components/PostItem';
+import PostItem from '../components/PostItem/PostItem';
 
 const PostPage: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -32,7 +32,11 @@ const PostPage: FC = () => {
     return <Typography variant="h6">Post not found</Typography>;
   }
 
-  return <PostItem post={post} />;
+  return (
+    <Container>
+      <PostItem post={post} />
+    </Container>
+  );
 };
 
 export default PostPage;

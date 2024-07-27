@@ -7,7 +7,7 @@ import { AppDispatch, RootState } from '../store/postStore';
 import { fetchPosts } from '../store/postsSlice';
 
 import PostForm from '../components/PostForm';
-import PostItem from '../shared/components/PostItem';
+import PostItem from '../components/PostItem/PostItem';
 
 const HomePage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,16 +25,14 @@ const HomePage: FC = () => {
   }
 
   return (
-    <>
-      <Container>
-        <PostForm />
-        {posts.length > 0 ? (
-          posts.map((post) => <PostItem key={post.id} post={post} reducedView={true} />)
-        ) : (
-          <Typography variant="h6">No posts available</Typography>
-        )}
-      </Container>
-    </>
+    <Container>
+      <PostForm />
+      {posts.length > 0 ? (
+        posts.map((post) => <PostItem key={post.id} post={post} reducedView={true} />)
+      ) : (
+        <Typography variant="h6">No posts available</Typography>
+      )}
+    </Container>
   );
 };
 
