@@ -41,8 +41,6 @@ const Posts: FunctionComponent = () => {
     return <Typography variant="h5">There are no posts.</Typography>;
   }
 
-  console.log('posts');
-  console.log(posts);
   return (
     <InfiniteScroll
       dataLength={posts?.length ?? 0}
