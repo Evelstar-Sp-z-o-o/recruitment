@@ -80,8 +80,9 @@ const Navbar: FC = () => {
   useEffect(() => {
     if (!nickname) {
       handleOpen();
+    } else {
+      handleClose();
     }
-    console.dir(nickname);
   }, [nickname]);
 
   return (

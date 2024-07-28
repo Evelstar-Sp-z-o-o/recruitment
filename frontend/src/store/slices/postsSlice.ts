@@ -7,6 +7,7 @@ import {
   deletePost as deletePostService,
 } from '../../services/postService';
 import { Post } from '../../types/types';
+import { RootState } from '../postStore';
 
 interface PostsState {
   posts: Post[];
@@ -29,15 +30,16 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (_, { rejec
   }
 });
 
-export const addPost = createAsyncThunk('posts/addPost', async (content: string, { rejectWithValue }) => {
+export const addPost = createAsyncThunk('posts/addPost', async (content: string, { getState, rejectWithValue }) => {
   try {
-    const newPost = await createPost(content);
+    const state = getState() as RootState;
+    const author = state.user.nickname;
+    const newPost = await createPost(content, author);
     return newPost as Post;
   } catch (error) {
     return rejectWithValue(error.response?.data?.message || 'Failed to add post');
   }
 });
-
 export const updatePost = createAsyncThunk('posts/updatePost', async (post: Post, { rejectWithValue }) => {
   try {
     const updatedPost = await updatePostService(post);

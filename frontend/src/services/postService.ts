@@ -24,11 +24,11 @@ export const getPostById = async (id: string) => {
   return response.data;
 };
 
-export const createPost = async (content: string) => {
+export const createPost = async (content: string, author: string) => {
   const timestamp = new Date().getTime();
   const post: PostData = {
     body: content,
-    author: 'abc@gmail.com',
+    author: author,
     created: timestamp,
     edited: timestamp,
     postId: getRandomId(),

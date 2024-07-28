@@ -7,9 +7,10 @@ import { formatDistanceToNow } from 'date-fns';
 import PostForm from '@/src/components/PostForm';
 import { AppDispatch } from '@/src/store/postStore';
 import { deletePost } from '@/src/store/slices/postsSlice';
+import { DialogHeader, StyledDialog, StyledDialogContent } from '@/src/styles/styledComponents';
 import { Post } from '@/src/types/types';
 import CloseIcon from '@mui/icons-material/Close';
-import { Typography, Avatar, styled, Container, Box, Dialog, IconButton } from '@mui/material';
+import { Typography, Avatar, styled, Container, Box, Dialog, IconButton, DialogActions, Button } from '@mui/material';
 
 import PostItemAdditionalInfo from './PostItemAdditionalInfo';
 import PostItemMenu from './PostItemMenu';
@@ -42,11 +43,6 @@ const MenuWrapper = styled('div')({
   right: '8px',
 });
 
-const ModalContent = styled(Box)({
-  padding: '16px',
-  position: 'relative',
-});
-
 interface PostItemProps {
   post: Post;
   reducedView?: boolean;
@@ -56,7 +52,8 @@ const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [editMode, setEditMode] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const stopPropagation = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -75,13 +72,26 @@ const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
     }
   };
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const handleOpenEditModal = () => {
+    setOpenEditModal(true);
   };
 
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false);
     setEditMode(false);
+  };
+
+  const handleOpenDeleteModal = () => {
+    setOpenDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const confirmDelete = () => {
+    handleDelete();
+    handleCloseDeleteModal();
   };
 
   return (
@@ -101,19 +111,41 @@ const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
         </Typography>
         {reducedView ? null : <PostItemAdditionalInfo post={post} />}
         <MenuWrapper onClick={stopPropagation}>
-          <PostItemMenu handleDelete={handleDelete} handleEdit={handleOpenModal} />
+          <PostItemMenu handleDeleteClick={handleOpenDeleteModal} handleEditClick={handleOpenEditModal} />
         </MenuWrapper>
       </PostWrapper>
 
-      <Dialog open={openModal} onClose={handleCloseModal} maxWidth="md" fullWidth>
-        <ModalContent>
-          <IconButton onClick={handleCloseModal} sx={{ position: 'absolute', top: 8, right: 8 }}>
+      <StyledDialog open={openEditModal} onClose={handleCloseEditModal} maxWidth="md" fullWidth>
+        <StyledDialogContent>
+          <IconButton aria-label="close" onClick={handleCloseEditModal} sx={{ position: 'absolute', top: 8, right: 8 }}>
             <CloseIcon />
           </IconButton>
-          <Typography variant="h6">Edit your post</Typography>
-          <PostForm selectedPost={post} onClose={handleCloseModal} />
-        </ModalContent>
-      </Dialog>
+          <DialogHeader>Edit your post</DialogHeader>
+          <PostForm selectedPost={post} onClose={handleCloseEditModal} />
+        </StyledDialogContent>
+      </StyledDialog>
+
+      <StyledDialog open={openDeleteModal} onClose={handleCloseDeleteModal}>
+        <StyledDialogContent>
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseDeleteModal}
+            sx={{ position: 'absolute', top: 8, right: 8 }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogHeader>Confirm deletion</DialogHeader>
+          <Typography variant="body1" sx={{ margin: '10px 0 8px 0' }}>
+            Are you sure you want to delete this post? This action cannot be undone.
+          </Typography>
+          <DialogActions>
+            <Button onClick={handleCloseDeleteModal}>Cancel</Button>
+            <Button onClick={confirmDelete} color="primary" variant="contained" autoFocus>
+              Delete
+            </Button>
+          </DialogActions>
+        </StyledDialogContent>
+      </StyledDialog>
     </>
   );
 };

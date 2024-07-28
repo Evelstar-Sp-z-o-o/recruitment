@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 
 import { AppDispatch } from '@/src/store/postStore';
 import { setNickname } from '@/src/store/slices/userSlice';
-import { Box, Button, Modal, TextField, Typography } from '@mui/material';
+import { DialogHeader, StyledDialog, StyledDialogContent } from '@/src/styles/styledComponents';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Button, Dialog, IconButton, TextField, Typography } from '@mui/material';
 
 const MIN_LENGTH = 1;
 const MAX_LENGTH = 40;
@@ -22,7 +24,6 @@ const NicknameModal: FC<NicknameModalProps> = ({ nickname, isOpen, closeModal })
   const handleSave = () => {
     if (newNickname.length >= MIN_LENGTH && newNickname.length <= MAX_LENGTH) {
       dispatch(setNickname(newNickname));
-      closeModal();
     } else {
       setError(`Nickname must be between ${MIN_LENGTH} and ${MAX_LENGTH} characters.`);
     }
@@ -38,24 +39,14 @@ const NicknameModal: FC<NicknameModalProps> = ({ nickname, isOpen, closeModal })
     }
   };
   return (
-    <Modal open={isOpen} onClose={closeModal}>
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: 400,
-          bgcolor: 'background.paper',
-          border: '2px solid #000',
-          boxShadow: 24,
-          p: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-        }}
-      >
-        <Typography variant="h6">{nickname ? 'Change Nickname' : 'Set your eveltter nickname!'}</Typography>
+    <StyledDialog open={isOpen} onClose={closeModal} maxWidth="md" fullWidth>
+      <StyledDialogContent>
+        {nickname ? (
+          <IconButton onClick={closeModal} sx={{ position: 'absolute', top: 8, right: 8 }}>
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+        <DialogHeader>{nickname ? 'Change Nickname' : 'Set your eveltter nickname!'}</DialogHeader>
         <TextField
           label="Set your nickname"
           variant="outlined"
@@ -65,16 +56,16 @@ const NicknameModal: FC<NicknameModalProps> = ({ nickname, isOpen, closeModal })
           error={!!error}
           helperText={error}
         />
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
-          <Button variant="contained" color="primary" onClick={handleSave} disabled={!!error || !newNickname}>
-            Save
-          </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, marginTop: '10px' }}>
           <Button variant="outlined" onClick={closeModal} disabled={!nickname}>
             Cancel
           </Button>
+          <Button variant="contained" color="primary" onClick={handleSave} disabled={!!error || !newNickname}>
+            Save
+          </Button>
         </Box>
-      </Box>
-    </Modal>
+      </StyledDialogContent>
+    </StyledDialog>
   );
 };
 

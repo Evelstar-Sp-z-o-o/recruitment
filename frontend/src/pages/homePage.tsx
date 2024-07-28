@@ -8,6 +8,7 @@ import { fetchPosts } from '../store/slices/postsSlice';
 
 import PostForm from '../components/PostForm';
 import PostItem from '../components/PostItem/PostItem';
+import { ErrorText } from './PostPage';
 
 const HomePage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,7 +22,7 @@ const HomePage: FC = () => {
   }, [dispatch, status]);
 
   if (status === 'failed') {
-    return <Typography variant="h6">Error: {error}</Typography>;
+    return <ErrorText variant="h6">Error: {error}</ErrorText>;
   }
 
   return (
@@ -30,7 +31,7 @@ const HomePage: FC = () => {
       {posts.length > 0 ? (
         posts.map((post) => <PostItem key={post.id} post={post} reducedView={true} />)
       ) : (
-        <Typography variant="h6">No posts available</Typography>
+        <ErrorText variant="h6">No posts available</ErrorText>
       )}
     </Container>
   );
