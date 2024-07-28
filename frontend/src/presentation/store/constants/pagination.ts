@@ -1,0 +1,4 @@
+const ITEMS_PER_PAGE = 20;
+const INITIAL_PAGE = 1;
+
+export { ITEMS_PER_PAGE, INITIAL_PAGE };
