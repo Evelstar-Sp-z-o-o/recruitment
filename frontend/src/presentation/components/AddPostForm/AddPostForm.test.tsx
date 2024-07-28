@@ -15,7 +15,7 @@ const setup = () => {
 };
 describe('AddPostForm', () => {
   const setInput = async (inputValue: string) => {
-    const input = screen.getByTestId('post');
+    const input = screen.getByTestId('inputController');
     fireEvent.change(input, { target: { value: inputValue } });
   };
 

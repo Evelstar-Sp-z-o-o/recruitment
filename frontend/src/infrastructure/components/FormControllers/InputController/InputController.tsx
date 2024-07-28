@@ -56,7 +56,7 @@ const InputController: FunctionComponent<Props> = ({
               type={type}
               placeholder={placeholder}
               sx={style}
-              inputProps={{ 'data-testid': fieldName }}
+              inputProps={{ 'data-testid': 'inputController' }}
             />
           )}
         />

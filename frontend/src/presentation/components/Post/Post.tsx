@@ -28,7 +28,7 @@ const Post: FunctionComponent<Props> = ({ post }) => {
         subheader={formatTimestampToDate(created)}
       />
       <CardContent sx={{ display: 'flex', gap: 2, flexDirection: 'column' }}>
-        <Typography variant="body2" sx={{ marginLeft: 2 }}>
+        <Typography variant="body2" sx={{ marginLeft: 2 }} data-testid="bodyPost">
           {body}
         </Typography>
         {edited ? (
