@@ -14,13 +14,13 @@
     "downlevelIteration": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client"],
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
     "paths": {
       "@/*": ["./*"],
       "react": ["./node_modules/@types/react"],
       "js-cookie": ["./node_modules/@types/js-cookie"]
     }
   },
-  "include": ["src", "test", "__mocks__", "src/components/modal/documents/.tsx", "utils"],
+  "include": ["src", "test", "__mocks__", "src/pages/modal/documents/.tsx", "utils"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

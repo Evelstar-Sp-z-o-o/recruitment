@@ -1,14 +1,44 @@
 {
   "posts": [
     {
+      "id": 1,
       "data": {
-        "body": "This is example post",
-        "author": "john.doe@gmail.com",
-        "created": 1528871013,
-        "edited": 1528871013,
-        "postId": "8q7wm5"
-      },
-      "id": 1
+        "body": "This is the first post for testing. It has a short length.",
+        "author": "author1@gmail.com",
+        "created": 1722100832031,
+        "edited": 1722153372886,
+        "postId": "post1"
+      }
+    },
+    {
+      "id": 2,
+      "data": {
+        "body": "Here's another post to check the layout. This one is a bit longer than the first post to test how the layout adjusts to different lengths of content.",
+        "author": "author2@gmail.com",
+        "created": 1722100832032,
+        "edited": 1722153372887,
+        "postId": "post2"
+      }
+    },
+    {
+      "id": 3,
+      "data": {
+        "body": "This is yet another test post. It is significantly longer than the previous ones, providing a good test for the layout handling of lengthy content. The post includes several sentences, aiming to mimic a real-world scenario where users might post detailed information or stories. Ensuring that the layout remains consistent and visually appealing with such content is crucial.",
+        "author": "author3@gmail.com",
+        "created": 1722100832033,
+        "edited": 1722153372888,
+        "postId": "post3"
+      }
+    },
+    {
+      "id": 4,
+      "data": {
+        "body": "Testing with one more post for layout purposes. This one has a moderate length, longer than the shortest post but not as extensive as the longest one. It helps in checking how the layout behaves with content of varied lengths.",
+        "author": "author4@gmail.com",
+        "created": 1722100832034,
+        "edited": 1722153372889,
+        "postId": "post4"
+      }
     }
   ]
 }
