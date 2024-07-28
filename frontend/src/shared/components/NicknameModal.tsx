@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { AppDispatch } from '@/src/store/postStore';
 import { setNickname } from '@/src/store/slices/userSlice';
-import { DialogHeader, StyledDialog, StyledDialogContent } from '@/src/styles/styledComponents';
+import { DialogHeader, StyledButton, StyledDialog, StyledDialogContent } from '@/src/styles/styledComponents';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, Dialog, IconButton, TextField, Typography } from '@mui/material';
 
@@ -57,12 +57,12 @@ const NicknameModal: FC<NicknameModalProps> = ({ nickname, isOpen, closeModal })
           helperText={error}
         />
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, marginTop: '10px' }}>
-          <Button variant="outlined" onClick={closeModal} disabled={!nickname}>
+          <StyledButton onClick={closeModal} disabled={!nickname} className="cancel">
             Cancel
-          </Button>
-          <Button variant="contained" color="primary" onClick={handleSave} disabled={!!error || !newNickname}>
+          </StyledButton>
+          <StyledButton variant="contained" color="primary" onClick={handleSave} disabled={!!error || !newNickname}>
             Save
-          </Button>
+          </StyledButton>
         </Box>
       </StyledDialogContent>
     </StyledDialog>

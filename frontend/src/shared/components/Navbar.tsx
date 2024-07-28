@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { AppDispatch, RootState } from '@/src/store/postStore';
 import { setNickname } from '@/src/store/slices/userSlice';
+import { StyledAvatar } from '@/src/styles/styledComponents';
 import { AppBar, Avatar, Box, Button, Modal, styled, TextField, Toolbar, Tooltip, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 
@@ -24,13 +25,6 @@ const AccountInfo = styled(Box)(({ theme }) => ({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
-}));
-
-const NavbarAvatar = styled(Avatar)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  width: '30px',
-  height: '30px',
-  fontSize: 16,
 }));
 
 const StyledNav = styled(AppBar)(({ theme }) => ({
@@ -102,7 +96,7 @@ const Navbar: FC = () => {
                   anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                   variant="dot"
                 >
-                  <NavbarAvatar>{nickname[0].toUpperCase()}</NavbarAvatar>
+                  <StyledAvatar>{nickname[0].toUpperCase()}</StyledAvatar>
                 </StyledBadge>
                 <Typography variant="body2">{nickname}</Typography>
               </AccountInfo>

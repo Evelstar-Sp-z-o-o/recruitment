@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router-dom';
 
 import { formatDistanceToNow } from 'date-fns';
 
-import PostForm from '@/src/components/PostForm';
 import { AppDispatch } from '@/src/store/postStore';
 import { deletePost } from '@/src/store/slices/postsSlice';
-import { DialogHeader, StyledDialog, StyledDialogContent } from '@/src/styles/styledComponents';
+import { StyledAvatar } from '@/src/styles/styledComponents';
 import { Post } from '@/src/types/types';
-import CloseIcon from '@mui/icons-material/Close';
-import { Typography, Avatar, styled, Container, Box, Dialog, IconButton, DialogActions, Button } from '@mui/material';
+import { Typography, styled, Container, Box, useTheme, useMediaQuery } from '@mui/material';
 
 import PostItemAdditionalInfo from './PostItemAdditionalInfo';
 import PostItemMenu from './PostItemMenu';
+import DeleteDialog from './dialogs/DeleteDialog';
+import EditDialog from './dialogs/EditDialog';
 
 const PostWrapper = styled(Container, {
   shouldForwardProp: (prop) => prop !== 'reducedView',
@@ -54,6 +54,8 @@ const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
   const [editMode, setEditMode] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const theme = useTheme();
+  const isScreenWidthLessThan600px = useMediaQuery(theme.breakpoints.down('sm'));
 
   const stopPropagation = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -98,9 +100,11 @@ const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
     <>
       <PostWrapper onClick={handlePostClick} reducedView={reducedView}>
         <Box display="flex" alignItems="center" gap={1} marginBottom={2}>
-          <Avatar sx={{ bgcolor: '#364fc7', marginRight: '10px' }}>{post.data.author[0].toUpperCase()}</Avatar>
-          <Typography variant="body2">{post.data.author}</Typography>
-          {reducedView ? (
+          <StyledAvatar sx={{ marginRight: '10px' }}>{post.data.author[0].toUpperCase()}</StyledAvatar>
+          <Typography variant="body2" sx={{ maxWidth: '60vw', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {post.data.author}
+          </Typography>
+          {reducedView && !isScreenWidthLessThan600px ? (
             <Typography variant="body2" color="textSecondary">
               {formatDistanceToNow(new Date(post.data.created))}
             </Typography>
@@ -115,37 +119,8 @@ const PostItem: FC<PostItemProps> = ({ post, reducedView }) => {
         </MenuWrapper>
       </PostWrapper>
 
-      <StyledDialog open={openEditModal} onClose={handleCloseEditModal} maxWidth="md" fullWidth>
-        <StyledDialogContent>
-          <IconButton aria-label="close" onClick={handleCloseEditModal} sx={{ position: 'absolute', top: 8, right: 8 }}>
-            <CloseIcon />
-          </IconButton>
-          <DialogHeader>Edit your post</DialogHeader>
-          <PostForm selectedPost={post} onClose={handleCloseEditModal} />
-        </StyledDialogContent>
-      </StyledDialog>
-
-      <StyledDialog open={openDeleteModal} onClose={handleCloseDeleteModal}>
-        <StyledDialogContent>
-          <IconButton
-            aria-label="close"
-            onClick={handleCloseDeleteModal}
-            sx={{ position: 'absolute', top: 8, right: 8 }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <DialogHeader>Confirm deletion</DialogHeader>
-          <Typography variant="body1" sx={{ margin: '10px 0 8px 0' }}>
-            Are you sure you want to delete this post? This action cannot be undone.
-          </Typography>
-          <DialogActions>
-            <Button onClick={handleCloseDeleteModal}>Cancel</Button>
-            <Button onClick={confirmDelete} color="primary" variant="contained" autoFocus>
-              Delete
-            </Button>
-          </DialogActions>
-        </StyledDialogContent>
-      </StyledDialog>
+      <EditDialog open={openEditModal} onClose={handleCloseEditModal} post={post} />
+      <DeleteDialog open={openDeleteModal} onClose={handleCloseDeleteModal} onConfirm={confirmDelete} />
     </>
   );
 };

@@ -7,8 +7,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import PostItem from '../components/PostItem/PostItem';
+import { Post } from '../types/types';
 
-const mockPost = {
+const mockPost: Post = {
   data: {
     body: 'This is a test post',
     author: 'John Doe',
