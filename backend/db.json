@@ -2,16 +2,6 @@
   "posts": [
     {
       "data": {
-        "body": "This is example post",
-        "author": "john.doe@gmail.com",
-        "created": 1528871013,
-        "edited": 1528871013,
-        "postId": "8q7wm5"
-      },
-      "id": 1
-    },
-    {
-      "data": {
         "body": "This is another example post",
         "author": "joe.doe@gmail.com",
         "created": 1528871013,
@@ -19,6 +9,62 @@
         "postId": "wm5yG"
       },
       "id": 2
+    },
+    {
+      "data": {
+        "body": "This is another example post 3",
+        "author": "John Doe",
+        "created": 1722119138,
+        "postId": "_7H5hQTcat9qsYyH61HBa"
+      },
+      "id": 4
+    },
+    {
+      "data": {
+        "body": "This is another example post edited ",
+        "author": "John Doe",
+        "created": 1722119138,
+        "edited": 1722119138,
+        "postId": "VBmw2y0sga2K-S4sWLlpZ"
+      },
+      "id": 5
+    },
+    {
+      "data": {
+        "body": "This is another example post 5",
+        "author": "John Doe",
+        "created": 1722119138,
+        "postId": "ujUwBFBb9RyXh_I0_TWY-"
+      },
+      "id": 6
+    },
+    {
+      "data": {
+        "body": "This is another example post 7",
+        "author": "John Doe",
+        "created": 1722154804,
+        "postId": "JypwXJ3t8rGy1muVR35KL"
+      },
+      "id": 7
+    },
+    {
+      "data": {
+        "body": "This is another example post 8",
+        "author": "John Doe",
+        "created": 1722154804,
+        "postId": "pUS35FsFs6CFCJ-LHdUB6"
+      },
+      "id": 8
+    },
+    {
+      "data": {
+        "body": "This is another example post 9 edited",
+        "author": "John Doe",
+        "created": 1722154804,
+        "edited": 1722154804,
+        "postId": "mJ5VP79xL8YYmAGaHwq3Z"
+      },
+      "id": 9
     }
   ]
 }

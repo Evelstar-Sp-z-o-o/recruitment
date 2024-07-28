@@ -147,6 +147,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # frontend - dotenv environment variables file
+frontend/.env.*
 .env
 
 ### yarn ###

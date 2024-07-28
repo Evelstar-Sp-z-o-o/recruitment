@@ -14,7 +14,7 @@
     "downlevelIteration": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client"],
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
     "paths": {
       "@/*": ["./*"],
       "react": ["./node_modules/@types/react"],
