@@ -1,17 +1,20 @@
-import { FC } from 'react';
-
-import { Box, Paper, Typography } from '@mui/material';
-
 import './styles/main.scss';
+import QueryProvider from './components/providers/query-provider';
+import RouterProvider from './components/providers/router-provider';
+import ReduxProvider from './components/providers/redux-provider';
+import { saveUserToLocalStorage } from './utils/localStorage';
 
-const App: FC = () => {
+// init with mocked user
+saveUserToLocalStorage({ email: 'test_user@gmail.com' })
+
+const App = () => {
   return (
-    <Box className="center">
-      <Paper sx={{ padding: 4 }}>
-        <Typography variant="h6">Hello, please start here. 🙂</Typography>
-      </Paper>
-    </Box>
-  );
-};
+    <ReduxProvider>
+      <QueryProvider>
+        <RouterProvider />
+      </QueryProvider>
+    </ReduxProvider>
+  )
+}
 
 export default App;
