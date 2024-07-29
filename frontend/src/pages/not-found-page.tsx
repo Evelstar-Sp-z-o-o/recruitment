@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import BackToMainPageButton from '../components/ui/back-to-main-page-button';
 
-// import BackToMainPageButton from '../components/ui/back-to-main-page-button/BackToMainPageButton'
 
 const containerStyles = {
     minHeight: 'calc(100vh - 300px)',

@@ -1,6 +1,3 @@
-// import Breadcrumb from './breadcrumb/Breadcrumb'
-// import MainContentContainer from '../../ui/main-content-container/MainContentContainer'
-// import BackToMainPageButton from '../../ui/back-to-main-page-button/BackToMainPageButton'
 import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom';
 

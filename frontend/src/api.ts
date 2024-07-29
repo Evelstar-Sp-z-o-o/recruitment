@@ -1,4 +1,4 @@
-import type { Post, PostFormData } from './types';
+import type { Post } from './types';
 
 export const BASE_API_URL = 'http://localhost:3000/api';
 
