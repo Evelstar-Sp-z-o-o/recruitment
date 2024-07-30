@@ -1,9 +1,10 @@
 import React from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+
 import Layout from './components/layout/layout';
-import PostsPage from './pages/posts-page';
-import PostDetailsPage from './pages/post-details-page';
 import NotFoundPage from './pages/not-found-page';
+import PostDetailsPage from './pages/post-details-page';
+import PostsPage from './pages/posts-page';
 import ProfilePage from './pages/profile-page';
 
 const routes = [

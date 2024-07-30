@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Box } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-import { PostFormData } from '@/src/types';
 
-const formContainerStyles = { borderBottom: '1px solid lightgray', paddingBottom: '10px', borderTop: '1px solid lightgray' }
+import { PostFormData } from '@/src/types';
+import { LoadingButton } from '@mui/lab';
+import { TextField, Box } from '@mui/material';
+
+const formContainerStyles = {
+  borderBottom: '1px solid lightgray',
+  paddingBottom: '10px',
+  borderTop: '1px solid lightgray',
+};
 const inputStyles = {
   '& .MuiOutlinedInput-root': {
     borderRadius: 0,
@@ -17,7 +22,7 @@ const inputStyles = {
   '& .MuiInputBase-root': {
     paddingBottom: '40px',
   },
-}
+};
 
 interface Props {
   onSubmit: (data: PostFormData) => void;
@@ -25,11 +30,7 @@ interface Props {
   isPending: boolean;
 }
 
-const PostForm: React.FC<Props> = ({
-  onSubmit,
-  initialValues,
-  isPending,
-}) => {
+const PostForm: React.FC<Props> = ({ onSubmit, initialValues, isPending }) => {
   const {
     handleSubmit,
     control,
@@ -63,7 +64,7 @@ const PostForm: React.FC<Props> = ({
               rows={4}
               error={!!errors.body}
               fullWidth
-              placeholder='What do you want to share?'
+              placeholder="What do you want to share?"
               inputProps={{ maxLength: characterLimit }}
               helperText={errors.body ? errors.body.message : `${characterCount}/${characterLimit} characters`}
               onChange={(e) => {
@@ -74,11 +75,7 @@ const PostForm: React.FC<Props> = ({
             />
           )}
         />
-        <Box
-          position="absolute"
-          bottom="8px"
-          right="8px"
-        >
+        <Box position="absolute" bottom="8px" right="8px">
           <LoadingButton
             type="submit"
             loading={isPending}

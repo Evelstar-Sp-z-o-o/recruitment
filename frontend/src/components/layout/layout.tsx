@@ -1,14 +1,14 @@
 import { ErrorBoundary } from 'react-error-boundary';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { Box, CssBaseline, useMediaQuery, useTheme } from '@mui/material';
 import Container from '@mui/material/Container';
 
 import ErrorBoundaryComponent from '../ui/error-boundary-component';
-import Sidebar from './sidebar';
-import MainContentContainer from './main-content-container';
-import Header from './header';
 import GlobalSnackbar from '../ui/snackbar';
+import Header from './header';
+import MainContentContainer from './main-content-container';
+import Sidebar from './sidebar';
 
 const layoutContainerStyles = {
     display: 'flex',
@@ -19,9 +19,8 @@ const layoutContainerStyles = {
 const mainContainerStyles = {
     minHeight: '100vh',
     display: { sm: 'flex' },
-    p: 0
+    p: 0,
 };
-
 
 const Layout = () => {
     const theme = useTheme();
