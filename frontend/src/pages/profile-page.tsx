@@ -13,7 +13,7 @@ const containerStyles = {
     textAlign: 'center',
 };
 
-const Profile = () => {
+const ProfilePage = () => {
     const user = useSelector((state: RootState) => state.user.user);
 
     return (
@@ -32,4 +32,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default ProfilePage;
