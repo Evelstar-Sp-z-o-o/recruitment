@@ -7,7 +7,6 @@ import Container from '@mui/material/Container';
 import ErrorBoundaryComponent from '../ui/error-boundary-component';
 import Sidebar from './sidebar';
 import MainContentContainer from './main-content-container';
-import BackToMainPageButton from '../ui/back-to-main-page-button';
 import Header from './header';
 import GlobalSnackbar from '../ui/snackbar';
 
@@ -23,16 +22,8 @@ const mainContainerStyles = {
     p: 0
 };
 
-const currentPageNavStyles = {
-    height: '36px',
-    display: 'flex',
-    gap: 4,
-    alignItems: 'center',
-};
 
 const Layout = () => {
-    const location = useLocation();
-    const currentPath = location.pathname;
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
