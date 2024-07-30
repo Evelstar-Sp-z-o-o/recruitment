@@ -1,16 +1,44 @@
 import { FC } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Box, Paper, Typography } from '@mui/material';
+import { Container, GlobalStyles } from '@mui/material';
 
-import './styles/main.scss';
+import EditPost from './components/EditPost';
+import PostList from './components/PostList';
+import BottomNav from './components/layout/BottomNavigation';
+import Navbar from './components/layout/Navbar';
+
+const globalStyles = (
+  <GlobalStyles
+    styles={{
+      body: {
+        margin: 0,
+        padding: 0,
+        backgroundColor: '#0d1117',
+        color: '#e6edf3',
+        fontFamily: 'Noto Sans, sans-serif',
+      },
+      a: {
+        textDecoration: 'none',
+        color: 'inherit',
+      },
+    }}
+  />
+);
 
 const App: FC = () => {
   return (
-    <Box className="center">
-      <Paper sx={{ padding: 4 }}>
-        <Typography variant="h6">Hello, please start here. 🙂</Typography>
-      </Paper>
-    </Box>
+    <Router>
+      {globalStyles}
+      <Navbar />
+      <Container role="main" sx={{ padding: '80px 1rem', minHeight: '100vh' }}>
+        <Routes>
+          <Route path="/" element={<PostList />} />
+          <Route path="/edit/:id" element={<EditPost />} />
+        </Routes>
+        <BottomNav />
+      </Container>
+    </Router>
   );
 };
 
