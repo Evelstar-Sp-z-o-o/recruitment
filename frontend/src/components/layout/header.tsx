@@ -1,23 +1,13 @@
 import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-
-import Logo from './logo';
-import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, List, ListItemButton, ListItemIcon } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { AccountBoxOutlined, HomeOutlined } from '@mui/icons-material';
-
-const containerStyles = {
-    height: '64px', border: '1px solid lightgray',
-    padding: {
-        sm: 2,
-        md: 4
-    }
-};
+import AccountLink from '../ui/account-link';
 
 const listContainerStyles = {
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center'
 }
 
 const listItemStyles = {
@@ -28,7 +18,7 @@ const largeIconStyles = {
     color: 'black',
 };
 
-const appBarStyles = { boxShadow: 'none', maxWidth: 'md', margin: 'auto' };
+const appBarStyles = { boxShadow: 'none', maxWidth: 'md', margin: 'auto', px: 2 };
 
 const Header = () => {
     return (
@@ -48,6 +38,9 @@ const Header = () => {
                         </ListItemIcon>
                     </ListItemButton>
                 </Link>
+                <Box ml='auto' mt={0}>
+                    <AccountLink />
+                </Box>
             </List>
         </AppBar>
     );

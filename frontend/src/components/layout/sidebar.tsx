@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 
 import Logo from './logo';
 import { Link } from 'react-router-dom';
+import AccountLink from '../ui/account-link';
 
 const containerStyles = {
     display: { xs: 'none', sm: 'block' },
@@ -44,6 +45,9 @@ const Sidebar = () => {
                     </ListItemButton>
                 </Link>
             </List>
+            <Box mt={6}>
+                <AccountLink />
+            </Box>
         </Box>
     );
 };
