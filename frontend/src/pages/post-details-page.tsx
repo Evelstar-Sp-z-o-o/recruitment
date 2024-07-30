@@ -13,8 +13,6 @@ import {
     DialogActions,
     Avatar,
     Box,
-    Snackbar,
-    Alert,
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
@@ -74,15 +72,12 @@ const PostDetailsPage = () => {
     const dispatch = useDispatch();
     const {
         mutate: updatePost,
-        error: updatePostError,
         isPending: isEditPostPending,
         isSuccess: isEditPostSuccess,
         reset: resetEditPost,
     } = useEditPost(postId || '');
     const {
         mutate: deletePost,
-        error: deletePostError,
-        isPending: isDeletePostPending,
         isSuccess: isDeletePostSuccess,
     } = useDeletePost(postId || '');
 
