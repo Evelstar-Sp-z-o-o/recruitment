@@ -31,7 +31,7 @@ const Layout = () => {
         <ErrorBoundary FallbackComponent={ErrorBoundaryComponent}>
             <Box sx={layoutContainerStyles}>
                 <CssBaseline />
-                <Container maxWidth="md" sx={mainContainerStyles}>
+                <Container maxWidth="lg" sx={mainContainerStyles}>
                     {isMobile ? <Header /> : <Sidebar />}
                     <MainContentContainer>
                         <Outlet />
